@@ -17,16 +17,21 @@ import time, requests, re, random, tldextract
 
 from utils import check_twitter_for_website_link, check_youtube_for_website_link, get_domain
 
+USER_AGENT_LIST = ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36',
+                   'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36',
+                   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36',
+                   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36']
+
 headers = requests.utils.default_headers()
 headers.update(
     {
-        'User-Agent': 'My User Agent 1.0',
+        'User-Agent': random.choice(USER_AGENT_LIST),
     }
 )
 
 start = time.time()
 
-directory_path = "D:/MSc Data Science/Elective Modules - Research Modules/[INF-DS-RMB] Research Module B/RM Code/"
+directory_path = "D:/MSc Data Science/Elective Modules - Research Modules/[INF-DS-RMB] Research Module B/RM Code/Sentiment-Classification-Youtube-Comments-Political-Affiliation/"
 
 # load config_KEYS.yaml file
 with open(os.path.join(directory_path, "utility/config_KEYS.yml"), "r") as ymlfile:
@@ -71,6 +76,7 @@ for index, website_links in enumerate(news_channels["Website"]):
         print("{} : {}".format(index, website_links))
 
         response = requests.get(website_links, headers = headers)
+        time.sleep(1)
         soup = BeautifulSoup(response.text, 'lxml')
 
         # trying to find social media link, iei either youtube link or twitter handle.
@@ -81,15 +87,15 @@ for index, website_links in enumerate(news_channels["Website"]):
             channel_link = socialmedia_link.get("href")
 
             if "twitter.com" in channel_link.lower():
-                    if (bool(re.match(r'https://twitter.com/[\w@]+\??|/?$', channel_link)) and not bool(re.match(r'https://twitter.com/(intent|share|home|hashtag|search)/?', channel_link))
-                        and not bool(re.match(r'https://twitter.com/[\w]+/status?', channel_link))):
+                if (bool(re.match(r'https://twitter.com/[\w@]+\??|/?$', channel_link)) and not bool(re.match(r'https://twitter.com/(intent|share|home|hashtag|search)/?', channel_link))
+                    and not bool(re.match(r'https://twitter.com/[\w]+/status?', channel_link))):
 
-                        # extract the twitter handle
-                        #match = re.search(r'^.*?\btwitter\.com/@?(\w{1,15})(?:[?/,].*)?$', socialmedia_link.get("href").lower())
-                        match = re.search(r"^.*?\btwitter\.com/@?([^?/,\r\n]+)(?:[?/,].*)?$", channel_link)                   
-                        # increament the dictionary with that key as twiter handle
-                        twitter_handle[match.group(1)] += 1
-                        print("Twitter handle Dictionary: ", twitter_handle)
+                    # extract the twitter handle
+                    #match = re.search(r'^.*?\btwitter\.com/@?(\w{1,15})(?:[?/,].*)?$', socialmedia_link.get("href").lower())
+                    match = re.search(r"^.*?\btwitter\.com/@?([^?/,\r\n]+)(?:[?/,].*)?$", channel_link)                   
+                    # increament the dictionary with that key as twiter handle
+                    twitter_handle[match.group(1)] += 1
+                    print("Twitter handle Dictionary: ", twitter_handle)
 
             if "youtube.com/" in channel_link:
 
@@ -193,6 +199,7 @@ for index, website_links in enumerate(news_channels["Website"]):
             for ids in youtube_id_list:
                 print("Youtube Channel link : https://www.youtube.com/channel/{}/about".format(ids))
                 yt_about_page = requests.get("https://www.youtube.com/channel/{}/about".format(ids), headers=headers)
+                time.sleep(1)
                 soup = BeautifulSoup(yt_about_page.content, features='html.parser')
 
                 if check_youtube_for_website_link(soup, website_links, selected_twitter_handle):
@@ -215,6 +222,7 @@ for index, website_links in enumerate(news_channels["Website"]):
             for users in youtube_user_list:
                 print("Youtube Channel link : https://www.youtube.com/channel/{}/about".format(users))
                 yt_about_page = requests.get("https://www.youtube.com/channel/{}/about".format(users), headers=headers)
+                time.sleep(1)
                 soup = BeautifulSoup(yt_about_page.content, features='html.parser')
 
                 if check_youtube_for_website_link(soup, website_links, selected_twitter_handle):
