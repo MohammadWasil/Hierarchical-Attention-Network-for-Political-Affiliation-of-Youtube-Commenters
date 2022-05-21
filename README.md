@@ -1,7 +1,9 @@
 # Sentiment-Classification-Youtube-Comments-Political-Affiliation
 
+Change the name of the file `config_KEYS EXAMPLE.yml` to `config_KEYS.yml` and add your twitter credentials there.
+
 To scrap the data:
-1. Change the API key and tokens in "config_KEYS EXAMPLE.yml" with your own twitter API key and tokens
+1. Change the API key and tokens in `config_KEYS.yml` with your own twitter API key and tokens
 2. To create a list of News channels with their website link and country, Run
 ```{python}
 python 'Scrap MBFC website.py'
