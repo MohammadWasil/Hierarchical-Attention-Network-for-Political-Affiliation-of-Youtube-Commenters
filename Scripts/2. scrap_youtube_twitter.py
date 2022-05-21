@@ -63,7 +63,6 @@ def main():
 
                 response = requests.get(website_links, headers = headers)
                 time.sleep(1)
-                print("***.got the respnse")
                 soup = BeautifulSoup(response.text, 'lxml')
 
                 # trying to find social media link, iei either youtube link or twitter handle.
@@ -82,7 +81,6 @@ def main():
                             match = re.search(r"^.*?\btwitter\.com/@?([^?/,\r\n]+)(?:[?/,].*)?$", channel_link)                   
                             # increament the dictionary with that key as twiter handle
                             twitter_handle[match.group(1)] += 1
-                            print("***.got the twitter h", match.group(1))
                             print("Twitter handle Dictionary: ", twitter_handle)
 
                     if "youtube.com/" in channel_link:
@@ -136,7 +134,6 @@ def main():
                     # lookup the user
                     try:
                         returned_users = api.lookup_users(screen_name=twitter_handle_list)
-                        print("***.got the lookusers")
                         for user in returned_users:
 
                             user_json = user._json
@@ -150,7 +147,6 @@ def main():
                     except:
                         for twitter_handle in twitter_handle_list:
                             returned_user = api.lookup_users(screen_name = [twitter_handle])[0]
-                            print("***.got the lookusers")
                             user_json = returned_user._json
                             screen_name = user_json['screen_name'].lower()
 
@@ -190,7 +186,6 @@ def main():
                     for ids in youtube_id_list:
                         print("Youtube Channel link : https://www.youtube.com/channel/{}/about".format(ids))
                         yt_about_page = requests.get("https://www.youtube.com/channel/{}/about".format(ids), headers=headers)
-                        print("***.got the response")
                         time.sleep(1)
                         soup = BeautifulSoup(yt_about_page.content, features='html.parser')
 
@@ -214,7 +209,6 @@ def main():
                     for users in youtube_user_list:
                         print("Youtube Channel link : https://www.youtube.com/channel/{}/about".format(users))
                         yt_about_page = requests.get("https://www.youtube.com/channel/{}/about".format(users), headers=headers)
-                        print("***.got the response")
                         time.sleep(1)
                         soup = BeautifulSoup(yt_about_page.content, features='html.parser')
 
