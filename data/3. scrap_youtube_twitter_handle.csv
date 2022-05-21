@@ -1,0 +1,441 @@
+index,Name,Bias Rating,Country,Website,Youtube Channel,Twitter Handle,Twitter Similarity
+0,Accountable.US,left,USA,https://www.accountable.us/,,accountable_us,0.88
+1,Act.TV (act.tv),left,USA,http://act.tv,actdottv,actdottv,0.5454545454545454
+2,Aftonbladet,left,Sweden,https://www.aftonbladet.se,,aftonbladet,1.0
+3,Al DIA,left,USA,https://aldianews.com,pontealdiatv,aldianews,1.0
+4,Alliance for Justice (AFJ) (www.afj.org),left,USA,https://www.afj.org/,alliance4justice,afjustice,0.5
+5,Alt News,left,India,https://www.altnews.in,AltNewsVIdeos,altnews,1.0
+6,Alternet (www.alternet.org),left,USA,https://www.alternet.org/,,alternet,1.0
+7,Amandla (aidc.org.za),left,South Africa,http://aidc.org.za/amandla-media/,UCmX0gITcFMtmDSah8-wCChw,aidc_rsa,0.6666666666666666
+8,America Blog (americablog.com),left,USA,http://americablog.com/,,,
+9,American Bridge 21st Century (americanbridgepac.org),left,USA,https://americanbridgepac.org/,AmericanBridgePAC,american_bridge,0.875
+10,American Oversight,left,USA,https://www.americanoversight.org,,weareoversight,0.7096774193548387
+11,Americans United for Separation of Church and State (www.au.org),left,USA,https://www.au.org/,,,
+12,Angry White Men (angrywhitemen.org),left,USA,https://angrywhitemen.org,,,
+13,Attack the System (attackthesystem.com),left,USA,https://attackthesystem.com/,,,
+14,AutoStraddle (www.autostraddle.com),left,USA,https://www.autostraddle.com/,,autostraddle,1.0
+15,Baltimore City Paper (www.citypaper.com),left,USA,https://www.baltimoresun.com/citypaper/,,,
+16,Bay Area Reporter (www.ebar.com),left,USA,http://www.ebar.com/,UC_WSavcwZVE3ciFM8yCwkBw,,
+17,Being Liberal (www.themaven.net),left,USA,https://beingliberal.org/,,,
+18,"BillMoyers.com (billmoyers.com)
+",left,USA,https://billmoyers.com/,,billmoyers,1.0
+19,Bitch Media (bitchmedia.org),left,USA,https://bitchmedia.org/,,bitchmedia,1.0
+20,Black Agenda Report (blackagendareport.com),left,USA,https://blackagendareport.com/,,blkagendareport,0.9375
+21,Black America Web (blackamericaweb.com),left,USA,https://blackamericaweb.com/,blackamericaweb,blackamericaweb,1.0
+22,Black Lives Matter (blacklivesmatter.com),left,USA,https://blacklivesmatter.com,,,
+23,Black Main Street (blackmainstreet.net),left,USA,https://blackmainstreet.net/,,bjsocialnetwork,0.3333333333333333
+24,BoingBoing (boingboing.net),left,USA,https://boingboing.net,,boingboing,1.0
+25,Boston Review (bostonreview.net),left,USA,http://bostonreview.net,,,
+26,Brut.Media,left,France,https://www.brut.media/,BrutAmerica,brutamerica,0.5333333333333333
+27,Bust Magazine (bust.com),left,USA,https://bust.com,,bust_magazine,0.4705882352941176
+28,Call to Activism (calltoactivism.com),left,USA,https://www.calltoactivism.com/,,,
+29,Canada Fact Check (canadafactcheck.ca),left,Canada,https://canadafactcheck.ca,,jegtheme,0.2608695652173913
+30,Canadian Dimension (canadiandimension.com),left,Canada,https://canadiandimension.com/,UCXu7fg-_KdAoHY7bmahr9vg,cdn_dimension,0.7333333333333333
+31,Capital & Main (capitalandmain.com),left,USA (44/180 Press Freedom),https://capitalandmain.com,UCjfpIrbyc1hMT-CRZWbGF4g,capitalandmain,1.0
+32,Care2 (www.care2.com),left,USA,https://www.care2.com,,care2,1.0
+33,Ceasefire Magazine (ceasefiremagazine.co.uk),left,United Kingdom,https://ceasefiremagazine.co.uk/,,ceasefiremag,0.8275862068965517
+34,Center for American Progress (www.americanprogress.org),left,USA,https://www.americanprogress.org/,seeprogress,amprog,0.5454545454545454
+35,Center for Media and Democracy (www.prwatch.org),left,USA,https://www.prwatch.org/,,exposedbycmd,0.2105263157894736
+36,Center for a Stateless Society (c4ss.org),left,USA,https://c4ss.org/,c4ssvideos,c4ssdotorg,0.5714285714285714
+37,Change.org (https://www.change.org/),left,USA,https://www.change.org/,,ukchange,0.8571428571428571
+38,Chicago Reader (www.chicagoreader.com),left,USA,http://www.chicagoreader.com/,,chicago_reader,0.9629629629629628
+39,Chicago Reporter (chicagoreporter.com),left,USA,https://www.chicagoreporter.com/,ChicagoReporter1972,chicagoreporter,1.0
+40,China Internet Information Center (china.org.cn),left,China,http://www.china.org.cn/,,chinaorgcn,0.6666666666666666
+41,Citizen Critics (citizencritics.org),left,USA,https://citizencritics.org,,,
+42,Climate Home News (climatechangenews.com),left,United Kingdom,https://www.climatechangenews.com/,,climatehome,0.6428571428571429
+43,CNN (www.cnn.com),left,USA,https://www.cnn.com/,,,
+44,Code Pink (www.codepink.org),left,USA,https://www.codepink.org,,,
+45,ColorLines (colorlines.com),left,USA,https://www.colorlines.com,UCHdWMuH-IIveBWjIsOhK-dw,colorlines,1.0
+46,Columbus Free Press (https://columbusfreepress.com/),left,USA,https://columbusfreepress.com,,,
+47,Comic Sands,left,USA,https://www.comicsands.com,,comicsandsdaily,0.8
+48,Common Dreams (www.commondreams.org),left,USA (45/180 Press Freedom),https://www.commondreams.org/,,,
+49,Commune Magazine (communemag.com),left,USA,https://communemag.com/,,commune_mag,0.9523809523809524
+50,Cop Block (copblock.org),left,USA,http://www.copblock.org/,,,
+51,Cosmopolitan (www.cosmopolitan.com),left,USA,http://www.cosmopolitan.com/,cosmopolitan,cosmopolitan,1.0
+52,CounterCurrents.org (www.countercurrents.org),left,India (142/180 Press Freedom),http://www.countercurrents.org/,CCMEDIACHANNEL,countercurrents,1.0
+53,CounterPunch (www.counterpunch.org),left,USA (44/180 Press Freedom),https://www.counterpunch.org,,,
+54,Crikey (crikey.com.au),left,Australia,https://www.crikey.com.au/,UC4ZxKhcNYIm4ngklkG-ki0A,,
+55,CrimethInc (crimethinc.com),left,USA (44/180 Press Freedom),https://crimethinc.com/,,crimethinc,1.0
+56,Crooked Media (crooked.com),left,USA,https://crooked.com/,crookedmedia,crookedmedia,0.7368421052631579
+57,Crooks and Liars (crooksandliars.com),left,USA,https://crooksandliars.com,,crooksandliars,1.0
+58,Current Affairs (www.currentaffairs.org),left,USA,https://www.currentaffairs.org/,,curaffairs,0.8333333333333334
+59,Curve Magazine (www.curvemag.com),left,USA (44/180 Press Freedom),http://www.curvemag.com,,therealcurve,0.5
+60,Daily Beast (www.thedailybeast.com),left,USA,https://www.thedailybeast.com/,,thedailybeast,1.0
+61,Daily Dot (www.dailydot.com),left,USA (44/180 Press Freedom),https://www.dailydot.com/,,,
+62,Daily Kos,left,USA (45/180 Press Freedom),https://www.dailykos.com/,,dailykos,1.0
+63,Daily News bin,left,,http://www.dailynewsbin.com/,,,
+64,Daily Record (Scotland) (www.dailyrecord.co.uk),left,United Kingdom (33/180 Press Freedom),https://www.dailyrecord.co.uk/,,daily_record,0.9565217391304348
+65,Daily Sound and Fury (dailysoundandfury.com),left,USA,https://dailysoundandfury.com,,dailysoundnfury,0.9375
+66,Dallas Voice (www.dallasvoice.com),left,USA,https://dallasvoice.com/,UCzLKquBnVnmwE8LBYSQTK3w,dallasvoice,1.0
+67,DeadState (deadstate.org),left,USA,https://deadstate.org/,,deadstatetweets,0.75
+68,Deadspin (deadspin.com),left,USA,https://deadspin.com/,UCFsh2bHIGqgRVZnZX8xhI0Q,deadspin,1.0
+69,Deep South Voice (deepsouthvoice.com),left,USA,https://deepsouthvoice.com/,,deepsouthvoice,1.0
+70,Democracy Chronicles (democracychronicles.org),left,USA,https://democracychronicles.org,,,
+71,Democracy Guardian,left,USA,https://democracyguardian.com,,democracyguard,0.9032258064516128
+72,Democracy Journal (democracyjournal.org),left,USA,https://democracyjournal.org/,,demjournal,0.7692307692307693
+73,Democracy Now (www.democracynow.org),left,USA (45/180 Press Freedom),https://www.democracynow.org/,,,
+74,Democratic Underground (www.democraticunderground.com),left,USA (44/180 Press Freedom),https://www.democraticunderground.com/,,,
+75,Deshabhimani (https://www.deshabhimani.com/),left,India,https://www.deshabhimani.com/,,dbidaily,0.3
+76,DeSmog (www.desmogblog.com),left,USA (44/180 Press Freedom),https://www.desmogblog.com/,DesmogBlog,desmog,0.75
+77,Detroit Metro News,left,USA,https://www.metrotimes.com,,mcmuckraker,0.2857142857142857
+78,Dissent Magazine (www.dissentmagazine.org),left,USA,https://www.dissentmagazine.org/,,dissentmag,0.8
+79,Drudge Retort (www.drudge.com),left,USA,https://drudge.com/,SamSeder,davidsirota,0.2352941176470588
+80,Earth First Journal (earthfirstjournal.org),left,USA,http://earthfirstjournal.org/,,,
+81,Ecowatch (www.ecowatch.com),left,USA,https://www.ecowatch.com,,ecowatch,1.0
+82,Egberto Willies (egbertowillies.com),left,USA (44/180 Press Freedom),https://egbertowillies.com/,,egbertowillies,1.0
+83,Electoral-Vote.com (www.electoral-vote.com),left,Netherlands,https://www.electoral-vote.com,,votemaster,0.3333333333333333
+84,Electronic Intifada (electronicintifada.net),left,USA,https://electronicintifada.net/,,intifada,0.6153846153846154
+85,Elite Daily (elitedaily.com),left,USA,http://elitedaily.com/,,elitedaily,1.0
+86,Elle Magazine (elle.com),left,USA,,,,
+87,Esquire Magazine (www.esquire.com),left,USA,https://www.esquire.com,esquire,esquire,1.0
+88,Everyday Feminism (everydayfeminism.com),left,USA,https://everydayfeminism.com/,,evrydayfeminism,0.967741935483871
+89,Evonomics (evonomics.com),left,USA,https://evonomics.com/,,,
+90,ExtraNewsFeed,left,USA,https://extranewsfeed.com,,extranewsfeed,1.0
+91,Feminist Current (www.feministcurrent.com),left,Canada,http://www.feministcurrent.com,,,
+92,Feministing (feministing.com),left,USA,http://feministing.com/,,feministing,1.0
+93,Fifth Column News (thefifthcolumnnews.com),left,USA,https://thefifthcolumnnews.com/,,,
+94,Fifth Estate (www.fifthestate.org),left,USA (44/180 Press Freedom),https://www.fifthestate.org/,,anarchybookfair,0.1538461538461538
+95,Finnish News (finnishnews.fi),left,Finland,https://www.finnishnews.fi/,,,
+96,Food and Water Watch (www.foodandwaterwatch.org),left,USA,https://www.foodandwaterwatch.org,,,
+97,Foreign Policy Journal (www.foreignpolicyjournal.com),left,USA,https://www.foreignpolicyjournal.com,,forpoljournal,0.7878787878787878
+98,Foreign Policy News (foreignpolicynews.org),left,USA,http://foreignpolicynews.org,UCef5LW_IXrGLIUiTQSCv6VA,foreignpolicyns,0.9375
+99,Free Press (freepress.org),left,USA,https://freepress.org/,,,
+100,Free Rein News (frnewsreport.com),left,Unknown,http://frnewsreport.com,,,
+101,Freedom From Religion Foundation (ffrf.org),left,USA,https://ffrf.org/,,,
+102,Freedom News and Journal (freedomnews.org.uk),left,United Kingdom,https://freedomnews.org.uk/,UCOCmlobISshBIjiNVVQUI1Q,freedom_paper,0.6666666666666666
+103,Front Page Live (www.frontpagelive.com),left,USA,https://www.frontpagelive.com,UCLiVYX4--R2vM5KLGK2S2WA,frontpage_live,0.9629629629629628
+104,FSTv (Freespeech.org) (www.freespeech.org),left,USA,https://www.freespeech.org/,,,
+105,Gawker (gawker.com),left,USA,https://www.gawker.com/,,gawker,1.0
+106,Gay City News (gaycitynews.com),left,USA,https://gaycitynews.com/,,,
+107,"Gay Star News (www.gaystarnews.com)
+",left,United Kingdom (33/180 Press Freedom),https://www.gaystarnews.com/,GayStarNewsLtd,gaystarnews,1.0
+108,Geopolitics Alert (geopoliticsalert.com),left,USA,https://geopoliticsalert.com/,,,
+109,Gizmodo (gizmodo.com),left,USA (44/180 Press Freedom),https://gizmodo.com,UCxFmw3IUMDUC1Hh7qDjtjZQ,gizmodo,1.0
+110,GLAAD (glaad.org),left,USA,https://www.glaad.org/,glaad,glaad,1.0
+111,Global Voices (globalvoices.org),left,USA,https://globalvoices.org/,,globalvoices,1.0
+112,Good Magazine (www.good.is),left,USA,https://www.good.is/,goodmagazine,good,1.0
+113,GQ Magazine (www.gq.com),left,USA,https://www.gq.com,UCjfFAxLaJ_oGCjrFSGWI9vg,gq_germany,0.3333333333333333
+114,Grasping Reality With Both Hands: Bradford Delong (www.bradford-delong.com),left,USA,http://www.bradford-delong.com/,,,
+115,Green Left Weekly (www.greenleft.org.au),left,Australia,https://www.greenleft.org.au,,greenleftonline,0.75
+116,Grit Post (gritpost.com),left,USA,https://gritpost.com,,,
+117,Guardian Liberty Voice (guardianlv.com),left,USA,https://guardianlv.com/,,,
+118,Guardians of Democracy (theguardiansofdemocracy.com),left,USA,https://theguardiansofdemocracy.com/,UCOzT3fyPN7uTGUIha0YIl_g,guardemocracy,0.7222222222222222
+119,Haaretz (www.haaretz.com),left,Israel (86/180 Press Freedom),https://www.haaretz.com/,,haaretzcom,0.8235294117647058
+120,High Times (hightimes.com),left,USA,https://hightimes.com/,UCFQ7vc-dWlSUZd6OqsAepMA,high_times_mag,0.782608695652174
+121,Hill Reporter (hillreporter.com),left,USA,https://hillreporter.com,,anteksiler,0.3636363636363636
+122,Huffington Post (www.huffingtonpost.com),left,USA,https://www.huffpost.com/,,,
+123,Human Rights Campaign (www.hrc.org),left,USA (44/180 Press Freedom),https://www.hrc.org,,,
+124,In Defence of Marxism (www.marxist.com),left,United Kingdom (33/180 Press Freedom),https://www.marxist.com/,,,
+125,In These Times (inthesetimes.com),left,USA,https://inthesetimes.com/,,inthesetimesmag,0.8888888888888888
+126,Independent Florida Alligator (alligator.org),left,USA,https://www.alligator.org/,,thealligator,0.8571428571428571
+127,Inequality Media (www.inequalitymedia.org),left,USA,https://www.inequalitymedia.org/,,,
+128,Informed Comment (Juan Cole) (www.juancole.com),left,USA (44/180 Press Freedom),https://www.juancole.com,,infcomment,0.4444444444444444
+129,Institute for Policy Studies (www.ips-dc.org),left,USA (44/180 Press Freedom),https://ips-dc.org/,,ips_dc,0.8333333333333334
+130,International Policy Institute (intpolicydigest.org),left,USA,https://intpolicydigest.org/,,intpolicydigest,1.0
+131,International Viewpoint (www.internationalviewpoint.org),left,United Kingdom,https://internationalviewpoint.org/,,,
+132,Intrepid Report (www.intrepidreport.com),left,USA,http://www.intrepidreport.com/,,,
+133,Iowa Capital Dispatch (iowacapitaldispatch.com),left,USA,https://iowacapitaldispatch.com/,,,
+134,Iowa Starting Line (iowastartingline.com),left,USA,https://iowastartingline.com,,iastartingline,0.9333333333333332
+135,It’s Going Down (itsgoingdown.org),left,USA,https://itsgoingdown.org/,ItsGoingDown,igd_news,0.4
+136,Jacobin (www.jacobinmag.com),left,USA (45/180 Press Freedom),https://www.jacobinmag.com/,,jacobin,0.8235294117647058
+137,Jezebel (jezebel.com),left,USA,https://jezebel.com/,UCI4iIRZltBUQITyvCXz_PZg,jezebel,1.0
+138,JoeBiden.com,left,USA (44/180 Press Freedom),,,,
+139,Latest.com (latest.com),left,USA,https://latest.com,,latest_com,0.75
+140,Lavender Magazine (www.lavendermagazine.com),left,USA,https://www.lavendermagazine.com/,,,
+141,LA Weekly (laweekly.com),left,USA,https://www.laweekly.com/,,laweekly,1.0
+142,Left Foot Forward (leftfootforward.org),left,United Kingdom (44/180 Press Freedom),https://leftfootforward.org/,,,
+143,Left Over Rights (leftoverrights.com),left,,http://leftoverrights.com/,,,
+144,Left Voice (www.leftvoice.org),left,USA (44/180 Press Freedom),http://www.leftvoice.org,,,
+145,LeftScoop (www.leftscoop.com),left,,https://www.leftscoop.com/,,,
+146,LGBTQ Nation (www.lgbtqnation.com),left,USA,https://www.lgbtqnation.com/,lgbtqnation,lgbtqnation,1.0
+147,Libcom.org (libcom.org),left,USA (44/180 Press Freedom),http://libcom.org,,libcomorg,0.8
+148,Liberal America (liberalamerica.life),left,USA,http://liberalamerica.org/,UC5zPi7g6wk5Y8fiPBhtvL-w,libamericaorg,0.7407407407407407
+149,Liberation News (www.liberationnews.org),left,USA (44/180 Press Freedom),https://www.liberationnews.org/,,,
+150,Little Green Footballs (littlegreenfootballs.com),left,USA,http://littlegreenfootballs.com/,,green_footballs,0.8
+151,Mail & Guardian (mg.co.za),left,South Africa,https://mg.co.za/about-us/,,,
+152,"Maine Beacon (mainebeacon.com)
+",left,USA (44/180 Press Freedom),http://mainebeacon.com/,,mebeacon,0.8421052631578947
+153,Mashable (mashable.com),left,USA,https://mashable.com,,mashable,1.0
+154,Media Matters (mediamatters.org),left,USA (44/180 Press Freedom),https://www.mediamatters.org,UC_70iWZ6ym2cglS_kv5YfmA,mmfa,0.25
+155,Mediaite (www.mediaite.com),left,USA (44/180 Press Freedom),https://www.mediaite.com/,,,
+156,Meduza (meduza.io),left,Latvia,https://meduza.io/en,,meduza_en,0.8
+157,MeidasTouch (meidastouch.com),left,USA,https://www.meidastouch.com/,UC9r9HYFxEQOBXSopFS61ZWg,meiselasb,0.5
+158,Merry Jane (www.merryjane.com),left,USA (45/180 Press Freedom),https://www.merryjane.com/,,,
+159,Miami New Times (www.miaminewtimes.com),left,USA (45/180 Press Freedom),http://www.miaminewtimes.com/,,miaminewtimes,1.0
+160,Middle East Monitor (www.middleeastmonitor.com),left,United Kingdom,https://www.middleeastmonitor.com/,,,
+161,"Middletown Media (www.muncievoice.com)
+",left,USA (44/180 Press Freedom),https://muncievoice.com/,,muncievoice,1.0
+162,Milwaukee Independent (milwaukeeindependent.org),left,USA,http://www.milwaukeeindependent.com/,,mkeind,0.4615384615384615
+163,Modern Liberals (modernliberals.com),left,USA,http://modernliberals.com/,,plesk,0.2105263157894736
+164,Monthly Review (monthlyreview.org),left,USA,https://monthlyreview.org/,,,
+165,Moon of Alabama (www.moonofalabama.org),left,USA,https://www.moonofalabama.org/,,,
+166,Ms. (Magazine) (www.msmagazine.com),left,USA (44/180 Press Freedom),https://msmagazine.com/,,msmagazine,1.0
+167,MSNBC (www.msnbc.com),left,USA,https://www.msnbc.com/,,,
+168,Nation of Change (www.nationofchange.org),left,USA,https://www.nationofchange.org/,NationofChangeVideo,nationofchange,1.0
+169,National Association for the Advancement of Colored People (NAACP) (www.naacp.org),left,USA,https://www.naacp.org/,naacpvideos,,
+170,Natural Resources Defense Council (www.nrdc.org),left,USA (44/180 Press Freedom),https://www.nrdc.org/,NRDCflix,nrdc,1.0
+171,"NC Policy Watch (www.ncpolicywatch.com)
+",left,,,,,
+172,New Internationalist (newint.org),left,United Kingdom,https://newint.org/,,newint,1.0
+173,New Politics Magazine (newpol.org),left,USA,https://newpol.org/,,newpoliticsmag,0.6
+174,New Republic (newrepublic.com),left,USA (45/180 Press Freedom),https://newrepublic.com/,NewRepublic1914,,
+175,New Statesman (www.newstatesman.com),left,United Kingdom (33/180 Press Freedom),https://www.newstatesman.com,,newstatesman,1.0
+176,New York Amsterdam News (amsterdamnews.com),left,USA,http://amsterdamnews.com,,,
+177,New York Magazine (nymag.com),left,USA (45/180 Press Freedom),http://nymag.com/,,nymag,1.0
+178,New Yorker (www.newyorker.com),left,USA (45/180 Press Freedom),https://www.newyorker.com/,NewYorkerDotCom,newyorker,1.0
+179,News Corpse (newscorpse.com),left,USA,https://www.newscorpse.com/,,,
+180,News Hounds (www.newshounds.us),left,USA,https://www.newshounds.us/,,,
+181,NewsOne (www.newsone.com),left,USA (44/180 Press Freedom),https://newsone.com/,,newsone,1.0
+182,North99 (north99.org),left,Canada,https://north99.org/,,,
+183,Novara Media (novaramedia.com),left,United Kingdom,https://novaramedia.com/,subscription_center,novaramedia,1.0
+184,Now Magazine (nowtoronto.com),left,Canada,https://nowtoronto.com/,,nowtoronto,1.0
+185,Occupy.com (www.occupy.com),left,USA,https://www.occupy.com,,occupy,1.0
+186,One Green Planet (www.onegreenplanet.org),left,USA,http://www.onegreenplanet.org,,,
+187,OpEdNews (OEN) (www.opednews.com),left,USA (45/180 Press Freedom),https://www.opednews.com/,,,
+188,Open Society Foundations (opensocietyfoundations.org),left,USA,https://www.opensocietyfoundations.org/,,opensociety,0.6666666666666666
+189,Out Magazine (out.com),left,USA,https://www.out.com,,,
+190,Palmer Report (www.palmerreport.com),left,USA (44/180 Press Freedom),https://www.palmerreport.com,,,
+191,Paste Magazine (www.pastemagazine.com),left,USA,https://www.pastemagazine.com/,,pastemagazine,1.0
+192,Peacock Panache (www.peacock-panache.com),left,USA,https://www.peacock-panache.com/,UCn7b6PCehgg4ZNh5NDcmy9g,peacockpanache,0.9655172413793104
+193,Pennsylvania Capital-Star (penncapital-star.com),left,USA,https://www.penncapital-star.com/,,,
+194,People for the American Way (PFAW) (www.pfaw.org),left,USA (44/180 Press Freedom),https://www.pfaw.org/,,,
+195,People Magazine (people.com),left,USA (44/180 Press Freedom),https://people.com,people,people,1.0
+196,PINAC (photographyisnotacrime.com),left,USA (44/180 Press Freedom),https://pinacnews.com/,,,
+197,Pink News (www.pinknews.co.uk),left,United Kingdom,https://www.pinknews.co.uk,UCQLRK5wiWGmzp4dnFt0arwA,pinknews,1.0
+198,Political Dig (politicaldig.com),left,USA,http://politicaldig.com/,,,
+199,Political Tribune (politicaltribune.org) (Formerly DC Tribune),left,USA (45/180 Press Freedom),https://polinews.org/,,politribune,0.631578947368421
+200,PoliticusUsa (www.politicususa.com),left,USA (44/180 Press Freedom),https://www.politicususa.com,,,
+201,Politizoom (politizoom.com),left,USA,https://politizoom.com,UCSxCtu4groYcYi_2rk5-xdg,politizoom,1.0
+202,Popular Information (popular.info),left,USA,https://popular.info,,juddlegum,0.25
+203,Popular Resistance (popularresistance.org),left,USA (44/180 Press Freedom),https://popularresistance.org/,,popresistance,0.8666666666666667
+204,Press Progress (www.pressprogress.ca),left,Canada,https://www.pressprogress.ca/,,pressprogress,1.0
+205,Progressive Change Campaign Committee (boldprogressives.org),left,USA,https://www.boldprogressives.org/,,boldprogressive,0.967741935483871
+206,Project Censored (projectcensored.org),left,USA (44/180 Press Freedom),https://www.projectcensored.org/,ProjectCensored,projectcensored,1.0
+207,Queerty (www.queerty.com),left,USA (44/180 Press Freedom),https://www.queerty.com,,queerty,1.0
+208,Rabble.ca (rabble.ca),left,Canada,http://rabble.ca/,,rabbleca,0.8571428571428571
+209,Rantt Media (rantt.com),left,USA,https://rantt.com,,,
+210,Raw Story (www.rawstory.com),left,USA (45/180 Press Freedom),https://www.rawstory.com/,UCt6tgXcL1hC9gItUIgiDvMQ,,
+211,Reader Supported News (RSN) (readersupportednews.org),left,USA (44/180 Press Freedom),https://www.rsn.org/,,rsnnow,0.6666666666666666
+212,Reading the Pictures (www.readingthepictures.org),left,USA (44/180 Press Freedom),https://www.readingthepictures.org/,bagnewssalon,readingthepix,0.7741935483870968
+213,Real News Network (therealnews.com),left,USA (44/180 Press Freedom),https://therealnews.com/,therealnews,therealnews,1.0
+214,Red Pepper (www.redpepper.org.uk),left,United Kingdom,http://www.redpepper.org.uk/,,redpeppermag,0.8571428571428571
+215,Refinery29 (refinery29.com),left,USA (45/180 Press Freedom),https://www.refinery29.com/,Refinery29TV,refinery29,1.0
+216,Republic Report (www.republicreport.org),left,USA,https://www.republicreport.org,,,
+217,Resilience (Post Carbon Institute) (www.resilience.org),left,USA,https://www.resilience.org,,buildresilience,0.8
+218,Revcom.us (revcom.us),left,USA,https://revcom.us/,therevcoms,therevcoms,0.75
+219,ReWire.news (rewire.news),left,USA,https://rewirenewsgroup.com/,,rewirenewsgroup,1.0
+220,Right Wing Watch (www.rightwingwatch.org),left,USA (44/180 Press Freedom),https://www.rightwingwatch.org/,,,
+221,Ring of Fire (trofire.com),left,USA (44/180 Press Freedom),https://trofire.com/,golefttv,ringoffireradio,0.5454545454545454
+222,Rolling Stone (www.rollingstone.com),left,USA (44/180 Press Freedom),https://www.rollingstone.com/,UC-JblcinswY50lrUdSaRNEg,rollingstone,1.0
+223,Salon (www.salon.com),left,USA,https://www.salon.com,,salon,1.0
+224,San Francisco Bay View (sfbayview.com),left,USA,https://sfbayview.com/,,sfbayview,1.0
+225,Scary Mommy (www.scarymommy.com),left,USA (45/180 Press Freedom),https://www.scarymommy.com/,ScaryMommyTV,scarymommy,1.0
+226,"Second Nexus (secondnexus.com)
+",left,USA,https://secondnexus.com,,elonmusk,0.5263157894736842
+227,Seventeen,left,USA,https://www.seventeen.com/,SeventeenMagazine,seventeen,1.0
+228,Shadow Proof (shadowproof.com),left,USA (44/180 Press Freedom),https://shadowproof.com,shadowproofcom,shadowproofcom,0.88
+229,ShareBlue (shareblue.com),left,USA,https://shareblue.com/,,,
+230,Shondaland (shondaland.com),left,USA,https://www.shondaland.com/,,byshondaland,0.9090909090909092
+231,Slate (www.slate.com),left,USA (45/180 Press Freedom),https://slate.com,,slate,1.0
+232,Sludge (readsludge.com),left,USA,https://readsludge.com/,,sludge,0.75
+233,Smirking Chimp,left,USA (44/180 Press Freedom),http://www.smirkingchimp.com/,,gop,0.25
+234,Socialist Standard (www.worldsocialism.org),left,United Kingdom,https://www.worldsocialism.org/spgb/,,,
+235,SocialistWorker.org (socialistworker.org),left,USA,https://socialistworker.org/,,,
+236,Source Politics (sourcepolitics.com/),left,USA,https://www.sourcepolitics.com,,,
+237,SourceWatch (www.sourcewatch.org),left,USA,https://www.sourcewatch.org/,,,
+238,Southern Poverty Law Center (www.splcenter.org),left,USA (44/180 Press Freedom),https://www.splcenter.org/,,splcenter,1.0
+239,Splinter (splinternews.com),left,USA,https://splinternews.com,UC4cCsgbPuRZG6LvRmCPjXgg,splinter_news,0.96
+240,St. Pete for Peace (www.stpete4peace.org),left,USA (45/180 Press Freedom),https://www.stpete4peace.org/,,,
+241,Talking Points Memo (talkingpointsmemo.com),left,USA (44/180 Press Freedom),https://talkingpointsmemo.com,,tpm,0.3
+242,Teen Vogue (teenvogue.com),left,USA,https://www.teenvogue.com,,teenvogue,1.0
+243,The 19th News (19thnews.org),left,USA,https://19thnews.org/,,,
+244,The Advocate (www.advocate.com),left,USA (44/180 Press Freedom),https://www.advocate.com,,,
+245,The American Independent Institute (americanindependent.com),left,USA (44/180 Press Freedom),https://americanindependent.com/,,amerindependent,0.8823529411764706
+246,The American Prospect (prospect.org),left,USA (44/180 Press Freedom),https://prospect.org,,theprospect,0.8421052631578947
+247,The Austin Chronicle (www.austinchronicle.com),left,USA,https://www.austinchronicle.com,,austinchronicle,1.0
+248,"The Baffler (thebaffler.com)
+",left,USA (44/180 Press Freedom),https://thebaffler.com/,,thebafflermag,0.8695652173913043
+249,The Blue Route (www.blue-route.org),left,USA,http://theblueroute.org/,,,
+250,The Burning Spear (www.theburningspear.com),left,USA (44/180 Press Freedom),https://www.theburningspear.com/,uhurutv,_uhurunews_,0.3846153846153846
+251,The Canary (UK) (www.thecanary.co),left,United Kingdom,https://www.thecanary.co/,TheCanaryTV,thecanaryuk,0.9
+252,The Climate Reality Project (www.climaterealityproject.org),left,USA (45/180 Press Freedom),https://www.climaterealityproject.org/,,,
+253,The Cut (thecut.com),left,USA,https://www.thecut.com/,,,
+254,The Daily 49er (www.daily49er.com),left,USA,http://www.daily49er.com/,,,
+255,The Daily Banter (thedailybanter.com),left,USA,https://thedailybanter.com/,,thedailybanter,1.0
+256,The Daily Buzz (the-daily.buzz),left,USA,https://the-daily.buzz/,,thedailybuzz5,0.7272727272727273
+257,The Daily Vox (www.thedailyvox.co.za),left,South Africa,https://www.thedailyvox.co.za/,UC9-EHjkOfBwD2_jVBsgpxqQ,thedailyvox,1.0
+258,The Democratic Hub (www.democratichub.com),left,USA (45/180 Press Freedom),http://www.democratichub.com/,,,
+259,The Dodo (https://www.thedodo.com),left,USA,https://www.thedodo.com,,dodo,0.7272727272727273
+260,The Dworkin Report (dworkinreport.com),left,USA (45/180 Press Freedom),https://dworkinreport.com,,funder,0.2105263157894736
+261,The Florida Squeeze (thefloridasqueeze.com),left,USA (44/180 Press Freedom),https://thefloridasqueeze.com/,,flasqueeze,0.7407407407407407
+262,The Gaily Grind (thegailygrind.com),left,USA,https://thegailygrind.com/,TheGailyGrind,thegailygrind,1.0
+263,The Ghion Journal (ghionjournal.com),left,USA (44/180 Press Freedom),https://ghionjournal.com,,,
+264,The Good Men Project (goodmenproject.com),left,USA,https://goodmenproject.com/,,,
+265,The Gravel Institute (gravelinstitute.org),left,USA,https://www.gravelinstitute.org/,TheGravelInstitute,gravelinstitute,1.0
+266,The Improper Magazine (www.theimproper.com),left,USA,https://www.theimproper.com,,,
+267,The Indypendent (indypendent.org),left,USA,https://indypendent.org,,theindypendent,0.88
+268,The Intellectualist (theintellectualist.co),left,USA (44/180 Press Freedom),https://mavenroundtable.io/theintellectualist/,,highbrow_nobrow,0.2666666666666666
+269,"The Lever (levernews.com)
+",left,USA,https://www.levernews.com/,,levernews,1.0
+270,The Lily (www.thelily.com),left,USA,https://www.thelily.com/,,thelilynews,0.7777777777777778
+271,The London Economic (www.thelondoneconomic.com),left,United Kingdom,https://www.thelondoneconomic.com,,londoneconomic,0.9032258064516128
+272,The Mary Sue (www.themarysue.com),left,USA,https://www.themarysue.com,TheMarySueTube,themarysue,1.0
+273,The Militant (www.themilitant.com),left,USA (45/180 Press Freedom),https://themilitant.com/,,,
+274,The Monthly (Australia) (www.themonthly.com.au),left,Australia,https://www.themonthly.com.au/,,,
+275,The Morning Star (www.morningstaronline.co.uk),left,United Kingdom,https://morningstaronline.co.uk/,,m_star_online,0.7333333333333333
+276,The Nation (https://www.thenation.com/),left,USA,https://www.thenation.com/,,heerjeet,0.35294117647058826
+277,The National Memo (www.nationalmemo.com),left,USA,https://www.nationalmemo.com/,,,
+278,The New Civil Rights Movement (www.thenewcivilrightsmovement.com),left,USA,https://www.thenewcivilrightsmovement.com/,,newcivilrights,0.717948717948718
+279,The Palestine Chronicle (www.palestinechronicle.com),left,USA,https://www.palestinechronicle.com,UC2J3olQxMEQLEmpzisRVzpg,palestinechron,0.875
+280,"The Phnom Penh Post (www.phnompenhpost.com)
+",left,Cambodia,https://www.phnompenhpost.com/,,,
+281,The Progressive (www.progressive.org),left,USA (44/180 Press Freedom),https://progressive.org/,theprogressive,theprogressive,0.88
+282,The Progressive Frontier (progressivefrontier.com),left,USA,https://progressivefrontier.com,,,
+283,The Root (www.theroot.com),left,USA (44/180 Press Freedom),https://www.theroot.com/,UCg5bOg1qVoZ2JDJ7MmjY63A,theroot,1.0
+284,The Source Newspaper (La Source) (thelasource.com),left,Canada (14/180 Press Freedom),https://thelasource.com/,,,
+285,The Stranger (www.thestranger.com),left,USA,https://www.thestranger.com/,,,
+286,The Texas Observer (www.texasobserver.org),left,USA,https://www.texasobserver.org,,,
+287,The Village Voice (www.villagevoice.com),left,USA,https://www.villagevoice.com/,,,
+288,The Walrus (thewalrus.ca),left,Canada,https://thewalrus.ca/,thewalrus,,
+289,The Washington Spectator (washingtonspectator.org),left,USA,https://washingtonspectator.org/,,washspec,0.5925925925925926
+290,The Week (theweek.com),left,USA (45/180 Press Freedom),https://theweek.com/,,theweek,1.0
+291,The World Can’t Wait (worldcantwait.net),left,USA (44/180 Press Freedom),https://worldcantwait.net/,,,
+292,TheGrio (thegrio.com),left,USA,https://thegrio.com/,,thegrio,1.0
+293,The Zero Hour (www.thisisthezerohour.com),left,USA,https://thisisthezerohour.com/,,,
+294,Them.us,left,United States,https://www.them.us/,,them,1.0
+295,Think Progress (thinkprogress.org),left,USA,https://thinkprogress.org/,thinkprogress,thinkprogress,1.0
+296,This Magazine (this.org),left,,,,,
+297,Towleroad (www.towleroad.com),left,USA,http://www.towleroad.com/,,tlrd,0.6153846153846154
+298,TreeHugger (www.treehugger.com),left,USA,https://www.treehugger.com/,,treehugger,1.0
+299,TruthDig (www.truthdig.com),left,USA,https://www.truthdig.com/,,truthdig,1.0
+300,TruthOut (truthout.org),left,USA (44/180 Press Freedom),https://truthout.org/,,,
+301,Truth Theory (truththeory.com),left,United Kingdom,https://truththeory.com,UC7pjcXDOGZ9uJlTJ8dIet5g,,
+302,Unicorn Riot (www.unicornriot.ninja),left,USA,https://unicornriot.ninja/,UCeHbMlHDec5NmJfiQXMYGXQ,ur_ninja,0.4210526315789473
+303,Uproxx (uproxx.com),left,,https://uproxx.com/,uproxxvideo,uproxx,1.0
+304,Upworthy (www.upworthy.com),left,USA,https://www.upworthy.com/,upworthy,upworthy,1.0
+305,Vanity Fair (www.vanityfair.com),left,USA (45/180 Press Freedom),https://www.vanityfair.com,VanityFairMagazine,vanityfair,1.0
+306,Viral Title (viraltitle.com),left,Panama,http://viraltitle.com,,,
+307,Vox (www.vox.com),left,USA (44/180 Press Freedom),https://www.vox.com/,,,
+308,Wall Street on Parade (wallstreetonparade.com),left,USA (45/180 Press Freedom),https://wallstreetonparade.com/,,,
+309,Washington Babylon (washingtonbabylon.com),left,USA,https://washingtonbabylon.com/,,,
+310,Washington Press (washingtonpress.com),left,USA,https://washingtonpress.com/,,washpress_news,0.6206896551724138
+311,Washington Sources (washingtonsources.org),left,USA,http://washingtonsources.org,,,
+312,Washingtonian (washingtonian.com),left,USA,https://www.washingtonian.com,,,
+313,Wear Your Voice (wearyourvoicemag.com),left,USA (44/180 Press Freedom),https://wearyourvoicemag.com,,,
+314,We Hunted the Mammoth (wehuntedthemammoth.com),left,USA,http://www.wehuntedthemammoth.com/,,,
+315,White House Watch (whitehousewatch.com),left,USA,https://whitehousewatch.com,,froomkin,0.0869565217391304
+316,Who.What.Why (whowhatwhy.org),left,USA (44/180 Press Freedom),https://whowhatwhy.org/,,,
+317,Wonkette (wonkette.com),left,USA,https://www.wonkette.com,,wonkette,1.0
+318,Workers World (www.workers.org),left,USA (44/180 Press Freedom),https://www.workers.org/,wwpvideo,workersworld,0.7368421052631579
+319,World Socialist Web Site (wsws.org),left,USA (44/180 Press Freedom),https://www.wsws.org,SEPupload,wsws_updates,0.5
+320,Yes Magazine (www.yesmagazine.org),left,USA,https://www.yesmagazine.org,,yesmagazine,1.0
+321,Young Turks (tytnetwork.com),left,USA,https://tytnetwork.com/,,,
+322,Your Black World (yourblackworld.net),left,USA,http://yourblackworld.net,drboycewatkins,yourblackworld,1.0
+323,Z Magazine (zcomm.org),left,USA,https://zcomm.org/zmag/,,,
+324,604 Now (604now.com),center-left,Canada,https://604now.com/,The604Now,604now,1.0
+325,972 Magazine (972mag.com),center-left,USA,https://972mag.com/,,972mag,1.0
+326,"1600 Daily (www.whitehouse.gov)
+",center-left,USA,https://www.whitehouse.gov/1600daily,whitehouse,whitehouse,1.0
+327,ABC News (abcnews.go.com),center-left,USA,https://abcnews.go.com,ABCNews,abc,0.0
+328,ABC News Australia (www.abc.net.au),center-left,Australia,https://www.abc.net.au,,abcaustralia,0.4
+329,ABC11 Eyewitness News (abc11.com),center-left,USA,https://abc11.com/,,abc11_wtvd,0.6666666666666666
+330,Above the Law (abovethelaw.com),center-left,USA,https://abovethelaw.com/,,atlblog,0.3333333333333333
+331,AceShowbiz (aceshowbiz.com),center-left,Indonesia,https://www.aceshowbiz.com/,,,
+332,ACLU (www.aclu.org),center-left,USA (44/180 Press Freedom),https://www.aclu.org/,aclu,aclu,1.0
+333,Ada Derana (adaderana.lk),center-left,Sri Lanka,http://www.adaderana.lk/,DeranaVideos,adaderana,1.0
+334,Aeon (aeon.co),center-left,Australia,https://aeon.co/,,aeonmag,0.7272727272727273
+335,Affinity Magazine (affinitymagazine.us),center-left,USA,http://affinitymagazine.us/,,,
+336,African Arguments (africanarguments.org),center-left,United Kingdom,https://africanarguments.org/,,africaarguments,0.967741935483871
+337,"Africa News (www.africanews.com)
+",center-left,France,https://www.africanews.com/,africanews,africanews,1.0
+338,Ahval News (ahvalnews.com),center-left,USA,https://ahvalnews.com/,,ahval_en,0.7058823529411765
+339,Akron Beacon Journal (beaconjournal.com),center-left,USA,https://www.beaconjournal.com/,,bygeorgethomas,0.2222222222222222
+340,Al Jazeera (www.aljazeera.com),center-left,Qatar,https://www.aljazeera.com/,aljazeeraenglish,ajenglish,0.2222222222222222
+341,Al Monitor (www.al-monitor.com),center-left,USA,https://www.al-monitor.com/,,almonitor,0.9473684210526316
+342,Al-Sura (al-sura.com),center-left,USA,https://al-sura.com,,,
+343,Alan Guttmacher Institute (www.guttmacher.org),center-left,USA,https://www.guttmacher.org/,,,
+344,Albany Times-Union (www.timesunion.com),center-left,USA,https://www.timesunion.com/,,timesunion,1.0
+345,Alberta Views (https://albertaviews.ca),center-left,Canada,https://albertaviews.ca,,albertaviewsmag,0.8888888888888888
+346,AllGov (www.allgov.com),center-left,USA,http://www.allgov.com,,,
+347,Almaguin News (northbaynipissing.com/almaguinhighlands-on),center-left,Canada,https://www.northbaynipissing.com/almaguinhighlands-on/,,,
+348,AM New York (www.amny.com),center-left,USA,http://www.amny.com/,,,
+349,America Magazine (www.americamagazine.org),center-left,USA,https://www.americamagazine.org/,americamedia,americamag,0.8
+350,American Immigration Council (www.americanimmigrationcouncil.org),center-left,USA,https://www.americanimmigrationcouncil.org,,,
+351,American Public Media (americanpublicmedia.org),center-left,USA (44/180 Press Freedom),https://www.americanpublicmedia.org,,ampubmedia,0.6896551724137931
+352,American Purpose (americanpurpose.com),center-left,USA,https://www.americanpurpose.com/,,americanpurpose,1.0
+353,Amnesty International (www.amnesty.org),center-left,United Kingdom,https://www.amnesty.org/en/,,,
+354,Ancaster News (thespec.com/local-ancaster),center-left,Canada,https://www.thespec.com/local-ancaster,thespecvideo,thespec,1.0
+355,Anniston Star (www.annistonstar.com),center-left,USA,https://www.annistonstar.com,,,
+356,Anthropocene Magazine (www.anthropocenemagazine.org),center-left,USA,http://www.anthropocenemagazine.org/,,anthropocenemag,0.8571428571428571
+357,Anti Defamation League (www.adl.org),center-left,USA,https://www.adl.org,ADLNational,adl,1.0
+358,AOL (www.aol.com),center-left,USA,https://www.aol.com/,,,
+359,APM Reports (www.apmreports.org),center-left,USA,https://www.apmreports.org/,,,
+360,Apple News,center-left,USA,https://www.apple.com/apple-news/,,,
+361,"APTN National News
+",center-left,Canada,https://www.aptnnews.ca/,,aptnnews,1.0
+362,Areo Magazine,center-left,United Kingdom,https://areomagazine.com,,areomagazine,1.0
+363,"Arizona Capitol Times (azcapitoltimes.com)
+",center-left,USA,https://azcapitoltimes.com/,,,
+364,Arizona Daily Star (tucson.com),center-left,USA,http://tucson.com/,,dwichner,0.2857142857142857
+365,Arizona Daily Sun (azdailysun.com),center-left,USA,http://azdailysun.com,,,
+366,Arizona Republic (www.azcentral.com),center-left,USA,https://www.azcentral.com,,azcentral,1.0
+367,Arkansas Times (www.arktimes.com),center-left,USA,https://www.arktimes.com,ArkansasTimes,arktimes,1.0
+368,Arms Control Association (https://www.armscontrol.org),center-left,USA,https://www.armscontrol.org,,,
+369,Arnprior Chronicle-Guide (insideottawavalley.com/arnprior-on/),center-left,Canada,https://www.insideottawavalley.com/arnprior-on/,,,
+370,ARTE (arte.tv),center-left,France/Germany,https://www.arte.tv/,,arteen,0.8
+371,Asheville Citizen-Times (www.citizen-times.com),center-left,USA,https://www.citizen-times.com/,,asheville,0.1818181818181818
+372,Asia Sentinel,center-left,USA,https://www.asiasentinel.com/,,asiasentinel,1.0
+373,Aspenia Online (aspeniaonline.it),center-left,Italy,https://aspeniaonline.it/,,,
+374,Aspen Institute (aspeninstitute.org),center-left,USA,https://www.aspeninstitute.org/,,,
+375,"Associated Press (apnews.com)
+",center-left,USA,https://apnews.com/,AssociatedPress,ap,0.5
+376,Atavist Magazine (magazine.atavist.com),center-left,USA,https://magazine.atavist.com/,,,
+377,Athens Banner-Herald (onlineathens.com),center-left,USA,https://www.onlineathens.com/,,onlineathens,1.0
+378,Atlanta Black Star (atlantablackstar.com),center-left,USA,https://atlantablackstar.com/,,,
+379,Atlanta Journal-Constitution (www.ajc.com),center-left,USA,https://www.ajc.com/,,,
+380,Atlantic (www.theatlantic.com),center-left,USA,https://www.theatlantic.com/,TheAtlantic,theatlantic,1.0
+381,Atlantic Media (www.atlanticmedia.com),center-left,USA,https://www.atlanticmedia.com/,,,
+382,ATTN: (www.attn.com),center-left,USA,https://www.attn.com/,attn,attn,1.0
+383,Aurora Banner (yorkregion.com/aurora-on/),center-left,Canada,https://www.yorkregion.com/aurora-on/,,,
+384,Austin American-Statesman (www.statesman.com),center-left,,,,,
+385,Austin Daily Herald (austindailyherald.com),center-left,,,,,
+386,AV Club (avclub.com),center-left,,,,,
+387,Axios (www.axios.com),center-left,,,,,
+388,BackChannel (backchannel.com),center-left,,,,,
+389,Balkan Insight (balkaninsight.com),center-left,,,,,
+390,Baltimore Sun (www.baltimoresun.com),center-left,,,,,
+391,Bangor Daily News (bangordailynews.com),center-left,USA,https://bangordailynews.com/,,,
+392,Baptist News Global (baptistnews.com),center-left,USA,https://baptistnews.com/,,baptist_news,0.9565217391304348
+393,Barrie Advance (simcoe.com/barrie-on/),center-left,Canada,https://www.simcoe.com/barrie-on/,,,
+394,Barrie Today (barrietoday.com),center-left,Canada,https://www.barrietoday.com/,,barrietoday,1.0
+395,Battle Creek Enquirer (www.battlecreekenquirer.com),center-left,USA,https://www.battlecreekenquirer.com,,bcenquirer,0.6896551724137931
+396,"Baxter Bulletin (www.baxterbulletin.com)
+",center-left,USA,https://www.baxterbulletin.com,,,
+397,Bay Nature Magazine (baynature.org),center-left,USA,https://baynature.org/,,baynature,1.0
+398,BBC News (www.bbc.com),center-left,United Kingdom,https://www.bbc.com/news,,bbcworld,0.5454545454545454
+399,Bedford Times-Mail (tmnews.com),center-left,USA,https://www.tmnews.com/,,,
+400,Bellingcat (www.bellingcat.com),center-left,United Kingdom,https://www.bellingcat.com/,,,
+401,Bellingham Herald (bellinghamherald.com),center-left,USA,https://www.bellinghamherald.com/,,,
+402,Berkeleyside (www.berkeleyside.com),center-left,USA,https://www.berkeleyside.com/,,berkeleyside,1.0
+403,Berkshire Eagle (www.berkshireeagle.com),center-left,USA,https://www.berkshireeagle.com/,UCvL92VdN1kAeX_769U407Nw,,
+404,Berliner Zeitung (berliner-zeitung.de),center-left,Germany,https://www.berliner-zeitung.de/,UCOK_An4e3Um5pkziO3e1Qyw,berlinerzeitung,0.967741935483871
+405,Bing News (www.bing.com),center-left,USA,https://www.bing.com/news,,,
+406,Birmingham Mail (www.birminghammail.co.uk),center-left,United Kingdom,https://www.birminghammail.co.uk,,birmingham_live,0.7586206896551724
+407,Black Enterprise (blackenterprise.com),center-left,USA,https://www.blackenterprise.com/,BEMultiMedia,,
+408,BlackPressUSA (blackpressusa.com),center-left,USA,https://blackpressusa.com/,UCS5gJZ-_6k3e26hG7H4t3vA,blackpressusa,1.0
+409,Bleacher Report (bleacherreport.com),center-left,USA,https://bleacherreport.com/,,bleacherreport,1.0
+410,Bloomberg (www.bloomberg.com),center-left,USA,https://www.bloomberg.com/,,,
+411,Bluestem Prairie (www.bluestemprairie.com),center-left,USA,http://www.bluestemprairie.com/,,,
+412,Boston.com,center-left,USA,https://www.boston.com/,,bostondotcom,0.6666666666666666
+413,Boston Globe (www.bostonglobe.com),center-left,USA,https://www.bostonglobe.com/,,bostonglobe,1.0
+414,Boy Genius Report (bgr.com),center-left,USA,http://bgr.com/,,bgr,1.0
+415,Bracebridge (muskokaregion.com/bracebridge-on/),center-left,Canada,https://www.muskokaregion.com/bracebridge-on/,,,
+416,Brampton Guardian,center-left,Canada,https://www.bramptonguardian.com,,bmptguardian,0.8571428571428571
+417,Brennan Center for Justice (www.brennancenter.org),center-left,USA,https://www.brennancenter.org/,TheBrennanCenter,brennancenter,1.0
+418,Brookings Institute (www.brookings.edu),center-left,USA,https://www.brookings.edu/,,brookingsinst,0.8181818181818182
+419,Bulletin of Atomic Scientists (thebulletin.org),center-left,USA,https://thebulletin.org/,,,
+420,Business Insider (www.businessinsider.com),center-left,USA,http://www.businessinsider.com/,businessinsider,businessinsider,1.0
+421,Bustle Magazine (www.bustle.com),center-left,USA,https://www.bustle.com/,bustle,bustle,1.0
+422,Buzzfeed (www.buzzfeed.com),center-left,USA,https://www.buzzfeed.com/news,,,
+423,Buzzfeed News (buzzfeednews.com),center-left,USA,https://www.buzzfeednews.com/,,buzzfeednews,1.0
+424,Byline Times (bylinetimes.com),center-left,United Kingdom,https://bylinetimes.com/,,bylineradio,0.6363636363636364

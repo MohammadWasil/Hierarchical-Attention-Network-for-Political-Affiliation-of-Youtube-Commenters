@@ -1,9 +1,7 @@
 from urllib.parse import parse_qs, quote, unquote, urlparse
 import re
-
+from tweepy import OAuthHandler, API
 import json
-
-
 
 def check_youtube_for_website_link(soup, website_links, twitter_handle_selected):
     domain = get_domain(website_links)
@@ -91,3 +89,18 @@ def get_domain(url):
     
     """
     return re.sub(r'www\d?.', '', urlparse(url.lower()).netloc.split(':')[0])
+
+
+def Authenticate_twitter(cfg):
+    # Authenticate to Twitter
+    auth = OAuthHandler(cfg["API_KEYS"], cfg["API_SECRET_KEYS"])
+    auth.set_access_token(cfg["ACCESS_TOKEN"], cfg["ACCESS_TOKEN_SECRET"])
+
+    api = API(auth)
+
+    if api.verify_credentials() == False:
+        print("The user credentials are invalid.")
+    else:
+        print("The user credentials are valid.")
+
+    return api
