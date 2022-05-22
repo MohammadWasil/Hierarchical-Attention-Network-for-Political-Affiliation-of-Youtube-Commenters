@@ -11,7 +11,6 @@ def main():
     with open(os.path.join(DIRECTORY_PATH, "utility/config_KEYS.yml"), "r") as ymlfile:
         cfg =  yaml.safe_load(ymlfile)
 
-
     api = Authenticate_twitter(cfg)
 
     channel_yt_twitter = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/2. scrap_youtube_twitter.csv"))

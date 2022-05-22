@@ -46,23 +46,44 @@ def main():
     twitter_handle_sim_score = defaultdict(float)
     new_channel_yt_twitter_sim = pd.DataFrame(columns=['Name', 'Bias Rating', 'Country', 'Website', 'Youtube Channel', 'Twitter Handle', 'Twitter Similarity'])
 
-    for index, website_links in enumerate(news_channels["Website"][:425]):
-        new_channel_yt_twitter_sim.loc[index, "Name"] = news_channels["Name"][index]
-        new_channel_yt_twitter_sim.loc[index, "Bias Rating"] = news_channels["Bias Rating"][index]
-        new_channel_yt_twitter_sim.loc[index, "Country"] = news_channels["Country"][index]
-        new_channel_yt_twitter_sim.loc[index, "Website"] = news_channels["Website"][index]
-        
-        if (website_links != "https://www.bellinghamherald.com/"):
+    sites_to_ignore = ["https://www.bellinghamherald.com/", "https://www.charlotteobserver.com", "https://www.fresnobee.com/",
+                        "https://www.kansascity.com", "http://www.kentucky.com/", "http://www.mcclatchydc.com/", "https://www.miamiherald.com",
+                        "https://www.newsobserver.com/", "https://www.heraldonline.com/", "https://www.sacbee.com", "https://www.sanluisobispo.com/",
+                        "https://www.stuff.co.nz/"]
+
+    for _, website_links in enumerate(news_channels["Website"][820:]):
+
+        # skip this one
+        if (website_links not in sites_to_ignore):
 
             num_channels += 1
             try:
+                index = news_channels.index[news_channels["Website"] == website_links].tolist()[0]
+
+                new_channel_yt_twitter_sim.loc[index, "Name"] = news_channels["Name"][index]
+                new_channel_yt_twitter_sim.loc[index, "Bias Rating"] = news_channels["Bias Rating"][index]
+                new_channel_yt_twitter_sim.loc[index, "Country"] = news_channels["Country"][index]
+                new_channel_yt_twitter_sim.loc[index, "Website"] = news_channels["Website"][index]
+
                 twitter_handle = defaultdict(int)
                 youtube_channel_id = defaultdict(int)
                 youtube_channel_users = defaultdict(int)
                 print("{} : {}".format(index, website_links))
 
-                response = requests.get(website_links, headers = headers)
+                try:
+                    response = requests.get(website_links, headers = headers, allow_redirects=False)
+                except:
+                    response = requests.get(website_links, allow_redirects=False) 
                 time.sleep(1)
+                if response.text.strip() == '':
+                    try:
+                        response = requests.get(website_links,
+                                                headers={random.choice(USER_AGENT_LIST)},
+                                                allow_redirects=True)
+                    except:
+                        response = requests.get(website_links, allow_redirects=True)
+                    print('+++ Need review for URL {0}, redirected URL {1}'.format(website_links, response.url))
+
                 soup = BeautifulSoup(response.text, 'lxml')
 
                 # trying to find social media link, iei either youtube link or twitter handle.
@@ -125,8 +146,6 @@ def main():
                                 youtube_user = re.split('\W', youtube_user)[0]
                                 print("Youtube User", youtube_user)
                                 youtube_channel_users[youtube_user] += 1
-
-                        print("***.got the youtube")
 
                 if(len(twitter_handle)) > 1:
                     twitter_handle_list = sorted(list(twitter_handle.keys()), key=lambda x: twitter_handle[x], reverse=True)
@@ -238,9 +257,10 @@ def main():
     print("**************************************************************************************************************")
     print("\n")
     # save twitter_handle_sim_score as json file
-    save_twitter_handle = "data/2. twitter_handle_sim_score.json"
-    with open(os.path.join(DIRECTORY_PATH, save_twitter_handle), 'w') as thss:
-        json.dump(twitter_handle_sim_score, thss)
+    # whichever twitter ahndle has less than 0.5 similarity, we need to manually check them.
+    save_twitter_handle = "data/2. twitter_handle_sim_score_2.json"
+    #with open(os.path.join(DIRECTORY_PATH, save_twitter_handle), 'w') as thss:
+    #    json.dump(twitter_handle_sim_score, thss)
 
     print("**************************************************************************************************************")
     print("************************************************Statistics****************************************************")
@@ -254,8 +274,8 @@ def main():
     print("**************************************************************************************************************")
     print("\n")
 
-    save_csv_file = "data/2. scrap_youtube_twitter.csv"
-    new_channel_yt_twitter_sim.to_csv(os.path.join(DIRECTORY_PATH, save_csv_file), encoding='utf-8', index=False)
+    save_csv_file = "data/2. scrap_youtube_twitter_2.csv"
+    #new_channel_yt_twitter_sim.to_csv(os.path.join(DIRECTORY_PATH, save_csv_file), encoding='utf-8', index=False)
     print("CSV saved!")
     print("\n")
     print('It took {0:0.1f} seconds'.format(time.time() - start))

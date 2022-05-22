@@ -3,20 +3,61 @@ import re
 from tweepy import OAuthHandler, API
 import json
 
+def youtube_search_bar(channel_name):
+    r = "https://www.youtube.com/results?search_query={}".format(channel_name)
+    return r
+
+def recursive_lookup(k, d):
+    # imporvised from https://stackoverflow.com/questions/48314755/find-keys-in-nested-dictionary
+    # here, k is the key to search
+    # d is the dictonary to find from.
+    if k in d: return d[k]
+    for v in d.values():
+        if isinstance(v, dict):
+            a = recursive_lookup(k, v)
+            if a is not None: yield a
+        elif isinstance(v, list):
+            for v_list in v:
+                if isinstance(v_list, dict):
+                    b = recursive_lookup(k, v_list)
+                    if b is not None: yield b
+    return None
+
+def search_dict(partial, key):
+    if isinstance(partial, dict):
+        for k, v in partial.items():
+            if k == key:
+                yield v
+            else:
+                for o in search_dict(v, key):
+                    yield o
+    elif isinstance(partial, list):
+        for i in partial:
+            for o in search_dict(i, key):
+                yield o
+
 def check_youtube_for_website_link(soup, website_links, twitter_handle_selected):
     domain = get_domain(website_links)
     
     aid = soup.find('script',string=re.compile('ytInitialData')).text
     yt_about_page = json.loads(aid[20:-1])
 
-    description = yt_about_page['contents']['twoColumnBrowseResultsRenderer']['tabs'][5]['tabRenderer']['content']['sectionListRenderer']['contents'][0]['itemSectionRenderer']['contents'][0]['channelAboutFullMetadataRenderer']['description']['simpleText']
+    #description = yt_about_page['contents']['twoColumnBrowseResultsRenderer']['tabs'][5]['tabRenderer']['content']['sectionListRenderer']['contents'][0]['itemSectionRenderer']['contents'][0]['channelAboutFullMetadataRenderer']['description']['simpleText']
 
-    youtube_to_website_link = yt_about_page['contents']['twoColumnBrowseResultsRenderer']['tabs'][5]['tabRenderer']['content']['sectionListRenderer']['contents'][0]['itemSectionRenderer']['contents'][0]['channelAboutFullMetadataRenderer']['primaryLinks'][0]['navigationEndpoint']['urlEndpoint']['url']
+    #youtube_to_website_link = yt_about_page['contents']['twoColumnBrowseResultsRenderer']['tabs'][5]['tabRenderer']['content']['sectionListRenderer']['contents'][0]['itemSectionRenderer']['contents'][0]['channelAboutFullMetadataRenderer']['primaryLinks'][0]['navigationEndpoint']['urlEndpoint']['url']
 
-    twitter_handle_link = yt_about_page['contents']['twoColumnBrowseResultsRenderer']['tabs'][5]['tabRenderer']['content']['sectionListRenderer']['contents'][0]['itemSectionRenderer']['contents'][0]['channelAboutFullMetadataRenderer']['primaryLinks'][2]['navigationEndpoint']['urlEndpoint']['url']
+    #twitter_handle_link = yt_about_page['contents']['twoColumnBrowseResultsRenderer']['tabs'][5]['tabRenderer']['content']['sectionListRenderer']['contents'][0]['itemSectionRenderer']['contents'][0]['channelAboutFullMetadataRenderer']['primaryLinks'][2]['navigationEndpoint']['urlEndpoint']['url']
 
     # we will use one of them to compare whether the youtube channel we got indeed belongs to that neews channel or not.
-    links_for_checking_authenticity = [youtube_to_website_link, twitter_handle_link]
+    #links_for_checking_authenticity = [youtube_to_website_link, twitter_handle_link]
+
+    links = next(search_dict(yt_about_page, 'primaryLinks'), [])
+    links_for_checking_authenticity = []
+    for link in links:
+        #pp.pprint(link)
+        #print("********************")
+        #print(link["navigationEndpoint"]["urlEndpoint"]["url"])
+        links_for_checking_authenticity.append(link["navigationEndpoint"]["urlEndpoint"]["url"])
 
     #website_links = "https://aldianews.com"
     #twitter_handle_selected = "ALDIANews"
@@ -44,9 +85,10 @@ def check_youtube_for_website_link(soup, website_links, twitter_handle_selected)
     # can add one more check - domain from description.
     # if we find domain in the description of the youtube about page, then also we can say
     # that we ahve matched the correct youtube channel for that news channel website
+    description = next(search_dict(yt_about_page, 'description'), {})
     if len(description) > 0:
         #print(description)
-        if domain in description:
+        if domain in description["simpleText"]:
             print("yes, the domain is in the description!")
             return True
     return False
