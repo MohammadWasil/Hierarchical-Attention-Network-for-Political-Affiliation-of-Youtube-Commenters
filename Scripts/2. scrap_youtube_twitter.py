@@ -49,9 +49,12 @@ def main():
     sites_to_ignore = ["https://www.bellinghamherald.com/", "https://www.charlotteobserver.com", "https://www.fresnobee.com/",
                         "https://www.kansascity.com", "http://www.kentucky.com/", "http://www.mcclatchydc.com/", "https://www.miamiherald.com",
                         "https://www.newsobserver.com/", "https://www.heraldonline.com/", "https://www.sacbee.com", "https://www.sanluisobispo.com/",
-                        "https://www.stuff.co.nz/"]
+                        "https://www.stuff.co.nz/", "https://www.thenewstribune.com/", "https://www.theolympian.com/", "https://www.thestate.com/",
+                        "https://www.usnews.com/", "https://www.bnd.com/", "http://www.idahostatesman.com", "https://www.heraldsun.com", "https://www.macon.com",
+                        "https://www.modbee.com/", "https://www.tri-cityherald.com/", "https://www.kansas.com/", "https://www.star-telegram.com/",
+                        "https://www.itv.com/news", "https://www.telegraph.co.uk"]
 
-    for _, website_links in enumerate(news_channels["Website"][820:]):
+    for _, website_links in enumerate(news_channels["Website"][2210:]):
 
         # skip this one
         if (website_links not in sites_to_ignore):
@@ -82,7 +85,6 @@ def main():
                                                 allow_redirects=True)
                     except:
                         response = requests.get(website_links, allow_redirects=True)
-                    print('+++ Need review for URL {0}, redirected URL {1}'.format(website_links, response.url))
 
                 soup = BeautifulSoup(response.text, 'lxml')
 
@@ -258,7 +260,7 @@ def main():
     print("\n")
     # save twitter_handle_sim_score as json file
     # whichever twitter ahndle has less than 0.5 similarity, we need to manually check them.
-    save_twitter_handle = "data/2. twitter_handle_sim_score_2.json"
+    save_twitter_handle = "data/2. twitter_handle_sim_score_1500.json"
     #with open(os.path.join(DIRECTORY_PATH, save_twitter_handle), 'w') as thss:
     #    json.dump(twitter_handle_sim_score, thss)
 
@@ -274,7 +276,7 @@ def main():
     print("**************************************************************************************************************")
     print("\n")
 
-    save_csv_file = "data/2. scrap_youtube_twitter_2.csv"
+    save_csv_file = "data/2. scrap_youtube_twitter_1500.csv"
     #new_channel_yt_twitter_sim.to_csv(os.path.join(DIRECTORY_PATH, save_csv_file), encoding='utf-8', index=False)
     print("CSV saved!")
     print("\n")

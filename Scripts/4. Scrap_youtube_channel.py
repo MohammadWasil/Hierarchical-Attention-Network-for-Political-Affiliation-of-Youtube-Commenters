@@ -1,12 +1,6 @@
-import time, requests, re
-import os
-from bs4 import BeautifulSoup
-
+import os, json, time, requests, re, random
 import pandas as pd
-import pprint
-import json
-import yaml
-import time, requests, re, random
+from bs4 import BeautifulSoup
 
 from utils import Authenticate_twitter, youtube_search_bar, check_youtube_for_website_link
 
@@ -28,6 +22,11 @@ def main():
     channel_yt_twitter = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/2. scrap_youtube_twitter.csv"))
     channel_yt_twitter.drop("index",axis=1,inplace=True)
 
+    # statistics
+    num_youtube_channels_nan = 0
+    num_youtube_channels_updates = 0
+    num_youtube_channels_fail_attempts = 0
+
     for index, row in channel_yt_twitter.iterrows():
     
         num_search_results = 0
@@ -36,6 +35,9 @@ def main():
         if pd.isna(channel_yt_twitter.iloc[index, 4]):
             print("*********************")
             print("Channel name: ", channel_yt_twitter.iloc[index, 0])
+
+            num_youtube_channels_nan += 1
+
             for _ in range(5):
                 if num_search_results == 0:
                     result_link = youtube_search_bar(channel_yt_twitter.iloc[index, 0])
@@ -47,8 +49,6 @@ def main():
 
                     if response.text:
                         soup = BeautifulSoup(response.text, 'lxml')
-
-                        #print(soup)
 
                         aid = soup.find('script',string=re.compile('ytInitialData')).text
                         yt_about_page = json.loads(aid[20:-1])
@@ -85,9 +85,17 @@ def main():
                     if check_youtube_for_website_link(soup, channel_yt_twitter.iloc[index, 3], channel_yt_twitter.iloc[index, 5]):
                         print("match found!")
                         # update the csv file.
+                        num_youtube_channels_updates += 1
                         channel_yt_twitter.iloc[index, 4] = channel_title
-            
+                    else:
+                        num_youtube_channels_fail_attempts += 1
 
-    
+    print("Number of successfull youtube channel name scrap update {} / Number of requests sent for youtube channel name scrap: {}".format(num_youtube_channels_updates, num_youtube_channels_nan))
+    print("Number of Failed youtube channel name scrap {} / Number of requests sent for youtube channel name scrap: {}".format(num_youtube_channels_fail_attempts, num_youtube_channels_nan))
+
+    save_csv_file = "data/4. scrap_youtube_channel.csv"
+    channel_yt_twitter.to_csv(os.path.join(DIRECTORY_PATH, save_csv_file), encoding='utf-8', index=False)
+    print("CSV saved!")
+
 if __name__ == '__main__':
     main()

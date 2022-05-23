@@ -1,6 +1,8 @@
 from urllib.parse import parse_qs, quote, unquote, urlparse
 import re
 from tweepy import OAuthHandler, API
+from googleapiclient.discovery import build
+import time
 import json
 
 def youtube_search_bar(channel_name):
@@ -146,3 +148,59 @@ def Authenticate_twitter(cfg):
         print("The user credentials are valid.")
 
     return api
+
+def Authenticate_youtube(cfg):
+    youtube_service = build('youtube', 'v3', developerKey=cfg["YOUTUBE_KEY"])
+    return youtube_service
+
+def get_youtube_channel_id(service, part_id, youtube_user):
+    """
+    Get youtube channel id with the given youtube user.
+    returns : youtube channel id.
+    """
+    for i in range(3):
+        try:
+            response = service.channels().list(part = part_id, forUsername=youtube_user)
+            response = response.execute()
+            #print(response)
+            # if there is a response
+            if response is not None:
+                if "items" in response:
+                    if isinstance(response["items"], list):
+                        if len(response["items"][0]) > 0:
+                            #print("yes")
+                            #print(response["items"][0]["id"])
+                            channel_id = response["items"][0]["id"]
+                            return channel_id
+            else:
+                return ""
+
+        except:
+            time.sleep(2**i)
+            print("exception!")
+    return ""
+
+def check_youtube_channel_id(service, part_id, youtube_id):
+    """
+    Get youtube channel id with the given youtube user.
+    """
+    for i in range(3):
+        try:
+            response = service.channels().list(part = part_id, id=youtube_id)
+            response = response.execute()
+            #print(response)
+            # if there is a response
+            if response is not None:
+                if "items" in response:
+                    if isinstance(response["items"], list):
+                        if len(response["items"][0]) > 0:
+                            #print("yes")
+                            #print(response["items"][0]["id"])
+                            channel_id = response["items"][0]["id"]
+                            return channel_id
+            else:
+                return ""
+        except:
+            time.sleep(2**i)
+            print("exception!")
+    return ""
