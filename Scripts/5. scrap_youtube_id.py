@@ -1,3 +1,12 @@
+"""
+Time = < 5 mins.
+To validate the given youtube channel Id. If youtube channel username is available to us, we will get their youtube channel ID.
+
+Input : 4. scrap_youtube_channel.csv
+Outpu : 5. scrap_youtube_ids.csv
+        5. list_indices_updated_yt_channel.txt (It contansins indices which were updated in the csv file)
+"""
+
 import os
 import pandas as pd
 import yaml
@@ -15,7 +24,6 @@ def main():
 
     ################ CHANGE THIS #######################s
     channel_yt_twitter = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/4. scrap_youtube_channel.csv"))
-    channel_yt_twitter.drop("index",axis=1,inplace=True)
 
     # duplicate one column
     channel_yt_twitter['Youtube User'] = channel_yt_twitter['Youtube Channel'] 
@@ -23,29 +31,49 @@ def main():
     #To find the id
     part = "id"
 
+    # list of indices changed
+    list_indices_updated = []
+
     # iterate over the dataframe
-    for index, row in channel_yt_twitter.iterrows():
+    for index, _ in channel_yt_twitter.iterrows():
         
         channel_id_user = channel_yt_twitter.iloc[index, 4]
         
         if not pd.isna(channel_id_user):
-            
+            print("-------------------- Youtube Channel Found FROM CSV -------------------- ")    
             # first, we will call get_youtube_channel_id().
             channel_id_response = get_youtube_channel_id(youtube_service, part, channel_id_user)
-            print(channel_id_response)
-
+            
             if channel_id_response == "":
-                print("Cannot find from the first function, trying again from the second function!!!")
+                print("Cannot find from youtube channel USERNAME, trying again from youtube channel ID!!!")
                 channel_id_response = check_youtube_channel_id(youtube_service, part, channel_id_user)
-                print(channel_id_response)
+                
                 if channel_id_response == "":
-                    print("Cannot find from the second function!!!")
+                    print("Cannot find from youtube channel ID!!!")
                 else:
+                    print("ID: ", channel_id_user, " | ID Received: ", channel_id_response)
+                    print("Matched using youtube channel ID")
                     channel_yt_twitter.iloc[index, 4] = channel_id_response
+
+                    list_indices_updated.append(index)
             else:
+                print("USER: ", channel_id_user, " | ID Received: ", channel_id_response)
+                print("Matched using youtube channel USERNAME")
                 channel_yt_twitter.iloc[index, 4] = channel_id_response
 
+                list_indices_updated.append(index)
+            print("\n")
+        else:
+            print("-------------------- No Youtube Channel Found From CSV -------------------- ")
+            print("\n")
 
+    print("Number of updated indices - {}".format(len(list_indices_updated)))
+    
+    print("Saving list ...")
+    save_list = "data/5. list_indices_updated_yt_channel.txt"
+    with open(os.path.join(DIRECTORY_PATH, save_list), "w") as output:
+        output.write(str(list_indices_updated))
+    print("List saved!")
 
     save_csv_file = "data/5. scrap_youtube_ids.csv"
     channel_yt_twitter.to_csv(os.path.join(DIRECTORY_PATH, save_csv_file), encoding='utf-8', index=False)

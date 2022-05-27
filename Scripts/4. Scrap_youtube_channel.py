@@ -1,5 +1,5 @@
 """
-Scrap the youtube search page using channel title to find theie youtube channel.
+Scrap the youtube search page using channel title to find their youtube channel.
 
 Input : 3. scrap_youtube_twitter_handle.csv
 Output : 4. scrap_youtube_channel.csv
