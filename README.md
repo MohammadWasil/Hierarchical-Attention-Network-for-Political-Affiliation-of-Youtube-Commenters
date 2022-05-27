@@ -24,3 +24,7 @@ python '3. Get_twitter_handle.py'
 ```{python}
 python '4. Scrap_youtube_channel.py'
 ```
+7. To validate the given youtube channel Id. If youtube channel username is available to us, we will get their youtube channel ID.
+```{python}
+python '5. scrap_youtube_id.py'
+```
