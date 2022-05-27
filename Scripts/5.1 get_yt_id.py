@@ -44,7 +44,7 @@ def main():
     list_indices_updated = []
 
     # 222:
-    for index, row in channel_yt_twitter[3030:].iterrows():
+    for index, row in channel_yt_twitter.iterrows():
 
         channel_username = channel_yt_twitter.loc[index, "Youtube Channel"]
         if not pd.isna(channel_username):
