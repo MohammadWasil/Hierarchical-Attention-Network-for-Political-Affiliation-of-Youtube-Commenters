@@ -12,7 +12,15 @@ python 'Scrap MBFC website.py'
 ```{python}
 python '2. scrap_youtube_twitter.py'
 ```
-4. To find twitter handle of the remaining news channels, we will do exhaistive search using:
+4. Review Twitter handles manually.
+```{python}
+python '2_1. review_twitter_handle.py'
+```
+5. To find twitter handle of the remaining news channels, we will do exhaustive search using:
 ```{python}
 python '3. Get_twitter_handle.py'
+```
+6. To search the youtube search page with channel title to find their youtube channel
+```{python}
+python '4. Scrap_youtube_channel.py'
 ```
