@@ -14,7 +14,7 @@ def main():
     youtube_service = Authenticate_youtube(cfg)
 
     ################ CHANGE THIS #######################s
-    channel_yt_twitter = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/3. scrap_youtube_twitter_handle.csv"))
+    channel_yt_twitter = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/4. scrap_youtube_channel.csv"))
     channel_yt_twitter.drop("index",axis=1,inplace=True)
 
     # duplicate one column

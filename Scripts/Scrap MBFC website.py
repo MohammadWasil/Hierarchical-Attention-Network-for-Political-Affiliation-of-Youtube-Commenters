@@ -1,3 +1,8 @@
+"""
+Scrap MBFC website for the lits of news channels, with their names, website, their biasness.
+Output: News channels.csv
+"""
+
 import time, requests, re
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup

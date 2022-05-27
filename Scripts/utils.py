@@ -77,10 +77,12 @@ def check_youtube_for_website_link(soup, website_links, twitter_handle_selected)
 
             if "twitter.com" in redirected_link['q'][0]:
                 match = re.search(r"^.*?\btwitter\.com/@?([^?/,\r\n]+)(?:[?/,].*)?$", redirected_link['q'][0])                   
+                #print(match)
                 #print(match.group(1))
-                if twitter_handle_selected == match.group(1):
-                    #print(True)
-                    return True
+                if match is not None:
+                    if twitter_handle_selected == match.group(1):
+                        #print(True)
+                        return True
             elif redirected_url == domain:
                 #print(True)
                 return True
@@ -140,7 +142,7 @@ def Authenticate_twitter(cfg):
     auth = OAuthHandler(cfg["API_KEYS"], cfg["API_SECRET_KEYS"])
     auth.set_access_token(cfg["ACCESS_TOKEN"], cfg["ACCESS_TOKEN_SECRET"])
 
-    api = API(auth)
+    api = API(auth, wait_on_rate_limit=True)
 
     if api.verify_credentials() == False:
         print("The user credentials are invalid.")

@@ -1,8 +1,15 @@
+"""
+Scrap the youtube search page using channel title to find theie youtube channel.
+
+Input : 3. scrap_youtube_twitter_handle.csv
+Output : 4. scrap_youtube_channel.csv
+"""
+
 import os, json, time, requests, re, random
 import pandas as pd
 from bs4 import BeautifulSoup
 
-from utils import Authenticate_twitter, youtube_search_bar, check_youtube_for_website_link
+from utils import youtube_search_bar, check_youtube_for_website_link
 
 def main():
     USER_AGENT_LIST = ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36',
@@ -19,7 +26,7 @@ def main():
 
     DIRECTORY_PATH = "D:/MSc Data Science/Elective Modules - Research Modules/[INF-DS-RMB] Research Module B/RM Code/Sentiment-Classification-Youtube-Comments-Political-Affiliation/"
 
-    channel_yt_twitter = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/2. scrap_youtube_twitter.csv"))
+    channel_yt_twitter = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/3. scrap_youtube_twitter_handle.csv"))
     channel_yt_twitter.drop("index",axis=1,inplace=True)
 
     # statistics
@@ -40,6 +47,7 @@ def main():
 
             for _ in range(5):
                 if num_search_results == 0:
+                    # can remove brackets from the name of the channel
                     result_link = youtube_search_bar(channel_yt_twitter.iloc[index, 0])
                     try:
                         response = requests.get(result_link, headers = headers)
@@ -87,6 +95,8 @@ def main():
                         # update the csv file.
                         num_youtube_channels_updates += 1
                         channel_yt_twitter.iloc[index, 4] = channel_title
+                        # there should be a break here.
+                        break
                     else:
                         num_youtube_channels_fail_attempts += 1
 

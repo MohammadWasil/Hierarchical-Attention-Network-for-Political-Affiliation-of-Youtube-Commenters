@@ -1,3 +1,11 @@
+"""
+Iterate over the dataset `News channels` to scrap their youtube channel, their twitter handle with the similarity score.
+
+Input: News channels.csv
+Output: 2. scrap_youtube_twitter.csv
+        2. twitter_handle_sim_score.json (stores all news channels twitter handle's similarity score)/
+"""
+
 import time, requests, re
 import os
 from bs4 import BeautifulSoup

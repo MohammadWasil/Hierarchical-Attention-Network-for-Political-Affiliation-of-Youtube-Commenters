@@ -1,8 +1,15 @@
+"""
+Get the twitter handle using search_usr function of he remaining news channels.
+
+Input: 2_1. review_twitter_handle.csv
+Output: 
+"""
+
 import pandas as pd
 import os, yaml, tldextract
 from difflib import SequenceMatcher
 from utils import check_twitter_for_website_link, get_domain, Authenticate_twitter
-
+import time
 DIRECTORY_PATH = "D:/MSc Data Science/Elective Modules - Research Modules/[INF-DS-RMB] Research Module B/RM Code/Sentiment-Classification-Youtube-Comments-Political-Affiliation/"
 
 def main():
@@ -13,7 +20,7 @@ def main():
 
     api = Authenticate_twitter(cfg)
 
-    channel_yt_twitter = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/2. scrap_youtube_twitter.csv"))
+    channel_yt_twitter = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/2_1. review_twitter_handle.csv"))
     channel_yt_twitter = channel_yt_twitter.reset_index()
 
     update_csv = False
@@ -30,6 +37,7 @@ def main():
             website_links = channel_yt_twitter.iloc[index, 4]
             
             returned_users = api.search_users(channel_name, count = 10)
+            time.sleep(1)
             num_requests_sent += 1
             update_csv = True
             
@@ -55,9 +63,16 @@ def main():
             if update_csv == True:
                 num_fail_attempts += 1
                 update_csv = False
-                
+            print("**************************************************************************************************************")
+
+    print("**************************************************************************************************************")
+    print("************************************************Statistics****************************************************")
+    print("**************************************************************************************************************")      
     print("Number of successfull update {} / Number of requests sent: {}".format(num_updates, num_requests_sent))
     print("Number of Failed update {} / Number of requests sent: {}".format(num_fail_attempts, num_requests_sent))
+    print("**************************************************************************************************************")
+    print("************************************************Statistics****************************************************")
+    print("**************************************************************************************************************")
 
     save_csv_file = "data/3. scrap_youtube_twitter_handle.csv"
     channel_yt_twitter.to_csv(os.path.join(DIRECTORY_PATH, save_csv_file), encoding='utf-8', index=False)
