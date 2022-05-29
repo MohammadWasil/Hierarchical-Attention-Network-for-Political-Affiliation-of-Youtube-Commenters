@@ -3,8 +3,8 @@ Time = < 5 mins.
 To validate the given youtube channel Id. If youtube channel username is available to us, we will get their youtube channel ID.
 
 Input : 4. scrap_youtube_channel.csv
-Outpu : 5. scrap_youtube_ids.csv
-        5. list_indices_updated_yt_channel.txt (It contansins indices which were updated in the csv file)
+Output : 5. scrap_youtube_ids.csv
+         5. list_indices_updated_yt_channel.txt (It contansins indices which were updated in the csv file)
 """
 
 import os

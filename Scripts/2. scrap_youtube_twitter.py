@@ -42,7 +42,7 @@ def main():
     start = time.time()
     api = Authenticate_twitter(cfg)
 
-    file_path = "data/News channels.csv"
+    file_path = "data/1. News channels.csv"
     news_channels = pd.read_csv(os.path.join(DIRECTORY_PATH, file_path))
 
     num_channels = 0

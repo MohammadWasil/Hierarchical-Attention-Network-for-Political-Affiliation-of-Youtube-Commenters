@@ -1,3 +1,11 @@
+"""
+Another way to get the channel id by using youtube search method
+
+Input: data/5.1 get_yt_ids.csv
+Output: data/5.1 yt_ids_update_idx_list.txt
+        data/5.1 get_yt_ids.csv
+"""
+
 import os
 import pandas as pd
 import yaml

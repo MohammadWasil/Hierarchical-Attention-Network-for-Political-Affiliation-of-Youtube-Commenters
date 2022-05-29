@@ -4,6 +4,11 @@ from tweepy import OAuthHandler, API
 from googleapiclient.discovery import build
 import time
 import json
+import requests
+import scrapetube
+
+import datetime
+from bs4 import BeautifulSoup
 
 def youtube_search_bar(channel_name):
     r = "https://www.youtube.com/results?search_query={}".format(channel_name)
@@ -136,7 +141,6 @@ def get_domain(url):
     """
     return re.sub(r'www\d?.', '', urlparse(url.lower()).netloc.split(':')[0])
 
-
 def Authenticate_twitter(cfg):
     # Authenticate to Twitter
     auth = OAuthHandler(cfg["API_KEYS"], cfg["API_SECRET_KEYS"])
@@ -206,3 +210,176 @@ def check_youtube_channel_id(service, part_id, youtube_id):
             time.sleep(2**i)
             print("exception!")
     return ""
+
+def ajax_request(session, url, params=None, data=None, headers=None, max_retry=5, sleep=20):
+    for idx_request in range(max_retry):
+        response = session.post(url, params=params, data=data, headers=headers)
+        time.sleep(1)
+        if response.status_code == 200:
+            ret_json = response.json()
+            if isinstance(ret_json, list):
+                ret_json = [x for x in ret_json if 'response' in x][0]
+            ret_json.update({'num_request': idx_request + 1})
+            return ret_json
+        elif response.status_code in [403, 413]:
+            return {'error': 'Comments are turned off', 'num_request': idx_request + 1}
+        time.sleep(sleep)
+    return {'error': 'Unknown error {0}'.format(response.status_code), 'num_request': max_retry}
+
+def get_video_date_upload(video_id):
+    youtube_video_link = "https://www.youtube.com/watch?v={}".format(video_id)
+
+    session = requests.Session()
+    header = {"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}
+
+    response = session.get(youtube_video_link, headers=header)
+
+    if response.status_code == 429:
+        print("Blocked by Youtube!")
+        return None
+    if response is not None:
+        soup = BeautifulSoup(response.text, features='html.parser')
+        try:
+            aid = soup.find('script',string=re.compile('ytInitialData')).text
+            aid = json.loads(aid[20:-1])
+        except:
+            return None
+
+        if 'videoDetails' not in aid or 'microformat' not in aid or 'playerMicroformatRenderer' not in aid['microformat']:
+            #print('xxx private or unavailable video {0}'.format(video_id))
+
+            # trying by manualy scraping
+            for date in search_dict(aid, 'dateText'):
+                try:
+                    date = datetime.datetime.strptime(date["simpleText"], "%d.%m.%Y").strftime("%Y-%m-%d")
+                    return datetime.datetime.strptime(date, "%Y-%m-%d")
+                except:
+                    return None
+        else:
+            microformat_renderer = aid['microformat']['playerMicroformatRenderer']
+            publish_date = microformat_renderer['publishDate']
+            return publish_date
+
+def get_video_ids_playlist(channel_id):
+
+    START_DATE = datetime.datetime.strptime('2021-01-01', "%Y-%m-%d")
+    END_DATE = datetime.datetime.strptime('2021-08-31', "%Y-%m-%d")
+
+    channel_get_all_videos_playlist = "UU" + channel_id[2:]
+
+    playlist = scrapetube.get_playlist(channel_get_all_videos_playlist)
+
+    playlist_videos = []
+    selected_videos = []
+
+    for _, vid in enumerate(playlist):
+        #print(i, vid['videoId'])
+        playlist_videos.append(vid['videoId'])
+
+    print("There are {} number of youtube videos in channel id {}: ".format(len(playlist_videos), channel_id))
+        
+    if len(playlist_videos) > 0:
+        for video in playlist_videos:
+            earliest_publish_date = get_video_date_upload(video)
+            if earliest_publish_date is not None:
+                if earliest_publish_date > START_DATE :
+                    if  earliest_publish_date < END_DATE:
+                        print("Date: ", earliest_publish_date, " | Video Id : ", video)
+                        selected_videos.append(video)
+                else:
+                    # since all the videos are in order, we do not want the rest of the comments form the videos
+                    #print("Dont ADD")
+                    return selected_videos # remove break and add return statement
+            else:
+                #print("Received Unknown type of Date: Passing ... ")
+                pass
+    return selected_videos # return statement
+
+def get_video_ids_playlist2(channel_get_all_videos_playlist):
+
+    START_DATE = datetime.datetime.strptime('2021-01-01', "%Y-%m-%d")
+
+    session = requests.Session()
+    header = {"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}
+    response = session.get("https://www.youtube.com/playlist?list={}".format(channel_get_all_videos_playlist), headers=header)
+
+    if response is not None:
+        # find response token
+        session_token_begin = response.text.find("XSRF_TOKEN") + len("XSRF_TOKEN") + 3
+        session_token_end = response.text.find('"', session_token_begin)
+        session_token = response.text[session_token_begin:session_token_end]
+
+        soup = BeautifulSoup(response.text, features='html.parser')
+        aid = soup.find('script',string=re.compile('ytInitialData')).text
+        aid = json.loads(aid[20:-1])
+        playlist_videos = []
+        selected_videos = []
+        
+        for video in search_dict(aid, 'playlistVideoRenderer'):
+            playlist_videos.append(video['videoId'])
+        
+        if len(playlist_videos) > 0:
+            for video in playlist_videos:
+                earliest_publish_date = get_video_date_upload(video)
+                if earliest_publish_date is not None:
+                    print("date: ", earliest_publish_date)
+                    if earliest_publish_date > START_DATE:
+                        print("ADD: ", video) # return
+                        selected_videos.append(video)
+                    else:
+                        # since all the videos are in order, we do not want the rest of the comments form the videos
+                        print("Dont ADD")
+                        return selected_videos # remove break and add return statement
+                        #break
+                else:
+                    print("Received Unknown type of Date: Passing ... ")
+        
+        # empty this list, so as to add new videos from playlist
+        playlist_videos = []
+        ncd = next(search_dict(aid, 'continuationEndpoint'), None)
+        if ncd:
+            print("Continuation exists !!!")
+            continuations = [(ncd['continuationCommand']['token'], ncd['clickTrackingParams'])]
+
+            while continuations:
+                continuation, itct = continuations.pop()
+                response_json = ajax_request(session,
+                                            'https://www.youtube.com/browse_ajax',
+                                            params={'referer': "https://www.youtube.com/playlist?list={}".format(channel_get_all_videos_playlist),
+                                                    'pbj': 1,
+                                                    'ctoken': continuation,
+                                                    'continuation': continuation,
+                                                    'itct': itct},
+                                            data={'session_token': session_token},
+                                            headers={'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36',
+                                                    'X-YouTube-Client-Name': '1',
+                                                    'X-YouTube-Client-Version': '2.20200207.03.01'})
+
+                if len(response_json) == 0:
+                    break
+                #if next(search_dict(response_json, 'externalErrorMessage'), None):
+                #    raise Exception('Error returned from server: ' + next(search_dict(response_json, 'externalErrorMessage')))
+                #elif 'error' in response_json:
+                #    raise Exception(response_json['error'])
+
+                # Ordering matters. The newest continuations should go first.
+                continuations = [(ncd['continuationCommand']['token'], ncd['clickTrackingParams']) for ncd in search_dict(response_json, 'continuationEndpoint')] + continuations
+
+                for video in search_dict(response_json, 'playlistVideoRenderer'):
+                    playlist_videos.append(video['videoId'])
+
+                if len(playlist_videos) > 0:
+                    for video in playlist_videos:
+                        earliest_publish_date = get_video_date_upload(video)
+                        if earliest_publish_date is not None:
+                            print("date: ", earliest_publish_date)
+                            if earliest_publish_date > START_DATE:
+                                print("ADD: ", video) # return
+                                selected_videos.append(video)
+                            else:
+                                # since all the videos are in order, we do not want the rest of the comments form the videos
+                                print("Dont ADD")
+                                return selected_videos # remove break and add return statement
+                        else:
+                            print("Received Unknown type of Date: Passing ... ")
+    return selected_videos
