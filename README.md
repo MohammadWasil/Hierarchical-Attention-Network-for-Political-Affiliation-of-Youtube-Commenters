@@ -4,6 +4,7 @@
 Install package `scrapetube` using pip to scrap the youtube videos id:
 ```
 pip install scrapetube
+pip install youtubesearchpython
 ```
 
 Change the name of the file `config_KEYS EXAMPLE.yml` to `config_KEYS.yml` and add your twitter credentials there.
@@ -45,4 +46,8 @@ python '5.2 get_yt_id_manual.py'
 10. From the youtube channel's playlist, get all those videos which was published from 2021-01-01 to 2021-08-31. 
 ```{python}
 python '6. get_yt_channel_playlists_videos.py'
+```
+11. Using the video Id's scraped in step 10, use those video id's to scrap their comments.
+```{python}
+python '7. get_yt_comments.py'
 ```
