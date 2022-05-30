@@ -10,6 +10,10 @@ import scrapetube
 import datetime
 from bs4 import BeautifulSoup
 
+import time
+from datetime import datetime, timedelta
+
+
 def youtube_search_bar(channel_name):
     r = "https://www.youtube.com/results?search_query={}".format(channel_name)
     return r
@@ -248,7 +252,7 @@ def get_video_date_upload(video_id):
         if 'videoDetails' not in aid or 'microformat' not in aid or 'playerMicroformatRenderer' not in aid['microformat']:
             #print('xxx private or unavailable video {0}'.format(video_id))
 
-            # trying by manualy scraping
+            # trying manual scraping
             for date in search_dict(aid, 'dateText'):
                 try:
                     date = datetime.datetime.strptime(date["simpleText"], "%d.%m.%Y").strftime("%Y-%m-%d")
@@ -383,3 +387,25 @@ def get_video_ids_playlist2(channel_get_all_videos_playlist):
                         else:
                             print("Received Unknown type of Date: Passing ... ")
     return selected_videos
+
+class Timer:
+    def __init__(self):
+        self.start_time = None
+
+    def start(self):
+        self.start_time = time.time()
+
+    def stop(self):
+        print('>>> Elapsed time: {0}\n'.format(str(timedelta(seconds=time.time() - self.start_time))[:-3]))
+
+
+def strify(lst, delim=','):
+    return delim.join(map(str, lst))
+
+
+def intify(lst_str, delim=','):
+    return list(map(int, lst_str.split(delim)))
+
+
+def bias_metric(a, b):
+    return (b - a) / (a + b)
