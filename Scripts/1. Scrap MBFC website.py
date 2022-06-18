@@ -1,5 +1,5 @@
 """
-Scrap MBFC website for the lits of news channels, with their names, website, their biasness.
+Scrap MBFC website for the lists of news channels, with their names, website, their biasness.
 Output: News channels.csv
 """
 

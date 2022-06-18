@@ -11,8 +11,8 @@ import datetime
 from bs4 import BeautifulSoup
 
 import time
-from datetime import datetime, timedelta
-
+from datetime import timedelta
+import datetime
 
 def youtube_search_bar(channel_name):
     r = "https://www.youtube.com/results?search_query={}".format(channel_name)

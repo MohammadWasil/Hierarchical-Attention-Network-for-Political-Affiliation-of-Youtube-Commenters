@@ -163,29 +163,37 @@ def get_video_metadata(video_id):
             # 3. get video comments via yt_comments package
             # You can either pass an ID or a URL
             # video_id = "y7zrjWp3fEk-3OmJ0"
-            comments = Comments(video_id)
-
-            while comments.hasMoreComments:
-                try:
-                    comments.getNextComments()        
-                except:
-                    print("Error ... breaking up the code...")
-                    comments.hasMoreComments = False
-                    break
-
-            print(f'Comments Retrieved: {len(comments.comments["result"])}')
-            print('Found all the comments.')
-            
-            print("Processing list ... ")
-            comment_list = []
-            for c in comments.comments["result"]:
-                comment_list.append(create_comment_dict(c))
+            try:
+                comments = Comments(video_id)
                 
-            comments.comments["result"] = []
-            
-            ret_json['num_comment'] = len(comment_list)
-            ret_json['top_comment_list'] = comment_list
-            #ret_json['comment_list'] = Not this
+                while comments.hasMoreComments:
+                    try:
+                        comments.getNextComments()        
+                    except:
+                        print("Error ... breaking up the code...")
+                        comments.hasMoreComments = False
+                        break
+
+                print(f'Comments Retrieved: {len(comments.comments["result"])}')
+                print('Found all the comments.')
+
+                print("Processing list ... ")
+                comment_list = []
+                for c in comments.comments["result"]:
+                    comment_list.append(create_comment_dict(c))
+
+                comments.comments["result"] = []
+
+                ret_json['num_comment'] = len(comment_list)
+                ret_json['top_comment_list'] = comment_list
+                #ret_json['comment_list'] = No Idea about this
+                
+            except Exception as e:
+                if 'Comments are turned off' in str(e):
+                    print('>>> Comments are turned off')
+                else:
+                    print('xxx exception in downloading the comments,', str(e))
+                pass
             
             # print('>>> Step 3: finish getting video comments...')
 
@@ -232,25 +240,52 @@ def main():
     
     # complete this ...
     DIRECTORY_PATH = "D:/MSc Data Science/Elective Modules - Research Modules/[INF-DS-RMB] Research Module B/RM Code/Sentiment-Classification-Youtube-Comments-Political-Affiliation/"
-    input_file = os.path.join(DIRECTORY_PATH, "data/6. video_ids - Copy.json")
+    input_file = os.path.join(DIRECTORY_PATH, "data/6. video_ids.json")
 
     output_file = "data/7. comments.json"
+    num_of_channels_scraped = 0
+    visited_channel = set()
+
+    if os.path.exists(os.path.join(DIRECTORY_PATH, output_file)):
+        with open(os.path.join(DIRECTORY_PATH, output_file), 'r') as fin:
+            for line in fin:
+                video_json = json.loads(line.rstrip())
+                
+                if 'channel id' in video_json:
+                    #for vid in video_json["video_ids"]:
+                    visited_channel.add(video_json['channel id'])
+        num_of_channels_scraped = len(visited_channel)
+    
+    print('visited {0} Channel in the past, continue...'.format(num_of_channels_scraped))
+    print(visited_channel)
+    
     with open(os.path.join(DIRECTORY_PATH, output_file), 'a') as fout:
         with open(input_file, 'r') as fin:
             for line in fin:
-                print("***************************************************************************")
+                
                 channel_videos = json.loads(line.rstrip())
-                if 'video_ids' in channel_videos:
-                    print("Scraping comments from channel with id {} ".format(channel_videos['channel id']))
-                    video_id = channel_videos['video_ids']
-                    
-                    processed_result = []
-                    for v_id in video_id:
-                        processed_result.append(get_video_metadata(v_id))
+                channel_id = channel_videos['channel id']
+                
+                if channel_id not in visited_channel: 
+                    print("Scraping comments from channel with id {} ".format(channel_id))
+                    if 'video_ids' in channel_videos:
+                        video_id = channel_videos['video_ids']
 
-                    # write processed_result to disk here
-                    fout.write('{}\n'.format(json.dumps({"channel id" : channel_videos['channel id'], "video_ids" : processed_result})))
+                        print("Number of videos to scan for comments: {}".format(len(video_id)))
+                        if len(video_id) < 200:
+                            processed_result = []
+                            for i, v_id in enumerate(video_id):
+                                print("Video number: {}".format(i))
+                                processed_result.append(get_video_metadata(v_id))
 
+                            # write processed_result to disk here
+                            fout.write('{}\n'.format(json.dumps({"channel id" : channel_id, "video_ids" : processed_result})))
+
+                            visited_channel.add(channel_id)
+                            print("***************************************************************************")
+                        else:
+                            print("Skipped !!! Too many for now")
+                        
     
 
 if __name__ == '__main__':

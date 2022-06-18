@@ -32,13 +32,13 @@ def main():
 
     with open(os.path.join(DIRECTORY_PATH, output_file), 'a') as fout:
         # iterate over the dataframe
-        for index, _ in channel_yt_twitter.iterrows():
+        for index, _ in channel_yt_twitter[:956].iterrows():
             
             channel_id = channel_yt_twitter.loc[index, "Youtube Channel"]
 
             if not pd.isna(channel_id):
                 if channel_id not in visited_channel_set: 
-                    print("Processing index number: ".format(index))
+                    print("Processing index number: {}".format(index))
                     num_of_channels_scraped += 1
 
                     # to scrap all the videos information from a single channel,

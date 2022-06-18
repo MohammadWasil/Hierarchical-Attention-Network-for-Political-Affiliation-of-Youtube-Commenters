@@ -4,7 +4,7 @@ To validate the given youtube channel Id. If youtube channel username is availab
 
 Input : 4. scrap_youtube_channel.csv
 Output : 5. scrap_youtube_ids.csv
-         5. list_indices_updated_yt_channel.txt (It contansins indices which were updated in the csv file)
+         5. list_indices_updated_yt_channel.txt (It contains indices which were updated in the csv file)
 """
 
 import os
