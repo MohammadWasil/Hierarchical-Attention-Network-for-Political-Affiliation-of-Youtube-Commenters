@@ -5,7 +5,7 @@ from html import unescape
 from xml.etree import ElementTree
 from youtubesearchpython import *
 
-from utils import Timer, search_dict
+from utils import Timer, search_dict, DIRECTORY_PATH
 
 HTML_TAG_REGEX = re.compile(r'<[^>]*>', re.IGNORECASE)
 PT_TIMEZONE = timezone('US/Pacific')
@@ -17,6 +17,18 @@ def parse_transcript(plain_data):
             for xml_element in ElementTree.fromstring(plain_data) if xml_element.text is not None]
 
 def get_video_metadata(video_id):
+
+    title = 'NA'
+    channel_id = 'NA'
+    category = 'NA'
+    keywords = []
+    description = 'NA'
+    duration = 'NA'
+    publish_date = 'NA'
+    view_count = 'NA'
+    is_streamed = 'NA'
+    snapshot_pt_time = "NA"
+
     timer = Timer()
     timer.start()
 
@@ -87,23 +99,99 @@ def get_video_metadata(video_id):
                     or 'microformat' not in initial_player_response \
                     or 'playerMicroformatRenderer' not in initial_player_response['microformat']:
                 print('xxx private or unavailable video {0}'.format(video_id))
-                return {}
+                
+                try:
+                    # trying manual scraping
+                    #print(initial_player_response)
+                    #print("*************************************")
+                    for videotitle in search_dict(initial_player_response, 'title'):
+                        if isinstance(videotitle, str):
+                            #print(videotitle)
+                            title = videotitle
+                            break
+                        elif isinstance(videotitle, dict):
+                            #print(videotitle["simpleText"])
+                            title = videotitle
+                            break
 
-            video_details = initial_player_response['videoDetails']
-            microformat_renderer = initial_player_response['microformat']['playerMicroformatRenderer']
+                    for channelid in search_dict(initial_player_response, 'channelId'):
+                        #print(channelid)
+                        channel_id = channelid
+                        break
 
-            title = video_details['title']
-            channel_id = video_details['channelId']
-            category = microformat_renderer.get('category', '')
-            print('>>> video_id: {0}, category: {1}'.format(video_id, category))
+                    for videocat in search_dict(initial_player_response, 'category'):
+                        #print(videocat)
+                        category = videocat
+                        break
 
-            keywords = video_details.get('keywords', [])
-            description = video_details['shortDescription']
-            duration = video_details['lengthSeconds']
-            publish_date = microformat_renderer['publishDate']
-            snapshot_pt_time = datetime.now(PT_TIMEZONE).strftime('%Y-%m-%d-%H')
-            view_count = microformat_renderer.get('viewCount', 0)
-            is_streamed = video_details['isLiveContent']
+                    for videokeywords in search_dict(initial_player_response, 'keywords'):
+                        #print(videokeywords)
+                        keywords = videokeywords
+                        break
+
+
+                    for videodesc in search_dict(initial_player_response, 'shortDescription'):
+                        #print(videodesc)   
+                        description = videodesc
+                        break
+
+                    for videolength in search_dict(initial_player_response, 'lengthSeconds'):
+                        #print(videolength)
+                        duration = videolength
+                        break
+
+                    for pubdate in search_dict(initial_player_response, 'publishDate'):
+                        #print(pubdate)
+                        publish_date = pubdate
+                        if publish_date is None:
+                            for date in search_dict(initial_player_response, 'dateText'):
+                                try:
+                                    date = datetime.datetime.strptime(date["simpleText"], "%d.%m.%Y").strftime("%Y-%m-%d")
+                                    publish_date = datetime.datetime.strptime(date, "%Y-%m-%d")
+                                    #print(publish_date)
+                                    break
+                                except:
+                                    pass
+                        break
+
+
+                    for videoviewcount in search_dict(initial_player_response, 'viewCount'):
+                        #print(videoviewcount)
+                        view_count = videoviewcount
+                        break
+
+                    for videolivestream in search_dict(initial_player_response, 'isLiveContent'):
+                        #print(videolivestream)
+                        is_streamed = videolivestream
+                        break
+
+                    snapshot_pt_time = datetime.now(PT_TIMEZONE).strftime('%Y-%m-%d-%H')
+                    #for date in search_dict(initial_player_response, 'dateText'):
+                    #    try:
+                    #        date = datetime.datetime.strptime(date["simpleText"], "%d.%m.%Y").strftime("%Y-%m-%d")
+                    #        publish_date = datetime.datetime.strptime(date, "%Y-%m-%d")
+                     #   except:
+                     #       return None
+
+                    #return {}
+                except:
+                    pass
+            else:
+                video_details = initial_player_response['videoDetails']
+                microformat_renderer = initial_player_response['microformat']['playerMicroformatRenderer']
+
+                title = video_details['title']       #done
+                channel_id = video_details['channelId']   #done
+                category = microformat_renderer.get('category', '')    #done
+                print('>>> video_id: {0}, category: {1}'.format(video_id, category))
+
+                keywords = video_details.get('keywords', [])    #done
+                description = video_details['shortDescription']   #done
+                duration = video_details['lengthSeconds']        #done
+                publish_date = microformat_renderer['publishDate']          # done
+                snapshot_pt_time = datetime.now(PT_TIMEZONE).strftime('%Y-%m-%d-%H')
+                view_count = microformat_renderer.get('viewCount', 0)   #done
+                is_streamed = video_details['isLiveContent']   #done
 
             num_like = 0
             num_dislike = 0
@@ -239,10 +327,10 @@ def create_comment_dict(result):
 def main():
     
     # complete this ...
-    DIRECTORY_PATH = "D:/MSc Data Science/Elective Modules - Research Modules/[INF-DS-RMB] Research Module B/RM Code/Sentiment-Classification-Youtube-Comments-Political-Affiliation/"
+    #DIRECTORY_PATH = "D:/MSc Data Science/Elective Modules - Research Modules/[INF-DS-RMB] Research Module B/RM Code/Sentiment-Classification-Youtube-Comments-Political-Affiliation/"
     input_file = os.path.join(DIRECTORY_PATH, "data/6. video_ids.json")
-
     output_file = "data/7. comments.json"
+    
     num_of_channels_scraped = 0
     visited_channel = set()
 
@@ -272,20 +360,17 @@ def main():
                         video_id = channel_videos['video_ids']
 
                         print("Number of videos to scan for comments: {}".format(len(video_id)))
-                        if len(video_id) < 200:
-                            processed_result = []
-                            for i, v_id in enumerate(video_id):
-                                print("Video number: {}".format(i))
-                                processed_result.append(get_video_metadata(v_id))
+                        processed_result = []
+                        for i, v_id in enumerate(video_id):
+                            #print("Video number: {}".format(i))
+                            processed_result.append(get_video_metadata(v_id))
 
-                            # write processed_result to disk here
-                            fout.write('{}\n'.format(json.dumps({"channel id" : channel_id, "video_ids" : processed_result})))
+                        # write processed_result to disk here
+                        fout.write('{}\n'.format(json.dumps({"channel id" : channel_id, "video_ids" : processed_result})))
 
-                            visited_channel.add(channel_id)
-                            print("***************************************************************************")
-                        else:
-                            print("Skipped !!! Too many for now")
-                        
+                        visited_channel.add(channel_id)
+                        print("***************************************************************************")
+                    
     
 
 if __name__ == '__main__':
