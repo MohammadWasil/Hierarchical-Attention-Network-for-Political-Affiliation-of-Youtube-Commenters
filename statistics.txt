@@ -1,0 +1,33 @@
+Statistics in Left ( not neccesary to do more scraping)
+Channels :  525
+Videos :  165067
+
+Progress:
+Channels = 188
+videos = 34739
+comments = 4850479
+hashtags = 6046
+
+***********************************************************
+
+Statistics in Right
+Channels :  109
+Videos :  23502
+
+Progress:
+Channels = 47
+videos = 3156
+comments = 104968
+hashtags = 133
+
+***********************************************************
+
+Statistics in Centre Right (Completed)
+Channels :  189
+Videos :  59300
+
+Progress:
+Channels = 189
+videos = 59300
+comments = 1589436
+hashtags = 698
