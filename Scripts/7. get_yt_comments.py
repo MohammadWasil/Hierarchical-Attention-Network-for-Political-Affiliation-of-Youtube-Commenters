@@ -328,8 +328,8 @@ def main():
     
     # complete this ...
     #DIRECTORY_PATH = "D:/MSc Data Science/Elective Modules - Research Modules/[INF-DS-RMB] Research Module B/RM Code/Sentiment-Classification-Youtube-Comments-Political-Affiliation/"
-    input_file = os.path.join(DIRECTORY_PATH, "data/6. video_ids.json")
-    output_file = "data/7. comments.json"
+    input_file = os.path.join(DIRECTORY_PATH, "data/6. video_ids_right.json")
+    output_file = "data/7. comments RIGHT.json"
     
     num_of_channels_scraped = 0
     visited_channel = set()
