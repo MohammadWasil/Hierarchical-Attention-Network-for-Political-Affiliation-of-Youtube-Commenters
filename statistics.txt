@@ -5,9 +5,55 @@ Videos :  165067
 Progress:
 Channels = 188
 videos = 34739
+views = 3121089754
 comments = 4850479
 hashtags = 6046
 
+Authors = 1572286
+
+Annotated Data From Subscription::
+Liberals comments      = 19934 (This number is coming from 5160 below) (81.60%)
+Conservatives comments =  4493 (This number is coming from 1431 below) (18.39%)
+			------
+			 24427
+			------
+
+Liberal Authors       =  5160 (78.28%)
+Conservatives Authors =  1431 (21.71%)
+           		------
+			 6591
+			------
+
+***********************************************************
+Statistics in Right (Complete center right and not necesary to do more for right)
+Channels :  298
+Videos :  82802
+
+Progress:
+Channels = 244
+videos = 68227
+views = 2636126897
+comments = 4695651
+hashtags = 1072
+
+Annotated Data From Subscription::
+Liberals comments      =  7534 (This number is coming from 2554 below) (30.47%)
+Conservatives comments = 17188 (This number is coming from 3544 below) (69.52%)
+			------
+			 24722
+			------
+
+Liberal Authors       =  2554 (41.88%)
+Conservatives Authors =  3544 (58.11%)
+           		------
+			 6098 
+			------
+BASIC conlcusion from Annotated comments/users based on Subscription is: There is a very little cross-partisians communication (as of now).
+
+***********************************************************
+***********************************************************
+Splitted data for RIght and Center Right
+***********************************************************
 ***********************************************************
 
 Statistics in Right
@@ -15,10 +61,10 @@ Channels :  109
 Videos :  23502
 
 Progress:
-Channels = 47
-videos = 3156
-comments = 104968
-hashtags = 133
+Channels = 55
+videos = 8927 
+comments = 3106215
+hashtags = 452
 
 ***********************************************************
 
