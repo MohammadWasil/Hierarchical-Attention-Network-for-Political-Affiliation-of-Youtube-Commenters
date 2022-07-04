@@ -14,6 +14,19 @@ import time
 from datetime import timedelta
 import datetime
 
+DIRECTORY_PATH = "D:/MSc Data Science/Elective Modules - Research Modules/[INF-DS-RMB] Research Module B/RM Code/Sentiment-Classification-Youtube-Comments-Political-Affiliation/"
+
+def homogeneity_score(r, l):
+    # -1 means left ( if < 0)
+    # +1 means right ( if > 0)
+    return (r-l) / (r+l)
+
+def biasness_classification(homogeneityscore):
+    if homogeneityscore > 0:
+        return "RIGHT"
+    elif homogeneityscore < 0:
+        return "LEFT"
+
 def youtube_search_bar(channel_name):
     r = "https://www.youtube.com/results?search_query={}".format(channel_name)
     return r
