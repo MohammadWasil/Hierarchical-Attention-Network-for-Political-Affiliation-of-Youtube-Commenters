@@ -2,7 +2,7 @@
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FMohammadWasil%2FSentiment-Classification-Youtube-Comments-Political-Affiliation&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
-### Packages
+### Installing Dependencies
 Install package `scrapetube` using pip to scrap the youtube videos id:
 ```
 pip install scrapetube
@@ -53,3 +53,29 @@ python '6. get_yt_channel_playlists_videos.py'
 ```{python}
 python '7. get_yt_comments.py'
 ```
+
+### (Annotated) Dataset Description
+
+#### Original Paper
+| Leaning | Users (from Subscription list) | Users (from Hasgtags) | Available |
+| --- | --- | --- | --- |
+| Liberal | 61320 | 8616 | Yes* |
+| Conservatives | 86134 | 8144 | Yes* |
+
+* But nor scrapable. USers_id has been hashed to some other numbers. Comments scraping is not reproducable.
+
+
+#### Our Dataset (Till now, exlucding Annotations from hashtags)
+| Leaning | Users (from Subscription list) | Users (from Hasgtags) | Available |
+| --- | --- | --- | --- |
+| Liberal | 7,714 |  | --- |
+| Conservatives | 4,975 |  | --- |
+
+### Dataset from External sources
+| Paper | Dataset | Available | Size (#Comments) | Github |
+| --- | --- | --- | --- | --- |
+| Lewis 2018 | Big data with comments | Yes | Annotations not Available | https://github.com/RSButner/Alt_Inf_Net |
+| Rebeiro 2020 | Not so big | Yes | Annotations not Available (No comments) Data might be avaiblae upon request | https://github.com/manoelhortaribeiro/radicalization_youtube |
+| Ledwich and Zaitsev 2020 | - | No | Data not available | - |
+
+
