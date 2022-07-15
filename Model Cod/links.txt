@@ -1,0 +1,32 @@
+https://www.youtube.com/watch?v=VBqbmmcMI7E&ab_channel=MaziarRaissi
+
+https://towardsdatascience.com/predicting-amazon-reviews-scores-using-hierarchical-attention-networks-with-pytorch-and-apache-5214edb3df20
+
+https://www.google.com/search?q=hierarchical+attention+network+pytorch+implementation&sxsrf=ALiCzsZdfcX6UQREjTI51-NF67ziTWGrUw%3A1656966111536&ei=30vDYrirIOG7xc8P_rmssAk&ved=0ahUKEwj4lu7jh-D4AhXhXfEDHf4cC5YQ4dUDCA4&uact=5&oq=hierarchical+attention+network+pytorch+implementation&gs_lcp=Cgdnd3Mtd2l6EAM6BwgAEEcQsAM6BAgAEEc6BwgjELACECdKBAhBGABKBAhGGABQngVY6RNgpxVoAXACeACAAfMBiAGeB5IBBTQuMy4xmAEAoAEByAEIwAEB&sclient=gws-wiz
+
+https://humboldt-wi.github.io/blog/research/information_systems_1819/group5_han/
+
+TODO:
+1. Pre trained glove embedding  Done. Improved a lot.
+2. Batch sampler. From Final_Rabbit notebook - on D/ML/Rabbit
+Performed horribly without word embedding.
+	The test accuracy is: 56.34%
+	F1 Score on Test data is: 0.16
+	Loss on Test Data is: 0.68
+
+Performed horribly with word embedding.
+	The test accuracy is: 59.98%
+	F1 Score on Test data is: 0.02
+	Loss on Test Data is: 0.68
+
+conclusion: Doesnt make sense to use batchsampler for HAN model.
+
+3. Work on preprocessing the dataset.
+4. Try out different model - Baseline lstm model, And Transformers.
+
+LSTM model:
+without glove embedding:
+	The test accuracy is: 64.66%
+	F1 Score on Test data is: 0.50
+	Loss on Test Data is: 0.63
+with glove embedding

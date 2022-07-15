@@ -1,0 +1,165 @@
+import torch
+from torch import nn
+import torch.optim as optim
+import torch.nn.functional as F
+from torch.optim import Adam
+from torch.nn.utils.rnn import pad_sequence
+from torchtext.data.utils import get_tokenizer
+from torchtext.vocab import build_vocab_from_iterator
+from torch.utils.data import Dataset, DataLoader, random_split
+import re
+import pandas as pd
+
+from sklearn.utils import shuffle
+from sklearn.metrics import f1_score
+from sklearn.model_selection import train_test_split
+
+def yield_tokens(data_iter):
+    for iter_, _ in data_iter:
+        for sentence in iter_:
+            yield tokenizer(sentence)
+
+# works perfectly. backup
+def collate_batch(batch):
+    label_list, text_list = [], []
+    for (_text, _label) in batch:
+        
+        label_list.append(torch.tensor(label_pipeline(_label), dtype=torch.int64 ))
+        
+        texts = []
+        for t in _text:
+            texts.append(torch.tensor(text_pipeline(t), dtype=torch.int64))
+        text_list.append(texts)
+    
+    sentence_length, word_length = get_max_length(text_list)
+    
+    # get the maximum length of the sentence from every batch
+    #max_len_sent=0
+    #for t in text_list:
+    #    for t_i in t:
+    #        if t_i.shape[0] > max_len_sent:
+    #            max_len_sent = t_i.shape[0]
+    
+    text_list_p = []
+    for t in text_list:
+        # input shape: a list of tensors with unequal length of sentences.
+        # padding to the highest length of the sequence.
+        p = [ torch.cat((batch, torch.LongTensor([vocab_size-1]).repeat(word_length - len(batch))), dim=0) 
+                if((word_length - batch.shape[0]) !=  0 ) else batch for batch in t]
+        
+        # input shape: a list of tensors with unequal length of documents.
+        # padding to the highest length of the document.
+        if(sentence_length - len(p)) !=  0:
+            extended_sentences = [torch.LongTensor([vocab_size-1 for _ in range(word_length)] )
+                                  for _ in range(sentence_length - len(p))]
+            p.extend(extended_sentences)
+
+            #p = pad_sequence(text_list[0], batch_first=False, padding_value = vocab_size-1)
+            #  OUTPUT shape: [MAX_LENGTH_OF_THE_SENTENCE_IN_BATCH, NUM_SENTENCES] => [57, 5]
+        
+        p = torch.stack(p)
+        # OUTPUT shape: [NUM_SENTENCES X MAX_LENGTH_OF_THE_SENTENCE_IN_BATCH] => [5,57]
+        text_list_p.append(p) # for every batch
+    
+    text_list_p = torch.stack(text_list_p)
+    # OUTPUT shape: [BATCH_SIZE X NUM_SENTENCES X MAX_LENGTH_OF_THE_SENTENCE_IN_DOCUMENT ] => [3, 5, 57]
+
+    #text_list_p = torch.permute(text_list_p, (2, 1, 0))
+    # NOt sure, whether it should be this: OUTPUT shape: [MAX_LENGTH_OF_THE_SENTENCE_IN_BATCH X NUM_SENTENCES X BATCH_SIZE] => [57, 5, 2]
+    
+    # convert a list of tensors to tensors.
+    # input : a list of tensors of len BATCH_SIZE
+    label_list = torch.stack(label_list)   
+    # OUTPUT shape: [BATCH_SIZE]
+    
+    return text_list_p.to(device), label_list.to(device)
+
+# get the maximum number of sentences in a document, and maximum number of words in sentences.
+def get_max_length(doc):
+    """
+    doc = [
+        [
+                [1,2,3,4,5],
+               [1,2,3,4],
+               [1,2,3,4,5,6,7,8],
+               [1,2,3,4,5]
+        ], 
+        [
+                [1,2],
+               [1,2,3,4,5,6,7,8,9],
+               [1,2,3,4,5],
+               [1,2,3,4],
+                [1, 2,3,4,5,6]
+        ]
+    ]
+
+    #sentence_in_doc, word_in_sentence = get_max_length(doc)
+    sentence_in_doc -> 5, and word_in_sentence -> 9
+    """
+    
+    sent_length_list = []
+    word_length_list = []
+
+    for sent in doc:
+        sent_length_list.append(len(sent))
+
+        for word in sent:
+            word_length_list.append(len(word))
+
+    sorted_word_length = sorted(word_length_list)
+    sorted_sent_length = sorted(sent_length_list)
+    
+    #return sorted_sent_length[int(0.8*len(sorted_sent_length))], sorted_word_length[int(0.8*len(sorted_word_length))]
+    return sorted_sent_length[-1], sorted_word_length[-1]
+
+def Download_and_extract():
+    print("This might take some time...")
+    print("Downloading...")
+    os.system('wget https://nlp.stanford.edu/data/glove.840B.300d.zip')
+    
+    Extract()
+    
+def Extract():
+    print("Extracting...")
+    # extract and save to the same directory.
+    with zipfile.ZipFile('glove.840B.300d.zip', 'r') as zip_ref:
+        zip_ref.extractall("./")
+    print("Done!")
+    
+def load_pretrained_embedding_matrix():
+    # Downloadin Glove word vector
+    # this might take some time........... ~5 mins.
+    if((os.path.isfile('glove.840B.300d.zip') == False)):
+        Download_and_extract()
+    elif((os.path.isfile('glove.840B.300d.zip') == True) and (os.path.isfile('glove.840B.300d.txt') == False)):
+         Extract()
+    else:
+        print("Already Downloaded and extracted!")
+
+    #!wget https://nlp.stanford.edu/data/glove.840B.300d.zip
+    #!unzip glove.840B.300d.zip
+
+# https://github.com/MohammadWasil/Visual-Question-Answering-VQA/blob/master/2.%20Dataset%20Used%20in%20Training..ipynb
+def GloveModel(file_path, vocab):
+    embedding_index = {}
+    f = open(file_path,'r', encoding='utf8')
+    embedding_index = {}
+    print("Opened!")
+
+    for j, line in enumerate(f):
+        splitLine = line.split(' ')
+        word = splitLine[0]
+        embedding = np.asarray(splitLine[1:], dtype='float32')
+        embedding_index[word] = embedding
+      
+    print("Done.",len(embedding_index)," words loaded!")
+    EMBEDDING_DIM = 300
+    embedding_matrix = np.zeros((len(vocab.get_stoi()) + 1, EMBEDDING_DIM))
+    print(embedding_matrix.shape)
+
+    for index, word in enumerate(vocab.get_itos()):
+        embedding_vector = embedding_index.get(word)
+        if embedding_vector is not None:
+          # words not found in embedding index will be all-zeros.
+          embedding_matrix[index] = embedding_vector
+    return embedding_matrix
