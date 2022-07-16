@@ -1,20 +1,14 @@
 import torch
-from torch import nn
-import torch.optim as optim
 import torch.nn.functional as F
-from torch.optim import Adam
-from torch.nn.utils.rnn import pad_sequence
-from torchtext.data.utils import get_tokenizer
-from torchtext.vocab import build_vocab_from_iterator
-from torch.utils.data import Dataset, DataLoader, random_split
-import re
-import pandas as pd
+
 
 from sklearn.utils import shuffle
 from sklearn.metrics import f1_score
 from sklearn.model_selection import train_test_split
 
-def evaluate(val_dataloader, model, loss_function):
+#from run import device
+
+def evaluate(val_dataloader, model, dataset_valid, loss_function, device):
     model.eval()
     correct = 0
     total_count = 0

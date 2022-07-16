@@ -30,3 +30,6 @@ without glove embedding:
 	F1 Score on Test data is: 0.50
 	Loss on Test Data is: 0.63
 with glove embedding
+	The test accuracy is: 78.61%
+	F1 Score on Test data is: 0.70
+	Loss on Test Data is: 0.52

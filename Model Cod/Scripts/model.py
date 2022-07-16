@@ -2,10 +2,9 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
-
 class Encoder(nn.Module):
 
-    def __init__(self, VOCAB_SIZE, EMBEDDING_DIMENSION, num_class, ENCODER_HIDDEN_DIMENSION, DECODER_HIDDEN_DIMENSION, embedding_matrix):
+    def __init__(self, VOCAB_SIZE, EMBEDDING_DIMENSION, num_class, ENCODER_HIDDEN_DIMENSION, DECODER_HIDDEN_DIMENSION, USE_PRETRAINED_EMBEDDING_MATRIX, embedding_matrix):
         super().__init__()
         
         self.vocab_size = VOCAB_SIZE
@@ -135,7 +134,7 @@ class Attention(nn.Module):
     
 class HierarchicalAttentionNetwork(nn.Module):
 
-    def __init__(self, VOCAB_SIZE, EMBEDDING_DIMENSION, num_class, ENCODER_HIDDEN_DIMENSION, DECODER_HIDDEN_DIMENSION, embedding_matrix):
+    def __init__(self, VOCAB_SIZE, EMBEDDING_DIMENSION, num_class, ENCODER_HIDDEN_DIMENSION, DECODER_HIDDEN_DIMENSION, USE_PRETRAINED_EMBEDDING_MATRIX, embedding_matrix, device):
         super().__init__()
         
         self.vocab_size = VOCAB_SIZE
@@ -144,9 +143,10 @@ class HierarchicalAttentionNetwork(nn.Module):
         self.ENCODER_HIDDEN_DIMENSION = ENCODER_HIDDEN_DIMENSION
         self.DECODER_HIDDEN_DIMENSION = DECODER_HIDDEN_DIMENSION
         self.embedding_matrix = embedding_matrix
+        self.USE_PRETRAINED_EMBEDDING_MATRIX = USE_PRETRAINED_EMBEDDING_MATRIX
 
-        self.model = Encoder(self.vocab_size, self.embedding_size, self.num_class, ENCODER_HIDDEN_DIMENSION, DECODER_HIDDEN_DIMENSION, self.embedding_matrix).to(device)
-        self.sent_model = Sentence_Encoder(self.vocab_size, self.embedding_size, num_class, ENCODER_HIDDEN_DIMENSION, DECODER_HIDDEN_DIMENSION).to(device)
+        self.model = Encoder(self.vocab_size, self.embedding_size, self.num_class, self.ENCODER_HIDDEN_DIMENSION, self.DECODER_HIDDEN_DIMENSION, self.USE_PRETRAINED_EMBEDDING_MATRIX, self.embedding_matrix).to(device)
+        self.sent_model = Sentence_Encoder(self.vocab_size, self.embedding_size, self.num_class, self.ENCODER_HIDDEN_DIMENSION, self.DECODER_HIDDEN_DIMENSION).to(device)
         
         self.linear = nn.Linear(self.ENCODER_HIDDEN_DIMENSION*2, self.num_class)
         
@@ -176,5 +176,52 @@ class HierarchicalAttentionNetwork(nn.Module):
         
         classifier = F.softmax(v_output, dim=2).squeeze(1)
         # classifier shape: [BATCH, 1, Num_classes]        
+        
+        return classifier
+
+class UserClassificationModel(nn.Module):
+
+    def __init__(self, VOCAB_SIZE, EMBEDDING_DIMENSION, num_class, ENCODER_HIDDEN_DIMENSION, USE_PRETRAINED_EMBEDDING_MATRIX, embedding_matrix):
+        super().__init__()
+        
+        self.vocab_size = VOCAB_SIZE
+        self.embed_dim = EMBEDDING_DIMENSION
+        
+        self.encoder_hidden_dim = ENCODER_HIDDEN_DIMENSION
+        
+        self.num_class = num_class
+
+        if USE_PRETRAINED_EMBEDDING_MATRIX:
+            self.vocab_size = embedding_matrix.shape[0]
+            self.embed_dim = embedding_matrix.shape[1]
+            
+            self.embedding = nn.Embedding(num_embeddings = self.vocab_size, embedding_dim = self.embed_dim)
+            self.embedding.weight=nn.Parameter(torch.tensor(embedding_matrix, dtype=torch.float32))
+        else:
+            self.embedding = nn.Embedding(self.vocab_size, self.embed_dim)
+        
+        self.gru = nn.GRU(self.embed_dim, self.encoder_hidden_dim, bidirectional = True)
+        
+        self.fc1 = nn.Linear(self.encoder_hidden_dim*2, self.num_class)
+        
+    def forward(self, text):
+        
+        # input shape: [MAX_LENGTH_OF_THE_SENTENCE_IN_BATCH X BATCH_SIZE] 
+        embedded = self.embedding(text)
+        # output shape: [MAX_SEQ_LENGTH x BATCH_SIZE x embed_dim]
+        
+        # input shape: [MAX_SEQ_LENGTH x BATCH_SIZE x embed_dim]
+        gru_out, hidden = self.gru(embedded)
+        # gru_out shape: [MAX_LENGTH_OF_THE_SENTENCE_IN_BATCH, BATCH_SIZE, ENCODER_HIDDEN_DIMENSION*2]
+        # hidden[0] shape: [1, BATCH_SIZE, ENCODER_HIDDEN_DIMENSION]
+        # hidden[1] shape: [1, NUM_SENTENCES, ENCODER_HIDDEN_DIMENSION]
+        
+        # input shape: [BATCH_SIZE, ENCODER_HIDDEN_DIMENSION*2]
+        fc1 = self.fc1(gru_out[-1])
+        # output shape: [BATCH_SIZE, num_classes]
+        
+        # input shape: [BATCH_SIZE, Num_class]
+        classifier = F.softmax(fc1, dim=1)#.squeeze(1)
+        # output shape: [BATCH_SIZE, Num_class]
         
         return classifier

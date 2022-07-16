@@ -1,7 +1,8 @@
 import torch
-from torch.utils.data import Dataset, DataLoader, random_split
+from torch.utils.data import Dataset
+from torch.utils.data.sampler import BatchSampler
+import numpy as np
 
-import re
 import pandas as pd
 
 from sklearn.utils import shuffle
@@ -140,3 +141,58 @@ class CommentDataset(Dataset):
         #elif self.valid == True:
         #    len_ = len(self.valid_df)
         return len_
+
+class YoutubeBatchSampler(BatchSampler):
+    def __init__(self, dataset, num_of_liberals, num_of_conservatives):
+        
+        self.label_list = []
+        for _, label in dataset:
+            self.label_list.append(label)
+
+        self.label_list = torch.LongTensor(self.label_list) # list of all the labels in the dataset
+        
+        self.label_set = list(set(self.label_list.numpy())) # unique labels from the dataset
+
+        self.label_to_indices = {label: np.where(self.label_list.numpy() == label)[0]
+                                 for label in self.label_set}
+
+        for l in self.label_set:
+            np.random.shuffle(self.label_to_indices[l])
+
+        self.used_label_indices_count = {label: 0 for label in self.label_set}
+        self.count = 0
+        self.dataset = dataset
+        self.num_of_liberals = num_of_liberals
+        self.num_of_conservatives = num_of_conservatives
+        self.batch_size = self.num_of_liberals + self.num_of_conservatives
+
+    def __iter__(self):
+        self.count = 0
+        
+        # maybe add <= 
+        while self.count + self.batch_size < len(self.dataset):
+            classes = np.array([1, 0])
+            indices = []
+            for class_ in classes:
+                if(class_ == 0) :
+                    indices.extend(self.label_to_indices[class_][self.used_label_indices_count[class_] : self.used_label_indices_count[class_] + self.num_of_liberals])
+                    self.used_label_indices_count[class_] += self.num_of_liberals
+
+                    if self.used_label_indices_count[class_] + self.num_of_liberals > len(self.label_to_indices[class_]):
+                        np.random.shuffle(self.label_to_indices[class_])
+                        self.used_label_indices_count[class_] = 0
+              
+                elif(class_ == 1):
+                    indices.extend(self.label_to_indices[class_][self.used_label_indices_count[class_] : self.used_label_indices_count[class_] + self.num_of_conservatives])
+                    self.used_label_indices_count[class_] += self.num_of_conservatives
+
+                    if self.used_label_indices_count[class_] + self.num_of_conservatives > len(self.label_to_indices[class_]):
+                        np.random.shuffle(self.label_to_indices[class_])
+                        self.used_label_indices_count[class_] = 0
+              
+              
+            yield indices
+            self.count = self.count + self.num_of_conservatives + self.num_of_liberals
+            
+    def __len__(self):
+        return len(self.dataset) // self.batch_size

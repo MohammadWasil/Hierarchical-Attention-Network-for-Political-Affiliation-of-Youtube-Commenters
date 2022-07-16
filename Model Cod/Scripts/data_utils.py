@@ -1,23 +1,42 @@
 import torch
-from torch import nn
-import torch.optim as optim
-import torch.nn.functional as F
-from torch.optim import Adam
-from torch.nn.utils.rnn import pad_sequence
 from torchtext.data.utils import get_tokenizer
 from torchtext.vocab import build_vocab_from_iterator
-from torch.utils.data import Dataset, DataLoader, random_split
-import re
-import pandas as pd
+import os, zipfile
+import numpy as np
 
-from sklearn.utils import shuffle
-from sklearn.metrics import f1_score
-from sklearn.model_selection import train_test_split
+tokenizer = get_tokenizer('basic_english')
+
+def load_vocabulary(path):
+    global vocab, vocab_size
+    checkpint_vocab = torch.load(path)
+
+    vocab = checkpint_vocab['vocab']
+    vocab_size = checkpint_vocab['vocab_size']
+    return vocab, vocab_size
+
+def save_vocabulary(path, vocab, vocab_size):
+    torch.save({
+                'vocab': vocab,
+                'vocab_size': vocab_size
+                }, path)
 
 def yield_tokens(data_iter):
     for iter_, _ in data_iter:
         for sentence in iter_:
             yield tokenizer(sentence)
+
+def vocabulary(dataset_train):
+    global vocab, vocab_size
+    # create vocabulary from the training data.
+    vocab = build_vocab_from_iterator(yield_tokens(dataset_train), specials=["<unk>"])
+    vocab.set_default_index(vocab["<unk>"])
+
+    vocab_size = len(vocab.get_itos()) # len(vocab.get_stoi()) - length of the vocabulary
+    
+    return vocab, vocab_size
+
+text_pipeline = lambda x: vocab(tokenizer(x))
+label_pipeline = lambda x: int(x)
 
 # works perfectly. backup
 def collate_batch(batch):
@@ -32,13 +51,6 @@ def collate_batch(batch):
         text_list.append(texts)
     
     sentence_length, word_length = get_max_length(text_list)
-    
-    # get the maximum length of the sentence from every batch
-    #max_len_sent=0
-    #for t in text_list:
-    #    for t_i in t:
-    #        if t_i.shape[0] > max_len_sent:
-    #            max_len_sent = t_i.shape[0]
     
     text_list_p = []
     for t in text_list:
@@ -72,7 +84,7 @@ def collate_batch(batch):
     label_list = torch.stack(label_list)   
     # OUTPUT shape: [BATCH_SIZE]
     
-    return text_list_p.to(device), label_list.to(device)
+    return text_list_p, label_list
 
 # get the maximum number of sentences in a document, and maximum number of words in sentences.
 def get_max_length(doc):
