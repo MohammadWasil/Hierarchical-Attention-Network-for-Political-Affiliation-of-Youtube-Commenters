@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
 
-def plot(train_loss_list, val_loss_list, train_accu_list, val_accu_list, EPOCHS):
+def plot(train_loss_list, val_loss_list, train_accu_list, val_accu_list, EPOCHS, model_name):
     fig, (ax1) = plt.subplots(1, 2, figsize=(14, 6))
 
-    fig.suptitle('Loss and accuracy for LSTM Model.')
+    fig.suptitle('Loss and accuracy for {} Model.'.format(model_name))
     epochs = EPOCHS 
 
     # accuracy Plot
@@ -31,4 +31,4 @@ def plot(train_loss_list, val_loss_list, train_accu_list, val_accu_list, EPOCHS)
 
     #plt.show()
     # save the plot
-    fig.savefig('han.png')
+    fig.savefig('{}.png'.format(model_name))

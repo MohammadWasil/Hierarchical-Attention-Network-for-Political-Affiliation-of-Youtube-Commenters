@@ -9,9 +9,9 @@ from model_utils import save_model, load_model
 
 #from run import device
 
-def train(model, train_dataloader, val_dataloader, dataset_train, dataset_valid, EPOCHS, learning_rate, 
+def train(model, train_dataloader, val_dataloader, dataset_train, dataset_valid, EPOCHS, optimizer, 
         path, LAST_SAVED_EPOCH_MODEL, device):
-    optimizer = Adam(model.parameters(), learning_rate)
+    
     loss_function = nn.CrossEntropyLoss()
 
     # load the model if there are already saved model
@@ -27,7 +27,7 @@ def train(model, train_dataloader, val_dataloader, dataset_train, dataset_valid,
         val_accu_list = []
 
     for epoch in range(epoch_, EPOCHS):
-        print(epoch)
+        #print(epoch)
         model.train()
         model.to(device)
         train_loss = 0

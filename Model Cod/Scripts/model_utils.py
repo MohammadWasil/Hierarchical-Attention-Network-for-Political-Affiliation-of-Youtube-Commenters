@@ -17,11 +17,12 @@ def save_model(epoch, model, optimizer, train_loss_list, val_loss_list, train_ac
                 'val_accu_list': val_accu_list,
                 }, path.format(epoch) )
 
-def load_model(path, last_saved_epoch, model, optimizer):
+def load_model(path, last_saved_epoch, model, optimizer=None):
 
     checkpoint = torch.load(path.format(last_saved_epoch))
     model.load_state_dict(checkpoint['model_state_dict'])
-    optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+    if optimizer is not None:
+        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
     epoch = checkpoint['epoch']
     train_loss_list = checkpoint['train_loss_list']
     val_loss_list = checkpoint['val_loss_list']

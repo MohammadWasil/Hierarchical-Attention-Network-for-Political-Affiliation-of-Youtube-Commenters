@@ -1,5 +1,6 @@
 import torch
 from torchtext.data.utils import get_tokenizer
+from torch.nn.utils.rnn import pad_sequence
 from torchtext.vocab import build_vocab_from_iterator
 import os, zipfile
 import numpy as np
@@ -25,10 +26,17 @@ def yield_tokens(data_iter):
         for sentence in iter_:
             yield tokenizer(sentence)
 
-def vocabulary(dataset_train):
+def yield_tokens_LSTM(data_iter):
+    for sentence, _ in data_iter:
+        yield tokenizer(sentence)
+
+def vocabulary(dataset_train, model):
     global vocab, vocab_size
     # create vocabulary from the training data.
-    vocab = build_vocab_from_iterator(yield_tokens(dataset_train), specials=["<unk>"])
+    if model == "HAN":
+        vocab = build_vocab_from_iterator(yield_tokens(dataset_train), specials=["<unk>"])
+    elif model == "LSTM":
+        vocab = build_vocab_from_iterator(yield_tokens_LSTM(dataset_train), specials=["<unk>"])
     vocab.set_default_index(vocab["<unk>"])
 
     vocab_size = len(vocab.get_itos()) # len(vocab.get_stoi()) - length of the vocabulary
@@ -37,6 +45,16 @@ def vocabulary(dataset_train):
 
 text_pipeline = lambda x: vocab(tokenizer(x))
 label_pipeline = lambda x: int(x)
+
+def get_vocabulary(PATH_TO_VOCABULARY, model_name, dataset_train=None):
+    if os.path.exists(PATH_TO_VOCABULARY):
+        print("Loading Vocabulary ... ")
+        vocab, vocab_size = load_vocabulary(PATH_TO_VOCABULARY)
+    else:
+        print("Creating and Saving vocabulary")
+        vocab, vocab_size = vocabulary(dataset_train, model_name)
+        save_vocabulary(PATH_TO_VOCABULARY, vocab, vocab_size)
+    return vocab, vocab_size
 
 # works perfectly. backup
 def collate_batch(batch):
@@ -86,6 +104,22 @@ def collate_batch(batch):
     
     return text_list_p, label_list
 
+def collate_batch_LSTM(batch):
+    label_list, text_list = [], []
+    for (_text, _label) in batch:
+        label_list.append(torch.tensor(label_pipeline(_label), dtype=torch.int64 ))
+        processed_text = torch.tensor(text_pipeline(_text), dtype=torch.int64)
+        text_list.append(processed_text)
+    
+    text_list = pad_sequence(text_list, batch_first=False, padding_value = vocab_size-1)
+   
+    # convert a list of tensors to tensors.
+    # input : a list of tensors of len BATCH_SIZE
+    label_list = torch.stack(label_list)   
+    # OUTPUT shape: [BATCH_SIZE]
+    
+    return text_list, label_list
+
 # get the maximum number of sentences in a document, and maximum number of words in sentences.
 def get_max_length(doc):
     """
@@ -123,6 +157,17 @@ def get_max_length(doc):
     
     #return sorted_sent_length[int(0.8*len(sorted_sent_length))], sorted_word_length[int(0.8*len(sorted_word_length))]
     return sorted_sent_length[-1], sorted_word_length[-1]
+
+def get_embedding_matrix(USE_PRETRAINED_EMBEDDING_MATRIX, vocab):
+    if USE_PRETRAINED_EMBEDDING_MATRIX:
+        # download an extract the glove embedding if they're not.
+        load_pretrained_embedding_matrix()
+        # load the embedding matrix.
+        embedding_matrix = GloveModel("glove.840B.300d.txt", vocab)
+    else:
+        embedding_matrix = None
+    
+    return embedding_matrix
 
 def Download_and_extract():
     print("This might take some time...")
