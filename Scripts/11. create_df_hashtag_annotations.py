@@ -1,10 +1,16 @@
+"""
+This file is use to create a seperate dataframe with autor's id, their comments, and hashtags used in that comment.
+From the csv created here,we are supposed to classify hashtags as left or right.
+And this will be used further to annotate author/users as liberals or conservatives
+"""
+
 import pandas as pd
 import os
 
 DIRECTORY_PATH = "D:/MSc Data Science/Elective Modules - Research Modules/[INF-DS-RMB] Research Module B/RM Code/Sentiment-Classification-Youtube-Comments-Political-Affiliation/"
 
 def main():
-    # have to change this
+    # have to change this - this is the leaning of youtube channels.
     LEANING = "LEFT"
     channels = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/10. comments {}.csv".format(LEANING)))
 
@@ -20,9 +26,11 @@ def main():
                     
             # populate the hashtag_list
             hashtag = []
-            for i in row["Authors Comment"].split():
-                if i.startswith("#"):
-                    hashtag.append(i)
+            
+            if not pd.isna(row["Authors Comment"]):
+                for i in row["Authors Comment"].split():
+                    if i.startswith("#"):
+                        hashtag.append(i)
             
             # if there is any hashtags in the comment, then only save it.
             if len(hashtag) > 0:

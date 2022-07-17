@@ -1,3 +1,8 @@
+"""
+First step of annotation is taking place here.
+Annotation is being done using subscription list of the users/authors, and homogeneity score.
+"""
+
 import pandas as pd
 import json, os
 from utils import homogeneity_score, biasness_classification

@@ -1,3 +1,7 @@
+"""
+Get users/authors subscription list, those who  have amde the comment, using youtube API
+
+"""
 import pandas as pd
 import json, os
 from utils import DIRECTORY_PATH
