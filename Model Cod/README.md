@@ -7,7 +7,8 @@ We will train 2 models: HAN and LSTM.
 ### Dependencies:
 ##### Version:
 ```
-Pytroch version : #.#.#+cu##
+Pytroch version :  1.10.0+cu102
+torchtext version : 0.11.0
 ```
 
 ##### Steps
