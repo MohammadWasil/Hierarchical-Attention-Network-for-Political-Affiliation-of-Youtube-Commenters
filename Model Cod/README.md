@@ -1,7 +1,7 @@
 ## Training Description
 To train and evaluate your model:
 
-We will train 2 omdels: HAN and LSTM.
+We will train 2 models: HAN and LSTM.
 
 
 ### Dependencies:
