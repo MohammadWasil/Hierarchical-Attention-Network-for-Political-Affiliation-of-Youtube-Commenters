@@ -54,6 +54,38 @@ python '6. get_yt_channel_playlists_videos.py'
 python '7. get_yt_comments.py'
 ```
 
+--- A utility file to combine right and right center files.
+```{python}
+python '7.1 combine_right_and_center_right_data.py'
+```
+
+12. Convert the data from json format to csv.
+```{python}
+python '8. json_to_csv.py'
+```
+
+13. Get the subscription list of all the auhtors who have made comments using Youtube API.
+```{python}
+python '9. get_authors_subscription.py'
+```
+
+14. First step of Annotation. Annotating users as liberals or conservatives using users subscription data and homogeneity score.
+```{python}
+python '10. user_subscription_homogeneity_score.py'
+```
+
+15. Create sepearte dataframe to easily annotate hashtags as being used by liberals or conservatives.
+```{python}
+python '11. create_df_hashtag_annotations.py'
+```
+
+16. Create first layer of annotated data for han training (this was done using users subscription data)
+```{python}
+python '12. create_data_subscription_training.py'
+```
+
+
+
 ### (Annotated) Dataset Description
 
 #### Original Paper
