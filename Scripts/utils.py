@@ -16,6 +16,9 @@ import datetime
 
 DIRECTORY_PATH = "D:/MSc Data Science/Elective Modules - Research Modules/[INF-DS-RMB] Research Module B/RM Code/Sentiment-Classification-Youtube-Comments-Political-Affiliation/"
 
+#left_hashtags = ["LiberalClueless","studentloanslivesmatter","BOYCOTTFRITOLAYS","solidarity","FreeBritney","FREEDMEN","ADOS", "TRUTH", "freepalestine", "PalestinianLivesMatter", "FREEPALESTINIAN", "DefundthePolice", "BLM", "EatTheRich", "CODEPINK", "climatechange", "Whee", "ModiHtaoDeshBchao", "modi_rojgar_do", "Truenews", "victimisation", "freeTheOuighours", "SosColombia", "GazaUnderAttack", "savesheikhjarrah", "BlackLiveMatter", "palestine", "govegan", "Propagande", "pasdamalgame", "videoscopie", "vidÃ©oscopie", "OuÃ¯gours", "Biden"]
+#right_hashtags = ["cowards", "generalstrike", "DEBO", "TheFederalist", "TRUMPWON", "trump2024baby", "TuckkkerCarlson", "letsgobrandon", "FJB", "unacceptable", "DemonRats", "BJP", "BOYCOTT", "bantwitter", "dalal", "MatvinScott", "victimisation", "Propagande", "AlexandriaOcasioSmollett", "pasdamalgame", "Impeachbiden", "BLOODYBIDEN"]
+
 number_dictionary = {"1" : "one", "2" : "two", "3": "three", "4" : "four", "5": "five", "6": "six", "7" : "seven", "8": "eight", "9":"nine", "0":"zero"}
 dictionary  = {"'cause": 'because',
  "'s": 'is',
@@ -148,6 +151,8 @@ dictionary  = {"'cause": 'because',
  "you'll": 'you shall',
  "you're": 'you are',
  "you've": 'you have'}
+
+
 
 # Review the questions:
 def mappingWords(questions,dictionary):

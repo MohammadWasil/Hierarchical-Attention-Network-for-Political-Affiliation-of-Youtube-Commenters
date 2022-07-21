@@ -1,5 +1,5 @@
 """
-This file is use to create a seperate dataframe with autor's id, their comments, and hashtags used in that comment.
+This file is use to create 2 seperate dataframe with autor's id, their comments, and hashtags used in that comment.
 From the csv created here,we are supposed to classify hashtags as left or right.
 And this will be used further to annotate author/users as liberals or conservatives
 """
