@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 
 #from run import device
 
-def evaluate(val_dataloader, model, dataset_valid, loss_function, device):
+def evaluate(val_dataloader, model, dataset_valid, loss_function, device, INFERENCE=None):
     model.eval()
     correct = 0
     total_count = 0
@@ -25,8 +25,13 @@ def evaluate(val_dataloader, model, dataset_valid, loss_function, device):
             label = label.to(device)
             
             # feed the validation text into the model, and get the probabilities.
-            predicted_label = model(text)
+            predicted_label, alpha_word, alpha_sentence = model(text)
 
+            # visualizing text
+            if INFERENCE ==True:
+                print("inferencing")
+                print(alpha_word, alpha_sentence)
+            
             # calculate loss
             loss = loss_function(predicted_label, label)
             

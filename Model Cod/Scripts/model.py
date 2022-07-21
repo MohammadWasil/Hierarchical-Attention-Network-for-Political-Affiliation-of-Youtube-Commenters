@@ -50,9 +50,9 @@ class Encoder(nn.Module):
         # output shape: [NUM_SENTENCES, ENCODER_HIDDEN_DIMENSION*2]
         
 
-        s_i = self.attention(gru_out) # fome the diagram, it is s_i.
+        alpha, s_i = self.attention(gru_out) # fome the diagram, it is s_i.
         
-        return s_i, gru_out
+        return alpha, s_i, gru_out
 
 class Sentence_Encoder(nn.Module):
 
@@ -85,9 +85,9 @@ class Sentence_Encoder(nn.Module):
         #hidden_f_b = torch.cat((hidden[0,:,:], hidden[1,:,:]), dim = 1)
         # output shape: [NUM_SENTENCES, ENCODER_HIDDEN_DIMENSION*2]
         
-        v = self.attention(gru_out) # from the diagram, it is v.
+        alpha, v = self.attention(gru_out) # from the diagram, it is v.
         # output: [BATCH X 1 X ENCODER_HIDDEN_DIMENSION*2]
-        return v, gru_out
+        return alpha, v, gru_out
       
 class Attention(nn.Module):
     def __init__(self, ENCODER_HIDDEN_DIMENSION):
@@ -120,7 +120,7 @@ class Attention(nn.Module):
         # 2nd output shape: [BATCH_SIZE, MAX_LENGTH_OF_THE_SENTENCE_IN_DOC, 1]
         
         # input: [MAX_LENGTH_OF_THE_SENTENCE_IN_BATCH, NUM_SENTENCES, 1]
-        alpha = F.softmax(context_vector, dim=1)
+        alpha = F.softmax(context_vector, dim=1)   # this needs to be send also##################
         # output: [MAX_LENGTH_OF_THE_SENTENCE_IN_BATCH, NUM_SENTENCES, 1]
         
         # 2nd output shape: [BATCH_SIZE, MAX_LENGTH_OF_THE_SENTENCE_IN_DOC, 1]
@@ -130,7 +130,7 @@ class Attention(nn.Module):
         
         a = alpha@gru_out  
         # 2nd output shape: [BATCH_SIZE, 1, ENCODER_HIDDEN_DIMENSION*2]
-        return a
+        return alpha, a
     
 class HierarchicalAttentionNetwork(nn.Module):
 
@@ -157,17 +157,18 @@ class HierarchicalAttentionNetwork(nn.Module):
 
         # Iterate through all the sentences in every batch
         for sent in text:
+
             # input: [BATCH_SIZE, MAX_LENGTH_OF_THE_SENTENCE_IN_DOC]
-            word_s, gru_out = self.model(sent)
+            alpha_word, word_s, gru_out = self.model(sent)
             # output: word_s: [BATCH_SIZE, 1, ENCODER_HIDDEN_DIMENSION*2]
 
-            #word_a_list.append(word_a)
+            word_a_list.append(alpha_word)
             word_s_list.append(word_s)
 
         word_s_list = torch.cat(word_s_list, dim=1)
         # output: word_s: [BATCH_SIZE, NUM_SENTENCES, ENCODER_HIDDEN_DIMENSION*2]
         
-        v, gru_out_sentence = self.sent_model(word_s_list)
+        alpha_sentence, v, gru_out_sentence = self.sent_model(word_s_list)
         # output v: # output: [BATCH X 1 X ENCODER_HIDDEN_DIMENSION*2]
         # output gru_out_sentence: [BATCH X NUM_SENTENCES x EMBEDDING_DIMENSION*2]
         
@@ -177,7 +178,7 @@ class HierarchicalAttentionNetwork(nn.Module):
         classifier = F.softmax(v_output, dim=2).squeeze(1)
         # classifier shape: [BATCH, 1, Num_classes]        
         
-        return classifier
+        return classifier, word_a_list, alpha_sentence
 
 class UserClassificationModel(nn.Module):
 
@@ -224,4 +225,4 @@ class UserClassificationModel(nn.Module):
         classifier = F.softmax(fc1, dim=1)#.squeeze(1)
         # output shape: [BATCH_SIZE, Num_class]
         
-        return classifier
+        return classifier, None, None

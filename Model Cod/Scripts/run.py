@@ -2,10 +2,70 @@ import os
 import argparse
 import yaml
 
+'''
+Pytroch version :  1.10.0+cu102
+torchtext version : 0.11.0
+scikit-learn : 1.0.2
+'''
+
 import torch
 from torch import nn
 from torch.optim import Adam
 from torch.utils.data import DataLoader
+
+"""try:
+    import torch
+    from torch import nn
+    from torch.optim import Adam
+    from torch.utils.data import DataLoader
+    
+    print(torch.__version__)
+    if torch.__version__ == "1.10.0+cu102" or torch.__version__ == "1.10.0":
+        print('Torch imported successfully')
+    else:
+        print("Torch imported, but version mismatched.")
+        raise ImportError('Version mismatch.')
+except ImportError:
+    print('\nEither Torch is not imported or correct version is not installed. Trying to install correct version...')
+    
+    # for local
+    os.system('pip install torch==1.10.0')
+    # for colab
+    #!pip install torch==1.10.0
+
+    import torch
+    from torch import nn
+    from torch.optim import Adam
+    from torch.utils.data import DataLoader    
+    if torch.__version__ == "1.10.0":
+        print('Correct torch version installed') 
+
+try:
+    import torch
+    import torchtext
+    from torchtext.data.utils import get_tokenizer
+    from torchtext.vocab import build_vocab_from_iterator    
+    
+    print("Torchtext version :", torchtext.__version__)
+
+    if torchtext.__version__ == "0.11.0":
+        print('Torchtext imported successfully')
+    else:
+        print("Torchtext imported, but version mismatched.")
+        raise ImportError('Version mismatch.')
+except ImportError:
+    print('\nEither Torchtext is not imported or correct version is not installed. Trying to install correct version...')
+    
+    # for local
+    os.system('pip install torchtext==0.11.0')
+    # for colab
+    #!pip install torchtext==0.11.0
+
+    from torchtext.data.utils import get_tokenizer
+    from torchtext.vocab import build_vocab_from_iterator    
+    if torchtext.__version__ == "0.11.0":
+        print('Correct torchtextversion installed') """
+
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -13,11 +73,13 @@ from model import HierarchicalAttentionNetwork, UserClassificationModel
 from datasets import CommentDataset, YoutubeBatchSampler, CommentDataset_LSTM
 from data_utils import collate_batch, collate_batch_LSTM, vocabulary, save_vocabulary, load_vocabulary, get_vocabulary, get_embedding_matrix
 from Evaluate import evaluate
+from Inference import inference, read_process_data
 from Train import train
 from plot import plot
 from model_utils import load_model
 
-data_folder = "12. Subscription Training Data.csv"
+data_folder = "16. Training Dataset.csv"
+eval_folder = "inference.csv"
 
 def parse_args():
     """Parse input arguments"""
@@ -33,8 +95,8 @@ def parse_args():
 
     parser.add_argument(
         '--RUN_MODE', dest='RUN_MODE',
-        choices=['train', 'test'],
-        help='{train, test}',
+        choices=['train', 'test', 'eval'],
+        help='{train, test, eval}',
         type=str, required=True
     )
 
@@ -161,7 +223,7 @@ class MainExec(object):
                 
             optimizer = Adam(model.parameters(), learning_rate)
             # to train and save/load the model
-            train_loss_list, val_loss_list, train_accu_list, val_accu_list, current_epoch = train(model, train_dataloader, val_dataloader, dataset_train, dataset_valid, 
+            train_loss_list, val_loss_list, train_accu_list, val_accu_list, current_epoch, _, _ = train(model, train_dataloader, val_dataloader, dataset_train, dataset_valid, 
                                                                                                 EPOCHS, optimizer, path, LAST_SAVED_EPOCH_MODEL, device)
 
             plot(train_loss_list, val_loss_list, train_accu_list, val_accu_list, current_epoch, self.args.MODEL)
@@ -225,6 +287,46 @@ class MainExec(object):
             print("The test accuracy is: {:.2f}%".format(TEST_ACC))
             print("F1 Score on Test data is: {:.2f}".format(F1_score))
             print("Loss on Test Data is: {:.2f}".format(TEST_LOSS))
+
+        # to get inference
+        elif self.args.RUN_MODE == "eval":
+            
+            if self.args.MODEL == "HAN":
+                
+                #dataset_test = CommentDataset(eval_folder, train=False, test=True, valid=False)
+                #test_dataloader = DataLoader(dataset_test,
+                #                            shuffle=False, collate_fn=collate_batch)
+
+                # create/load vocabulary
+                PATH_TO_VOCABULARY = self.cfgs["PATH_TO_SAVE_VOCAB_HAN"]
+                if PATH_TO_VOCABULARY is None:
+                    raise ValueError("No Vocabulary Found. No HAN Model Trained! Train some models using `python run.py --MODEL HAN --RUN_MODE train` ")
+                
+                vocab, vocab_size = get_vocabulary(PATH_TO_VOCABULARY, "HAN", None)
+
+                embedding_matrix = get_embedding_matrix(USE_PRETRAINED_EMBEDDING_MATRIX, vocab)
+                
+                text = read_process_data(eval_folder, vocab_size)
+                
+                ENCODER_HIDDEN_DIMENSION = self.cfgs["ENCODER_HIDDEN_DIM_HAN"]
+                DECODER_HIDDEN_DIMENSION = self.cfgs["DECODER_HIDDEN_DIM_HAN"]
+
+                path = self.cfgs["PATH_TO_SAVE_MODEL_HAN"]
+                #path_pt = self.cfgs["PATH_TO_SAVE_MODEL_HAN_pt"]
+                LAST_SAVED_EPOCH_MODEL = self.cfgs["LAST_SAVED_EPOCH_HAN_MODEL"]
+                if LAST_SAVED_EPOCH_MODEL is None:
+                    raise ValueError("No HAN Model Trained! Train some models using `python run.py --MODEL HAN --RUN_MODE train` ")
+
+                model = HierarchicalAttentionNetwork(vocab_size, embedding_size, num_class, ENCODER_HIDDEN_DIMENSION, DECODER_HIDDEN_DIMENSION, USE_PRETRAINED_EMBEDDING_MATRIX, embedding_matrix, device).to(device)
+                # to load the model:
+                model, _, _, _, _, _, _ = load_model(path, LAST_SAVED_EPOCH_MODEL, model, None)
+
+                #loss_function = nn.CrossEntropyLoss()
+                inference(text, model, device)
+                #print("The test accuracy is: {:.2f}%".format(TEST_ACC))
+                #print("F1 Score on Test data is: {:.2f}".format(F1_score))
+                #print("Loss on Test Data is: {:.2f}".format(TEST_LOSS))
+
 
 if __name__ == "__main__":
     args = parse_args()

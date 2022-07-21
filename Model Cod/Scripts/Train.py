@@ -40,8 +40,8 @@ def train(model, train_dataloader, val_dataloader, dataset_train, dataset_valid,
 
             optimizer.zero_grad()
 
-            predicted_label = model(text)
-
+            predicted_label, alpha_word, alpha_sentence = model(text)
+            
             loss = loss_function(predicted_label, label)
 
             loss.backward()
@@ -58,7 +58,7 @@ def train(model, train_dataloader, val_dataloader, dataset_train, dataset_valid,
         accuracy = accuracy * 100.0 / len(dataset_train)
 
         EPOCH_VAL_ACC, EPOCH_VAL_LOSS, F1_score = evaluate(val_dataloader, model, dataset_valid, loss_function, device)
-
+        
         print(f'Epoch: {epoch+1} | Train Loss: {train_loss} | Accuracy: {accuracy} | Val Accuracy: {EPOCH_VAL_ACC} | Val Loss: {EPOCH_VAL_LOSS} | F1 Score: {F1_score}')
         train_loss_list.append(train_loss)
         val_loss_list.append(EPOCH_VAL_LOSS)
@@ -68,4 +68,4 @@ def train(model, train_dataloader, val_dataloader, dataset_train, dataset_valid,
         # save the model.
         save_model(epoch, model, optimizer, train_loss_list, val_loss_list, train_accu_list, val_accu_list, path)
         
-    return train_loss_list, val_loss_list, train_accu_list, val_accu_list, epoch+1
+    return train_loss_list, val_loss_list, train_accu_list, val_accu_list, epoch+1, alpha_word, alpha_sentence

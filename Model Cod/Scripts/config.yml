@@ -1,5 +1,5 @@
-EPOCHS: 15
-BATCH_SIZE: 32
+EPOCHS: 1
+BATCH_SIZE: 1
 NUM_CLASS: 2
 EMBEDDING_SIZE: 100
 DECODER_HIDDEN_DIM_HAN: 32
@@ -11,8 +11,8 @@ BATCH_SAMPLER: False # it is better to keep this false.
 
 PATH_TO_SAVE_VOCAB_HAN: "./Vocabulary/Vocab HAN.pt.tar"
 PATH_TO_SAVE_MODEL_HAN: "./Han Models/Model HAN Epoch {}.pt.tar"
-LAST_SAVED_EPOCH_HAN_MODEL: 11 #Null # keep on updating this whenever you have new model and need to resume train.
+LAST_SAVED_EPOCH_HAN_MODEL: 0 #Null # keep on updating this whenever you have new model and need to resume train.
 
 PATH_TO_SAVE_VOCAB_LSTM: "./Vocabulary/Vocab LSTM.pt.tar"
 PATH_TO_SAVE_MODEL_LSTM: "./LSTM Models/Model LSTM Epoch {}.pt.tar"
-LAST_SAVED_EPOCH_LSTM_MODEL: 13 #Null # keep on updating this whenever you have new model and need to resume train.
+LAST_SAVED_EPOCH_LSTM_MODEL: #Null # keep on updating this whenever you have new model and need to resume train.
