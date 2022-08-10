@@ -6,8 +6,8 @@ A lot of help, inspiration and code for HAN model was taken from these sources.
 [Predicting Amazon review scores using Hierarchical Attention Networks with PyTorch and Apache Mxnet](https://towardsdatascience.com/predicting-amazon-reviews-scores-using-hierarchical-attention-networks-with-pytorch-and-apache-5214edb3df20) <Br>
 [[PYTORCH] Hierarchical Attention Networks for Document Classification - uvipen](https://github.com/uvipen/Hierarchical-attention-networks-pytorch) <Br>
 [Text Classification with Hierarchical Attention Networks](https://humboldt-wi.github.io/blog/research/information_systems_1819/group5_han/) <Br>
-[Pytorch-Hierarchical-Attention-Network - JoungheeKim](https://github.com/JoungheeKim/Pytorch-Hierarchical-Attention-Network) 
-[Hierarchical-Attention-Network - jaehunjung1](https://github.com/jaehunjung1/Hierarchical-Attention-Network)
+[Pytorch-Hierarchical-Attention-Network - JoungheeKim](https://github.com/JoungheeKim/Pytorch-Hierarchical-Attention-Network) <Br>
+[Hierarchical-Attention-Network - jaehunjung1](https://github.com/jaehunjung1/Hierarchical-Attention-Network) <Br>
 
 To train and evaluate your model:
 
