@@ -78,7 +78,7 @@ from Train import train
 from plot import plot
 from model_utils import load_model
 
-data_folder = "16. Training Dataset.csv"
+data_folder = "16. Training Dataset revisit.csv"
 eval_folder = "inference.csv"
 
 def parse_args():

@@ -44,8 +44,8 @@ class CommentDataset(Dataset):
         self.data = shuffle(self.data)
         self.data.reset_index(inplace=True, drop=True)
         
-        self.data['Annot'].replace('LEFT', 0, inplace=True)
-        self.data['Annot'].replace('RIGHT', 1, inplace=True)
+        self.data['Authors Biasness'].replace('LEFT', 0, inplace=True)
+        self.data['Authors Biasness'].replace('RIGHT', 1, inplace=True)
         
         # split the dataset into train, test, and valid.
         self.train_df, test_df = train_test_split(self.data, test_size=0.2,  random_state=11)
@@ -65,21 +65,21 @@ class CommentDataset(Dataset):
         if self.train == True:
             # do the sorting
             # Sort the dataframe according to the number of comments on documents.
-            self.train_df.sort_values(by=['Number of Comment'], ascending=False, inplace=True)       
+            self.train_df.sort_values(by=['Num of Comments'], ascending=False, inplace=True)       
             comments = []
-            for com in self.train_df["comment"]:
+            for com in self.train_df["Authors Comment"]:
                 comments.append(com.split("-|-")[:-1])
             self.train_comment = comments
         elif self.test == True:
             # no need to sort
             comments = []
-            for com in self.test_df["comment"]:
+            for com in self.test_df["Authors Comment"]:
                 comments.append(com.split("-|-")[:-1])
             self.test_comment = comments
         elif self.valid == True:
             # no need to sort
             comments = []
-            for com in self.valid_df["comment"]:
+            for com in self.valid_df["Authors Comment"]:
                 comments.append(com.split("-|-")[:-1])
             self.val_comment = comments
         
@@ -115,7 +115,7 @@ class CommentDataset(Dataset):
             self.data_selected = self.valid_df
             self.comment_selected = self.val_comment
 
-        label = self.data_selected.iloc[idx]["Annot"]
+        label = self.data_selected.iloc[idx]["Authors Biasness"]
         sentence = self.comment_selected[idx]
         return sentence, label
 
@@ -234,8 +234,8 @@ class CommentDataset_LSTM(Dataset):
         self.data = shuffle(self.data)
         self.data.reset_index(inplace=True, drop=True)
         
-        self.data['Annot'].replace('LEFT', 0, inplace=True)
-        self.data['Annot'].replace('RIGHT', 1, inplace=True)
+        self.data['Authors Biasness'].replace('LEFT', 0, inplace=True)
+        self.data['Authors Biasness'].replace('RIGHT', 1, inplace=True)
         
         # split the dataset into train, test, and valid.
         self.train_df, test_df = train_test_split(self.data, test_size=0.2,  random_state=11)
@@ -244,22 +244,22 @@ class CommentDataset_LSTM(Dataset):
         if self.train == True:
             # do the sorting
             # Sort the dataframe according to the number of comments on documents.
-            self.train_df.sort_values(by=['Number of Comment'], ascending=False, inplace=True)       
+            self.train_df.sort_values(by=['Num of Comments'], ascending=False, inplace=True)       
             comments = []
-            for com in self.train_df["comment"]:
+            for com in self.train_df["Authors Comment"]:
                 comments.append(com.replace(" -|- ", "."))
             self.train_comment = comments
             
         elif self.test == True:
             # no need to sort
             comments = []
-            for com in self.test_df["comment"]:
+            for com in self.test_df["Authors Comment"]:
                 comments.append(com.replace(" -|- ", "."))
             self.test_comment = comments
         elif self.valid == True:
             # no need to sort
             comments = []
-            for com in self.valid_df["comment"]:
+            for com in self.valid_df["Authors Comment"]:
                 comments.append(com.replace(" -|- ", "."))
             self.val_comment = comments
 
@@ -276,7 +276,7 @@ class CommentDataset_LSTM(Dataset):
             self.data_selected = self.valid_df
             self.comment_selected = self.val_comment
 
-        label = self.data_selected.iloc[idx]["Annot"]
+        label = self.data_selected.iloc[idx]["Authors Biasness"]
         sentence = self.comment_selected[idx]
         return sentence, label
 
