@@ -32,13 +32,13 @@ GPU Version: ```conda install pytorch cudatoolkit -c pytorch``` <Br/>
 CPU Version: ```conda install pytorch cpuonly -c pytorch```
 
 ### Train
-#### Train HAN model
+#### HAN model
 Initially, `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` file will be `Null`. At this point, simply run the below command to train HAN model:
 ```{bash}
 python run.py --MODEL HAN --RUN_MODE train
 ```
 
-To resume training after some time, `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` needs to be changed to the last epoch trained. For that, check the epoch number in the saved model's file name.
+To resume training after some time, `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` needs to be changed to the last epoch trained. For that, check the epoch number in the saved model's file name. And also make sure to change `PATH_TO_SAVE_MODEL_HAN` with the path of your best model, and `PATH_TO_SAVE_VOCAB_HAN` with the vocababulary created during training phase.
 For that, go to `./Han Models/`. And then, run the above command again to resume training.
 
 To test your HAN model, run:
@@ -46,19 +46,26 @@ To test your HAN model, run:
 python run.py --MODEL HAN --RUN_MODE test
 ```
 
-#### Train LSTM model
+To Evaluate yout model, make sure to change `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` with your best model, `PATH_TO_SAVE_MODEL_HAN` with the path of your best model, and `PATH_TO_SAVE_VOCAB_HAN` with the vocababulary created during training phase.
+```{bash}
+python run.py --MODEL HAN --RUN_MODE eval
+```
+
+#### LSTM model
 Initially, `LAST_SAVED_EPOCH_LSTM_MODEL` parameter in `config.yml` file will be `Null`. At this point, simply run the below command to train LSTM model:
 ```{bash}
 python run.py --MODEL LSTM --RUN_MODE train
 ```
 
-To resume training after some time, `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` needs to be changed to the last epoch trained. For that, check the epoch number in the saved model's file name.
+To resume training after some time, `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` needs to be changed to the last epoch trained. For that, check the epoch number in the saved model's file name. And also make sure to change `PATH_TO_SAVE_MODEL_HAN` with the path of your best model, and `PATH_TO_SAVE_VOCAB_HAN` with the vocababulary created during training phase.
 For that, go to `./Han Models/`. And then, run the above command again to resume training.
 
 To test your LSTM model, run:
 ```{bash}
 python run.py --MODEL LSTM --RUN_MODE test
 ```
+
+No evaluation script was created for LSTM, since we already know HAN was working much better than LSTM model.
 
 ### Model Result
 
