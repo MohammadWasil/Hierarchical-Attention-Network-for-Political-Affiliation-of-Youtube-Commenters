@@ -9,10 +9,6 @@ A lot of help, inspiration and code for HAN model was taken from these sources.
 [Pytorch-Hierarchical-Attention-Network - JoungheeKim](https://github.com/JoungheeKim/Pytorch-Hierarchical-Attention-Network) <Br>
 [Hierarchical-Attention-Network - jaehunjung1](https://github.com/jaehunjung1/Hierarchical-Attention-Network) <Br>
 
-To train and evaluate your model:
-
-We will train 2 models: HAN and LSTM.
-
 ### Dependencies:
 ##### Version:
 ```
@@ -41,6 +37,8 @@ GPU Version: ```conda install pytorch cudatoolkit -c pytorch``` <Br/>
 CPU Version: ```conda install pytorch cpuonly -c pytorch```
 
 ### Train
+We will train 2 models: HAN and LSTM.
+  
 #### HAN model
 Initially, `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` file will be `Null`. At this point, simply run the below command to train HAN model:
 ```{bash}
