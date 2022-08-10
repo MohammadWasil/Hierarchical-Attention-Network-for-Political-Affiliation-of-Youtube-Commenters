@@ -79,12 +79,32 @@ python '10. user_subscription_homogeneity_score.py'
 python '11. create_df_hashtag_annotations.py'
 ```
 
-16. Create first layer of annotated data for han training (this was done using users subscription data)
+16. Create first layer of annotated data for training (this was done using users subscription data) - Just a sample file to create out models.
 ```{python}
 python '12. create_data_subscription_training.py'
 ```
 
+17. Second step of Annotation. Annotating users as liberals or conservatives using hashatags used by the user on their comment and homogeneity score.
+```{python}
+python '13. create_data_from_hashtags.py'
+```
 
+18. Find conflicted users (user both in left and right channels with different leaning) and remove them. Then combine both the dataet and save. Next, take those samples, where we know the leaning of the user, and generate annotated training data for training.
+```{python}
+python '14. generate_training_data revisit.py'
+```
+
+19. Preprocess the given trainng dataset (created in step 14 and 17) suitable for training.
+```{python}
+python '15. data_for_training_revisit.py'
+```
+
+20. Preprocess the un-annotated dataset for inference.
+```{python}
+python '16. null_comments.py'
+```
+
+To train your model, follow the steps shown in readme [here](https://github.com/MohammadWasil/Sentiment-Classification-Youtube-Comments-Political-Affiliation/tree/main/Model%20Cod#training-description)
 
 ### (Annotated) Dataset Description
 
@@ -114,7 +134,7 @@ python '12. create_data_subscription_training.py'
 
 | Model | Validation F1 Score  | Validation Loss | Validation Accuracy | Test F1 Score | Test Loss | Test Accuracy |
 | --- | --- | --- | --- | --- | --- | --- |
-| HAN w/ Embedding | --- | --- | --- | --- | --- | --- |
+| HAN w/ Embedding | **0.86** | 0.418 | **89.28** | 0.88 | 0.41 | **89.69** |
 | HAN w/o embedding | - | - | - | - | - | - |
 | LSTM w/ Embedding | 0.83 | 0.439 | 86.83 | 0.83 | 0.45 | 86.05 |
 | LSTM w/o embedding | 0.80 | 0.468 | 84.11 | 0.79 | 0.48 | 82.56 |
