@@ -1,8 +1,15 @@
 ## Training Description
+
+Important Links for HAN model:
+
+[Hierarchical Attention Networks | Lecture 50 (Part 2) | Applied Deep Learning - Maziar Raissi](https://www.youtube.com/watch?v=VBqbmmcMI7E&ab_channel=MaziarRaissi)<Br>
+[Predicting Amazon review scores using Hierarchical Attention Networks with PyTorch and Apache Mxnet](https://towardsdatascience.com/predicting-amazon-reviews-scores-using-hierarchical-attention-networks-with-pytorch-and-apache-5214edb3df20) <Br>
+[[PYTORCH] Hierarchical Attention Networks for Document Classification - uvipen](https://github.com/uvipen/Hierarchical-attention-networks-pytorch) <Br>
+[Text Classification with Hierarchical Attention Networks](https://humboldt-wi.github.io/blog/research/information_systems_1819/group5_han/) <Br>
+
 To train and evaluate your model:
 
 We will train 2 models: HAN and LSTM.
-
 
 ### Dependencies:
 ##### Version:
