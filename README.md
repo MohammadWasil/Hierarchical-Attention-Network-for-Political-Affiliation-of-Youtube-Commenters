@@ -110,4 +110,15 @@ python '12. create_data_subscription_training.py'
 | Rebeiro 2020 | Not so big | Yes | Annotations not Available (No comments) Data might be avaiblae upon request | https://github.com/manoelhortaribeiro/radicalization_youtube |
 | Ledwich and Zaitsev 2020 | - | No | Data not available | - |
 
+### Model Result
+
+| Model | Validation F1 Score  | Validation Loss | Validation Accuracy | Test F1 Score | Test Loss | Test Accuracy |
+| --- | --- | --- | --- | --- | --- | --- |
+| HAN w/ Embedding | --- | --- | --- | --- | --- | --- |
+| HAN w/o embedding | - | - | - | - | - | - |
+| LSTM w/ Embedding | 0.83 | 0.439 | 86.83 | 0.83 | 0.45 | 86.05 |
+| LSTM w/o embedding | 0.80 | 0.468 | 84.11 | 0.79 | 0.48 | 82.56 |
+
+
+
 
