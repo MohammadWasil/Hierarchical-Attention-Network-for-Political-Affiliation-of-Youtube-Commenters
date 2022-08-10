@@ -1,3 +1,16 @@
+Hierarchical Attention Networks to study cross Partisan Communication on Youtube Comments
+
+IDEAs: 
+1. Data form other sources. Find the data sources. REJECTED
+2. # Use glove embedding - transfer learning since data is small. Done
+3. Is there a chance of fine-tuning? Research. No time. Done
+4. Different Models. Diff people diff model, use all the man power. Progress
+5. Annotate Hashtags. Progress. Done
+6. Scrap users subscription (Should we do more? ) No, Done.
+7. check code for hashtags (try to find length of unique hashtags) Done.
+
+
+***********************************************************
 Statistics in Left ( not neccesary to do more scraping)
 Channels :  525
 Videos :  165067
@@ -6,11 +19,10 @@ Progress:
 Channels = 188
 videos = 34739
 views = 3121089754
-comments = 4850479
 hashtags = 6046
 
-Authors = 1572286
 
+comments = 4850479
 Annotated Data From Subscription::
 Liberals comments      = 19934 (This number is coming from 5160 below) (81.60%)
 Conservatives comments =  4493 (This number is coming from 1431 below) (18.39%)
@@ -18,11 +30,41 @@ Conservatives comments =  4493 (This number is coming from 1431 below) (18.39%)
 			 24427
 			------
 
+Authors = 1572286
 Liberal Authors       =  5160 (78.28%)
 Conservatives Authors =  1431 (21.71%)
            		------
 			 6591
 			------
+
+Annotated Data From Hashtag::
+Liberals comments      = 53156 (This number is coming from 2547 below) (36.01%)
+Conservatives comments = 94444 (This number is coming from 2400 below) (63.98%)
+			------
+			147600
+			------
+
+Authors = 1572286
+Liberal Authors       =  2547 (51.48%)
+Conservatives Authors =  2400 (48.51%)
+           		------
+			 4947
+			------
+
+TOTAL Annotated Data ::									After removing conflicts
+comments = 4850479
+Liberals comments      = 73090 (This number is coming from 7707 below) (42.48%)			72269
+Conservatives comments = 98937 (This number is coming from 3831 below) (57.51%)			97896
+			------								        ------
+			172027									170165
+			------									------
+
+Authors = 1572286                           After removing conflicts (33)
+Liberal Authors       =  7707 (66.79%)		7695
+Conservatives Authors =  3831 (33.20%)     	3810
+           		------		      --------
+			11538			11505
+			------		      --------
 
 ***********************************************************
 Statistics in Right (Complete center right and not necesary to do more for right)
@@ -33,9 +75,10 @@ Progress:
 Channels = 244
 videos = 68227
 views = 2636126897
-comments = 4695651
 hashtags = 1072
 
+
+comments = 4695651
 Annotated Data From Subscription::
 Liberals comments      =  7534 (This number is coming from 2554 below) (30.47%)
 Conservatives comments = 17188 (This number is coming from 3544 below) (69.52%)
@@ -43,12 +86,71 @@ Conservatives comments = 17188 (This number is coming from 3544 below) (69.52%)
 			 24722
 			------
 
+Authors = 1292084
 Liberal Authors       =  2554 (41.88%)
 Conservatives Authors =  3544 (58.11%)
            		------
 			 6098 
 			------
-BASIC conlcusion from Annotated comments/users based on Subscription is: There is a very little cross-partisians communication (as of now).
+
+Annotated Data From Hashtag annotation::
+Liberals comments      =  40015 (This number is coming from 1223 below) (50.44%)
+Conservatives comments =  39312 (This number is coming from 854 below) (49.55%)
+			------
+			 79327
+			------
+Liberal Authors       =  1223 (58.88%)
+Conservatives Authors =   854 (41.11%)
+           		------
+			 2077 
+			------
+
+TOTAL data From RIGHT channel:::							After removing conflicts	
+comments = 4695651
+Liberals comments      = 47549 (This number is coming from 3777 below) (45.69%)			46235
+Conservatives comments = 56500 (This number is coming from 4398 below) (54.30%)			55808
+			------									------
+			104049									102043
+			------									------
+Authors = 1292084				After removing conflicts
+Liberal Authors       =  3777 (46.20%)			3756
+Conservatives Authors =  4398 (53.79%)			4386
+           		------		           	------				
+			 8175				8142
+			------           		------		
+
+--------------------------------------------------------
+
+Right Hashtags = 227
+Left Hashtags = 255
+
+********************
+After combining
+RIGHT video:
+	Total Authors = 7987				Total comments = 99064
+	Liberal AUthors 	= 3677			Liberal comments       = 44935
+	Conservativs Authors    = 4310			conservatives comments = 54129
+				 ------						------
+				  7987						99064
+				 ------						------
+LEFT video:
+	Total Authors = 11517				Total comments = 173698
+	Liberal AUthors 	= 7701			Liberal comments       = 73916
+	Conservativs Authors    = 3816			conservatives comments = 99782
+				 ------						------
+				 11517						173698
+				 ------						------
+
+
+Total Authors for Training =  11538 + 8175    = 19713
+Total Comments for Training = 172027 + 104049 = 276076
+
+##### CHnge this
+Authors which were present on both = 78
+Total Authors we have = 12689 - 78 = 12611
+
+BASIC conlcusion from Annotated comments/users based on Subscription is: There is a some cross-partisians communication (as of now).
+There might be high chance that we might have repeated authors from left and right channels.
 
 ***********************************************************
 ***********************************************************
