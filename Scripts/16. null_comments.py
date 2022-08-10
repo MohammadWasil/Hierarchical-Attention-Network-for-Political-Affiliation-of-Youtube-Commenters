@@ -1,62 +1,68 @@
+"""
+preprocess the un-annotated dataset for inference.
+"""
 import pandas as pd
 import os
 from utils import preprocess, dictionary, DIRECTORY_PATH
 
-data = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/For Inference Youtube Right Channel.csv"))
+def main():
+    LEANING = "LEFT"
+    #data = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/For Inference Youtube {} Channel.csv".format(LEANING)))
 
-left = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/13. comments RIGHT with Hashtag annotations.csv"))
-left_unlabel = left[left['Authors Biasness'].isnull()]
+    data = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/13. comments {} with Hashtag annotations.csv".format(LEANING)), 
+                        lineterminator='\n')
+    unlabel_data = data[data['Authors Biasness'].isnull()]
 
-ids = left_unlabel.groupby('Author Id')["Author Name"].value_counts().index[:]
-save_ids = []
-
-output_file = "data/Track the ids.txt"
-if os.path.exists(os.path.join(DIRECTORY_PATH, output_file)):
+    ids = unlabel_data.groupby('Author Id')["Author Name"].value_counts().index[:]
+    
+    save_ids = []
+    output_file = "data/Track the ids - {} revisit.txt".format(LEANING)
+    if os.path.exists(os.path.join(DIRECTORY_PATH, output_file)):
         with open(os.path.join(DIRECTORY_PATH, output_file), 'r') as fin:
             for line in fin:
                 save_ids.append(line[:-1])
             print(save_ids)
-                #video_json = json.loads(fin.rstrip())
-                
-                #if 'channel id' in video_json:
-                #    #for vid in video_json["video_ids"]:
-                #    visited_channel.add(video_json['channel id'])
-        #num_of_channels_scraped = len(visited_channel)
-counter = 0
-for i in ids:
+            print("Processed {} authors!!!".format(len(save_ids)))
     
-    user_id = i[0]
-    if user_id not in save_ids:
-        counter += 1
-        right_comments = []
-        right_num_of_comments = []
-        
-        #right_comments.append(R.loc[R['Author Id'] == user_id]["Authors Comment"].tolist())
-        comments = left_unlabel.loc[left_unlabel['Author Id'] == user_id]["Authors Comment"]
-        r_text = ""
-        right_num_of_comment = 0
-        for comment in comments:
-            text = preprocess(comment, dictionary)
-            r_text = r_text + text + " -|- "
-            # count the number of comments in each documents.
-            right_num_of_comment += 1
-        
-        right_comments.append(r_text)
-        right_num_of_comments.append(right_num_of_comment)
+    counter = 0
+    print("Total ids to process: {}".format(len(ids)))
+    for i in ids:
+        user_id = i[0]
+        if user_id not in save_ids:
+            counter += 1
 
-        comments_left_channel = pd.DataFrame(
-                {"comment" : right_comments,
-                "Number of Comment" : right_num_of_comments
-                })
-        #comments_left_channel = [[right_comments, right_num_of_comments]] 
-        #comments_left_channel = pd.DataFrame(comments_left_channel, columns = ['comment', 'Number of Comment']) 
+            author_data = unlabel_data.loc[unlabel_data['Author Id'] == user_id]
 
-        # Write the new data to the CSV file in append mode
-        comments_left_channel.to_csv(os.path.join(DIRECTORY_PATH, 'data/For Inference Youtube Right Channel.csv'), mode='a', header=False, index=False)
-        if counter % 100 == 0:
-            print("Counter: ", counter)
+            #right_comments.append(R.loc[R['Author Id'] == user_id]["Authors Comment"].tolist())
+            r_text = ""
+            num_com = 0
+            comments = author_data["Authors Comment"]
+            for comment in comments:
+                text = preprocess(comment, dictionary)
+                r_text = r_text + text + " -|- "
+                # count the number of comments in each documents.
+                num_com += 1
+                        
+            inference_data = pd.DataFrame(
+                    {"Video Biasness" : list(set(author_data["Biasness"]))[0],
+                    "Video Category": list(set(author_data["Video Category"])),
+                    "Author Id" : user_id,
+                    "Author Name" : list(set(author_data["Author Name"]))[0],
+                    "Authors Comment" : r_text,
+                    "Num of Comments" : num_com,
+                    "Authors Biasness" : list(set(author_data["Authors Biasness"]))[0]
+                    })
 
-        # save the id
-        save_ids.append(i)
-        with open(os.path.join(DIRECTORY_PATH, output_file), 'a') as fin:
-            fin.write(f"{user_id}\n")
+            # Write the new data to the CSV file in append mode
+            inference_data.to_csv(os.path.join(DIRECTORY_PATH, 'data/For Inference Youtube {} Channel revisit.csv'.format(LEANING)), 
+                                    mode='a', header=False, index=False)
+            if counter % 100 == 0:
+                print("Counter: ", counter)
+
+            # save the id
+            save_ids.append(i)
+            with open(os.path.join(DIRECTORY_PATH, output_file), 'a') as fin:
+                fin.write(f"{user_id}\n")
+
+if __name__ == '__main__':
+    main()

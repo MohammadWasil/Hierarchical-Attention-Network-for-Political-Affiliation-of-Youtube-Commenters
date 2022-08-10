@@ -1,3 +1,5 @@
+"""Second step of Annotation. Annotating users as liberals or conservatives using hashatags used by the user on their comment and homogeneity score.
+"""
 import pandas as pd
 import os
 from utils import DIRECTORY_PATH, homogeneity_score, biasness_classification
@@ -19,6 +21,7 @@ def main():
     channel = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/10. comments {}.csv".format(LEANING) ))
 
     # for the comments from left channels
+    # get all those authos who used hahstags in theor comments.
     authors_who_used_hashtags = []
     for _, row in channel.iterrows():
         if pd.isna(row["Authors Biasness"]):
@@ -60,7 +63,7 @@ def main():
             homo_score = homogeneity_score(right_user, left_user)
             users_leaning[user_id] = homo_score
 
-    # updating the dataset  
+    # updating the dataset
     for key, value in users_leaning.items():
         indx = channel[channel["Author Id"] == key].index
 

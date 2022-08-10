@@ -1,5 +1,6 @@
 """
-Create first layer of annotated data for han training (this was done using users subscription data)
+Create first layer of annotated data for han training (this was done using users subscription data) - This was just the sample
+Annotating hashtags took time, so inbetwen this, we crrate annotated dataset (from subscription list) to create our HAN model.
 """
 
 import pandas as pd
@@ -24,10 +25,11 @@ def main():
     #v = left["Author Id"].value_counts()
     #l = left[left["Author Id"].isin(v.index[v.eq(5)])]
 
-    # distribute into left and right
+    # distribute into left and right authors. Mind here, it is not channels, but Authors.
     R = merged[merged["Authors Biasness"] == "RIGHT"]
     L = merged[merged["Authors Biasness"] == "LEFT"]
 
+    # comments from conservative
     right_comments = []
     right_num_of_comments = []
     ids = R.groupby('Author Id')["Author Name"].value_counts().index[:]
@@ -48,6 +50,7 @@ def main():
         
     r_annot = ["RIGHT"] * len(right_comments)
 
+    # comments from liberals
     left_comments = []
     left_num_of_comments = []
     ids = L.groupby('Author Id')["Author Name"].value_counts().index[:]

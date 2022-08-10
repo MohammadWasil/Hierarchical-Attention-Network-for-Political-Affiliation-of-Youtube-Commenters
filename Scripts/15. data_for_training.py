@@ -7,6 +7,7 @@ import os
 from utils import DIRECTORY_PATH, dictionary, preprocess
 
 def main():
+    # plaese also save vidoes biasness and authors id
     data = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/15. Training Dataset.csv"))
 
     # distribute into left and right

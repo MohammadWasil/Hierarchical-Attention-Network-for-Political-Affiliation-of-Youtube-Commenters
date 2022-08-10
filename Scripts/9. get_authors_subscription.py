@@ -12,6 +12,7 @@ def main():
     LEANING = "RIGHT"
     data = pd.read_csv(os.path.join(DIRECTORY_PATH, "data/8. comments {}.csv".format(LEANING)))
 
+    # creates a list of authors subscription.
     output_file = os.path.join(DIRECTORY_PATH, "data/9. authors_subscription {}.json".format(LEANING))
     
     author_ids = list(set(data["Author Id"].tolist()))[1:]
