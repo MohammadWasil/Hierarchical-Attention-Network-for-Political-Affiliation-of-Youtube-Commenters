@@ -109,7 +109,7 @@ python '16. null_comments.py'
 
 To train your model, follow the steps shown in readme [here](https://github.com/MohammadWasil/Sentiment-Classification-Youtube-Comments-Political-Affiliation/tree/main/Model%20Cod#training-description)
 
-### (Annotated) Dataset Description
+### Dataset Statistics
 
 #### Original Paper
 | Leaning | Users (from Subscription list) | Users (from Hasgtags) | Available |
@@ -128,7 +128,7 @@ To train your model, follow the steps shown in readme [here](https://github.com/
 | Ledwich and Zaitsev 2020 | - | No | Data not available | - |
 
 
-#### Our Dataset (Till now, exlucding Annotations from hashtags)
+#### Our Dataset
 | Youtube Channel Leaning | #Authors | #Comments | #Annotated Authors | # Annotated Comments |
 | --- | --- | --- | --- | --- |
 | Left | 1.57 Million | 4.85 Million | 11505 | 170165 |
