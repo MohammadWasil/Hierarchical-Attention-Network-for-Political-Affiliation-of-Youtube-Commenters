@@ -129,16 +129,3 @@ To train your model, follow the steps shown in readme [here](https://github.com/
 | Lewis 2018 | Big data with comments | Yes | Annotations not Available | https://github.com/RSButner/Alt_Inf_Net |
 | Rebeiro 2020 | Not so big | Yes | Annotations not Available (No comments) Data might be avaiblae upon request | https://github.com/manoelhortaribeiro/radicalization_youtube |
 | Ledwich and Zaitsev 2020 | - | No | Data not available | - |
-
-### Model Result
-
-| Model | Validation F1 Score  | Validation Loss | Validation Accuracy | Test F1 Score | Test Loss | Test Accuracy |
-| --- | --- | --- | --- | --- | --- | --- |
-| HAN w/ Embedding | **0.86** | 0.418 | **89.28** | 0.88 | 0.41 | **89.69** |
-| HAN w/o embedding | - | - | - | - | - | - |
-| LSTM w/ Embedding | 0.83 | 0.439 | 86.83 | 0.83 | 0.45 | 86.05 |
-| LSTM w/o embedding | 0.80 | 0.468 | 84.11 | 0.79 | 0.48 | 82.56 |
-
-
-
-
