@@ -8,6 +8,7 @@ Install package `scrapetube` using pip to scrap the youtube videos id:
 pip install scrapetube
 pip install youtubesearchpython
 ```
+Also, create twitter api key and Youtube-api key for scraping datasets.
 
 Change the name of the file `config_KEYS EXAMPLE.yml` to `config_KEYS.yml` and add your twitter credentials there.
 
