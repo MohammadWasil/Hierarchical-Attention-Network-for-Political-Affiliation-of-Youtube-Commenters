@@ -70,16 +70,18 @@ except ImportError:
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 from model import HierarchicalAttentionNetwork, UserClassificationModel
-from datasets import CommentDataset, YoutubeBatchSampler, CommentDataset_LSTM
-from data_utils import collate_batch, collate_batch_LSTM, vocabulary, save_vocabulary, load_vocabulary, get_vocabulary, get_embedding_matrix
+from datasets import CommentDataset, InferenceCommentDataset, YoutubeBatchSampler, CommentDataset_LSTM
+from data_utils import collate_batch, collate_batch_inference, collate_batch_LSTM, vocabulary, save_vocabulary, load_vocabulary, get_vocabulary, get_embedding_matrix
 from Evaluate import evaluate
-from Inference import inference, read_process_data
+from Visualization import visualize_texts, read_process_data
+from inference import inference_data
 from Train import train
 from plot import plot
 from model_utils import load_model
 
-data_folder = "16. Training Dataset revisit.csv"
-eval_folder = "inference.csv"
+data_folder = "16. Training Dataset revisit.csv" # training data
+visualization_folder = "visualization_data.csv"  # for visualizing han model
+inference_folder = "visualization_data.csv"
 
 def parse_args():
     """Parse input arguments"""
@@ -95,8 +97,8 @@ def parse_args():
 
     parser.add_argument(
         '--RUN_MODE', dest='RUN_MODE',
-        choices=['train', 'test', 'eval'],
-        help='{train, test, eval}',
+        choices=['train', 'test', 'vis', 'inference'],
+        help='{train, test, visualization, inference}',
         type=str, required=True
     )
 
@@ -288,8 +290,8 @@ class MainExec(object):
             print("F1 Score on Test data is: {:.2f}".format(F1_score))
             print("Loss on Test Data is: {:.2f}".format(TEST_LOSS))
 
-        # to get inference
-        elif self.args.RUN_MODE == "eval":
+        # to get visualization result
+        elif self.args.RUN_MODE == "vis":
             
             if self.args.MODEL == "HAN":
                 
@@ -306,7 +308,7 @@ class MainExec(object):
 
                 embedding_matrix = get_embedding_matrix(USE_PRETRAINED_EMBEDDING_MATRIX, vocab)
                 
-                text = read_process_data(eval_folder, vocab_size)
+                text = read_process_data(visualization_folder, vocab_size)
                 
                 ENCODER_HIDDEN_DIMENSION = self.cfgs["ENCODER_HIDDEN_DIM_HAN"]
                 DECODER_HIDDEN_DIMENSION = self.cfgs["DECODER_HIDDEN_DIM_HAN"]
@@ -322,11 +324,51 @@ class MainExec(object):
                 model, _, _, _, _, _, _ = load_model(path, LAST_SAVED_EPOCH_MODEL, model, None)
 
                 #loss_function = nn.CrossEntropyLoss()
-                inference(text, model, device)
+                visualize_texts(text, model, visualization_folder, device)
                 #print("The test accuracy is: {:.2f}%".format(TEST_ACC))
                 #print("F1 Score on Test data is: {:.2f}".format(F1_score))
                 #print("Loss on Test Data is: {:.2f}".format(TEST_LOSS))
+        
+        # to get visualization result
+        elif self.args.RUN_MODE == "inference":
+            
+            if self.args.MODEL == "HAN":
+                
+                dataset_inference = InferenceCommentDataset(inference_folder)
+                inference_dataloader = DataLoader(dataset_inference,
+                                            shuffle=False, collate_fn=collate_batch_inference)
 
+                # create/load vocabulary
+                PATH_TO_VOCABULARY = self.cfgs["PATH_TO_SAVE_VOCAB_HAN"]
+                if PATH_TO_VOCABULARY is None:
+                    raise ValueError("No Vocabulary Found. No HAN Model Trained! Train some models using `python run.py --MODEL HAN --RUN_MODE train` ")
+                
+                vocab, vocab_size = get_vocabulary(PATH_TO_VOCABULARY, "HAN", None)
+
+                embedding_matrix = get_embedding_matrix(USE_PRETRAINED_EMBEDDING_MATRIX, vocab)
+                
+                #text = read_process_data(visualization_folder, vocab_size)
+                
+                ENCODER_HIDDEN_DIMENSION = self.cfgs["ENCODER_HIDDEN_DIM_HAN"]
+                DECODER_HIDDEN_DIMENSION = self.cfgs["DECODER_HIDDEN_DIM_HAN"]
+
+                path = self.cfgs["PATH_TO_SAVE_MODEL_HAN"]
+                #path_pt = self.cfgs["PATH_TO_SAVE_MODEL_HAN_pt"]
+                LAST_SAVED_EPOCH_MODEL = self.cfgs["LAST_SAVED_EPOCH_HAN_MODEL"]
+                if LAST_SAVED_EPOCH_MODEL is None:
+                    raise ValueError("No HAN Model Trained! Train some models using `python run.py --MODEL HAN --RUN_MODE train` ")
+
+                model = HierarchicalAttentionNetwork(vocab_size, embedding_size, num_class, ENCODER_HIDDEN_DIMENSION, DECODER_HIDDEN_DIMENSION, USE_PRETRAINED_EMBEDDING_MATRIX, embedding_matrix, device).to(device)
+                # to load the model:
+                model, _, _, _, _, _, _ = load_model(path, LAST_SAVED_EPOCH_MODEL, model, None)
+
+                loss_function = nn.CrossEntropyLoss()
+                left, right, left_comment, right_comment = inference_data(inference_dataloader, model, device)
+                print("The number of Liberals are: ", left)
+                print("The number of Conservatives are: ", right)
+
+                print("The number of Comments made by Liberals are: ", left_comment)
+                print("The number of Comments made by Conservatives are: ", right_comment)
 
 if __name__ == "__main__":
     args = parse_args()

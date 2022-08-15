@@ -104,6 +104,47 @@ def collate_batch(batch):
     
     return text_list_p, label_list
 
+def collate_batch_inference(batch):
+    label_list, text_list = [], []
+    for _text in batch:
+        
+        #label_list.append(torch.tensor(label_pipeline(_label), dtype=torch.int64 ))
+        
+        texts = []
+        for t in _text:
+            texts.append(torch.tensor(text_pipeline(t), dtype=torch.int64))
+        text_list.append(texts)
+    
+    sentence_length, word_length = get_max_length(text_list)
+    
+    text_list_p = []
+    for t in text_list:
+        # input shape: a list of tensors with unequal length of sentences.
+        # padding to the highest length of the sequence.
+        p = [ torch.cat((batch, torch.LongTensor([vocab_size-1]).repeat(word_length - len(batch))), dim=0) 
+                if((word_length - batch.shape[0]) !=  0 ) else batch for batch in t]
+        
+        # input shape: a list of tensors with unequal length of documents.
+        # padding to the highest length of the document.
+        if(sentence_length - len(p)) !=  0:
+            extended_sentences = [torch.LongTensor([vocab_size-1 for _ in range(word_length)] )
+                                  for _ in range(sentence_length - len(p))]
+            p.extend(extended_sentences)
+        
+        p = torch.stack(p)
+        # OUTPUT shape: [NUM_SENTENCES X MAX_LENGTH_OF_THE_SENTENCE_IN_BATCH] => [5,57]
+        text_list_p.append(p) # for every batch
+    
+    text_list_p = torch.stack(text_list_p)
+    # OUTPUT shape: [BATCH_SIZE X NUM_SENTENCES X MAX_LENGTH_OF_THE_SENTENCE_IN_DOCUMENT ] => [3, 5, 57]
+
+    # convert a list of tensors to tensors.
+    # input : a list of tensors of len BATCH_SIZE
+    #label_list = torch.stack(label_list)   
+    # OUTPUT shape: [BATCH_SIZE]
+    
+    return text_list_p
+
 def collate_batch_LSTM(batch):
     label_list, text_list = [], []
     for (_text, _label) in batch:

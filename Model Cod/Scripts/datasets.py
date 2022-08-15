@@ -142,6 +142,44 @@ class CommentDataset(Dataset):
         #    len_ = len(self.valid_df)
         return len_
 
+class InferenceCommentDataset(Dataset):
+    def __init__(self, folder_path):
+        
+        self.train_df = None
+
+        self.data_selected = None
+        self.comment_selected = None
+    
+        self.train_comment = []
+    
+        # Read the dataset
+        self.train_df = pd.read_csv(folder_path, sep = ",")#.head(20)
+        #self.train_df = pd.read_csv(folder_path, lineterminator="\n")
+        
+        self.train_df = self.train_df.drop_duplicates(subset='Author Id')
+
+        # do the sorting
+        # Sort the dataframe according to the number of comments on documents.
+        self.train_df.sort_values(by=['Num of Comments'], ascending=False, inplace=True)       
+        comments = []
+        for com in self.train_df["Authors Comment"]:
+            comments.append(com.split("-|-")[:-1])
+        self.train_comment = comments
+
+    def __getitem__(self, idx):
+    
+        self.data_selected = self.train_df
+        self.comment_selected = self.train_comment
+
+        #label = self.data_selected.iloc[idx]["Annot"]
+        sentence = self.comment_selected[idx]
+        return sentence
+
+    def __len__(self):  
+        len_ = len(self.train_comment)
+
+        return len_
+
 class YoutubeBatchSampler(BatchSampler):
     def __init__(self, dataset, num_of_liberals, num_of_conservatives):
         
