@@ -80,8 +80,8 @@ from plot import plot
 from model_utils import load_model
 
 data_folder = "16. Training Dataset revisit.csv" # training data
-visualization_folder = "visualization_data.csv"  # for visualizing han model
-inference_folder = "visualization_data.csv"
+visualization_folder = "For Visualization all.csv"  # for visualizing han model
+inference_folder = "visualization_data.csv"      # for inferencing un-lableled data
 
 def parse_args():
     """Parse input arguments"""

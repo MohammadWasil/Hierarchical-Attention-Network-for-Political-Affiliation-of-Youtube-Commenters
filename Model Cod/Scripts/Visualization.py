@@ -12,16 +12,15 @@ import matplotlib.pyplot as plt
 
 def colorize(words, sentence, color_array):
     if words:
-        cmap=matplotlib.cm.Blues
-    elif sentence:
         cmap=matplotlib.cm.Reds
+    elif sentence:
+        cmap=matplotlib.cm.Blues
         words = sentence
     
     template = '<span class="barcode"; style="color: black; background-color: {}">{}</span>'
     colored_string = ''
     for word, color in zip(words, color_array):
         color = matplotlib.colors.rgb2hex(cmap(color)[:3])
-        #print(color)
         colored_string += template.format(color, '&nbsp' + word + '&nbsp')
     
     return colored_string   
@@ -29,6 +28,7 @@ def colorize(words, sentence, color_array):
 def visualize(word, sentence, visualization_folder):
     data = pd.read_csv(visualization_folder)
     d = data["Authors Comment"]
+    leaning = data["Authors Biasness"]
 
     with open("Alpha word.pkl", "rb") as fp:
         word = pickle.load(fp)
@@ -38,25 +38,29 @@ def visualize(word, sentence, visualization_folder):
 
     s = ''
     for i in range(len(d)):
-        
+        if leaning[i] == "LEFT":
+            political_leaning = "Liberal"
+        elif leaning[i] == "RIGHT":
+            political_leaning = "Conservative"
+            
         w = d[i].split(" -|- ")[:-1]
         sen = sentence[i][0].tolist()
         
         for w_i in range(len(w)):
-            
-            #print(sen[w_i])
+        
             sentences = "sentence_{}".format(w_i + 1).split()
-            s += colorize(None, sentences, sen)
+
+            s += colorize(None, sentences, [sen[w_i]])
             
             color_array = word[w_i][0][0].to('cpu').tolist()
-            #print(color_array)
-            #print(w[w_i])
-            #print(color_array[:len(w[w_i].split(" "))])
             
             s += colorize(w[w_i].split(), None, color_array[:len(w[w_i].split(" "))])
             s += '<Br/>'
-
-    with open('Visualize HAN.html', 'w') as f:
+        s += '<p style="color:gray">' + 'Predicted leaning: ' + political_leaning + '</p>'
+        s += '<Br/>'
+        s += '<Br/>'
+            
+    with open('Visualize.html', 'w') as f:
         f.write(s)
 
 #from run import device
@@ -108,18 +112,13 @@ def visualize_texts(texts, model, visualization_folder, device):
     model.eval()
     
     with torch.no_grad():    
-        #for text in texts:
         text = texts.to(device)
-        #print(text.shape)
-        #label = label.to(device)
         
         # feed the validation text into the model, and get the probabilities.
         predicted_label, alpha_word, alpha_sentence = model(text)
 
         # visualizing text
-        print("inferencing")
-        #print(alpha_word)
-        #print(alpha_sentence)
+        print("Creating Visualization ... ")
         
         with open("Alpha word.pkl", "wb") as fp:   #Pickling
             pickle.dump(alpha_word, fp)
@@ -128,6 +127,3 @@ def visualize_texts(texts, model, visualization_folder, device):
             pickle.dump(alpha_sentence, fp)
 
         visualize(alpha_word, alpha_sentence, visualization_folder)
-
-    # returns the accuracy of the model
-    #return correct * 100.0 / len(dataset_valid), val_loss, F1_score
