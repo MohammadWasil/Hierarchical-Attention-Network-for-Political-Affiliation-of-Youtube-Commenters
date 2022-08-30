@@ -187,7 +187,7 @@ def main():
 
                 elif len(twitter_handle)==1:
                     selected_twitter_handle = list(twitter_handle.keys())[0].lower()
-                    print("Twitter with only on handle: ", selected_twitter_handle)
+                    print("Twitter with only one handle: ", selected_twitter_handle)
 
                 if selected_twitter_handle != '':
                     num_twitter_handle += 1

@@ -37,27 +37,31 @@ def main():
             r_text = ""
             num_com = 0
             comments = author_data["Authors Comment"]
-            for comment in comments:
-                text = preprocess(comment, dictionary)
-                r_text = r_text + text + " -|- "
-                # count the number of comments in each documents.
-                num_com += 1
-                        
-            inference_data = pd.DataFrame(
-                    {"Video Biasness" : list(set(author_data["Biasness"]))[0],
-                    "Video Category": list(set(author_data["Video Category"])),
-                    "Author Id" : user_id,
-                    "Author Name" : list(set(author_data["Author Name"]))[0],
-                    "Authors Comment" : r_text,
-                    "Num of Comments" : num_com,
-                    "Authors Biasness" : list(set(author_data["Authors Biasness"]))[0]
-                    })
+            
+            try:
+                for comment in comments:
+                    text = preprocess(comment, dictionary)
+                    r_text = r_text + text + " -|- "
+                    # count the number of comments in each documents.
+                    num_com += 1
+                            
+                inference_data = pd.DataFrame(
+                        {"Video Biasness" : list(set(author_data["Biasness"]))[0],
+                        "Video Category": list(set(author_data["Video Category"])),
+                        "Author Id" : user_id,
+                        "Author Name" : list(set(author_data["Author Name"]))[0],
+                        "Authors Comment" : r_text,
+                        "Num of Comments" : num_com,
+                        "Authors Biasness" : list(set(author_data["Authors Biasness"]))[0]
+                        })
 
-            # Write the new data to the CSV file in append mode
-            inference_data.to_csv(os.path.join(DIRECTORY_PATH, 'data/For Inference Youtube {} Channel revisit.csv'.format(LEANING)), 
-                                    mode='a', header=False, index=False)
-            if counter % 100 == 0:
-                print("Counter: ", counter)
+                # Write the new data to the CSV file in append mode
+                inference_data.to_csv(os.path.join(DIRECTORY_PATH, 'data/For Inference Youtube {} Channel revisit.csv'.format(LEANING)), 
+                                        mode='a', header=False, index=False)
+                if counter % 100 == 0:
+                    print("Counter: ", counter)
+            except:
+                pass
 
             # save the id
             save_ids.append(i)

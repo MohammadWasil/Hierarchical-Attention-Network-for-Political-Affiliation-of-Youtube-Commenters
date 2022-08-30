@@ -246,7 +246,7 @@ def check_youtube_for_website_link(soup, website_links, twitter_handle_selected)
             else:
                 redirected_url = re.sub(r'(https?://)?(www.)?', '', redirected_link['q'][0]).split('/', 1)[0]
                 #print(redirected_url)
-
+            # Method 1
             if "twitter.com" in redirected_link['q'][0]:
                 match = re.search(r"^.*?\btwitter\.com/@?([^?/,\r\n]+)(?:[?/,].*)?$", redirected_link['q'][0])                   
                 #print(match)
@@ -255,9 +255,11 @@ def check_youtube_for_website_link(soup, website_links, twitter_handle_selected)
                     if twitter_handle_selected == match.group(1):
                         #print(True)
                         return True
+            # Method 2
             elif redirected_url == domain:
                 #print(True)
                 return True
+    # Method 3
     # can add one more check - domain from description.
     # if we find domain in the description of the youtube about page, then also we can say
     # that we ahve matched the correct youtube channel for that news channel website

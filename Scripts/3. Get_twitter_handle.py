@@ -1,5 +1,5 @@
 """
-Get the twitter handle using search_usr function of he remaining news channels.
+Get the twitter handle using search_usr function of twitter api for the remaining news channels.
 
 Input: 2_1. review_twitter_handle.csv
 Output: 
