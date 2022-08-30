@@ -73,12 +73,3 @@ python run.py --MODEL LSTM --RUN_MODE test
 ```
 
 No evaluation script was created for LSTM, since we already know HAN was working much better than LSTM model.
-
-### Model Result
-
-| Model | Validation F1 Score  | Validation Loss | Validation Accuracy | Test F1 Score | Test Loss | Test Accuracy |
-| --- | --- | --- | --- | --- | --- | --- |
-| HAN w/ Embedding | **0.86** | 0.418 | **89.28** | 0.88 | 0.41 | **89.69** |
-| HAN w/o embedding | - | - | - | - | - | - |
-| LSTM w/ Embedding | 0.83 | 0.439 | 86.83 | 0.83 | 0.45 | 86.05 |
-| LSTM w/o embedding | 0.80 | 0.468 | 84.11 | 0.79 | 0.48 | 82.56 |
