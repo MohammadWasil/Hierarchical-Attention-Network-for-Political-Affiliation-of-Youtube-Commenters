@@ -108,26 +108,3 @@ python '16. null_comments.py'
 /Scripts/hashtag.py contains annotated hashtags, manually annoated by the team. Utils contains all utility functions and variables.
 
 To train your model, follow the steps shown in readme [here](https://github.com/MohammadWasil/Sentiment-Classification-Youtube-Comments-Political-Affiliation/tree/main/Model%20Cod#training-description)
-
-### Dataset Statistics
-
-#### Our Dataset
-| Youtube Channel Leaning | #Authors | #Comments | #Annotated Authors | # Annotated Comments |
-| --- | --- | --- | --- | --- |
-| Left | 1.57 Million | 4.85 Million | 11505 | 170165 |
-| Right | 1.29 Million | 4.69 Million | 8142 | 102043 |
-
-#### Original Paper
-| Leaning | Users (from Subscription list) | Users (from Hasgtags) | Available |
-| --- | --- | --- | --- |
-| Liberal | 61320 | 8616 | Yes* |
-| Conservatives | 86134 | 8144 | Yes* |
-
-*But not scrapable. Users_id has been hashed to some other numbers. Comments scraping is not reproducable.
-
-### Dataset from External sources
-| Paper | Dataset | Available | Size (#Comments) | Github |
-| --- | --- | --- | --- | --- |
-| Lewis 2018 | Big data with comments | Yes | Annotations not Available | https://github.com/RSButner/Alt_Inf_Net |
-| Rebeiro 2020 | Not so big | Yes | Annotations not Available (No comments) Data might be avaiblae upon request | https://github.com/manoelhortaribeiro/radicalization_youtube |
-| Ledwich and Zaitsev 2020 | - | No | Data not available | - |
