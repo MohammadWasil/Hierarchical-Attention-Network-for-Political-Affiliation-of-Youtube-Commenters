@@ -82,3 +82,5 @@ python run.py --MODEL LSTM --RUN_MODE test
 ```
 
 No inference script was created for LSTM, since we already know HAN was working much better than LSTM model.
+
+**Note**: Trained HAN model can be provided upon request.
