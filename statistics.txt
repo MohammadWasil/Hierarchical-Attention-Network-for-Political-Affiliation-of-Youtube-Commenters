@@ -144,38 +144,3 @@ LEFT video:
 
 Total Authors for Training =  11538 + 8175    = 19713
 Total Comments for Training = 172027 + 104049 = 276076
-
-##### CHnge this
-Authors which were present on both = 78
-Total Authors we have = 12689 - 78 = 12611
-
-BASIC conlcusion from Annotated comments/users based on Subscription is: There is a some cross-partisians communication (as of now).
-There might be high chance that we might have repeated authors from left and right channels.
-
-***********************************************************
-***********************************************************
-Splitted data for RIght and Center Right
-***********************************************************
-***********************************************************
-
-Statistics in Right
-Channels :  109
-Videos :  23502
-
-Progress:
-Channels = 55
-videos = 8927 
-comments = 3106215
-hashtags = 452
-
-***********************************************************
-
-Statistics in Centre Right (Completed)
-Channels :  189
-Videos :  59300
-
-Progress:
-Channels = 189
-videos = 59300
-comments = 1589436
-hashtags = 698
