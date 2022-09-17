@@ -105,6 +105,16 @@ python '15. data_for_training_revisit.py'
 python '16. null_comments.py'
 ```
 
-/Scripts/hashtag.py contains annotated hashtags, manually annoated by the team. Utils contains all utility functions and variables.
+21. Create Plots.
+```{python}
+python '17. plots.py'
+```
+
+22. Update: on removing conflicts from inferenced result.
+```{python}
+python '18. remove_conflicts_inference.py'
+```
+
+`utils.py` contains all utility functions and variables.
 
 To train your model, follow the steps shown in readme [here](https://github.com/MohammadWasil/Sentiment-Classification-Youtube-Comments-Political-Affiliation/tree/main/Model%20Cod#training-description)
