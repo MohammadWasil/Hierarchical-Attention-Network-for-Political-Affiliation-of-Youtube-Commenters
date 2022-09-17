@@ -110,7 +110,7 @@ python '16. null_comments.py'
 python '17. plots.py'
 ```
 
-22. Update: on removing conflicts from inferenced result.
+22. This can only be executed after yuo have infernece files. On removing conflicts from inferenced result.
 ```{python}
 python '18. remove_conflicts_inference.py'
 ```
