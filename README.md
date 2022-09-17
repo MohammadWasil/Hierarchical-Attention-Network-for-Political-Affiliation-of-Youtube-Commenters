@@ -14,7 +14,7 @@ pip install youtubesearchpython
 ```
 Also, create twitter api key and Youtube-api key for scraping data.
 
-Add your twitter credentials in `Utility/config_KEYS.yml`
+Add your twitter credentials in `utility/config_KEYS.yml`
 
 To scrap the data:
 1. Change the API key and tokens in `config_KEYS.yml` with your own twitter API key and tokens
