@@ -36,10 +36,9 @@ torchtext version : 0.11.0
 GPU Version: ```conda install pytorch cudatoolkit -c pytorch``` <Br/>
 CPU Version: ```conda install pytorch cpuonly -c pytorch```
 
-### Train
-We will train 2 models: HAN and LSTM.
-  
-#### HAN model
+### HAN model
+#### Train
+
 Initially, `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` file will be `Null`. At this point, simply run the below command to train HAN model:
 ```{bash}
 python run.py --MODEL HAN --RUN_MODE train
@@ -48,17 +47,26 @@ python run.py --MODEL HAN --RUN_MODE train
 To resume training after some time, `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` needs to be changed to the last epoch trained. For that, check the epoch number in the saved model's file name. And also make sure to change `PATH_TO_SAVE_MODEL_HAN` with the path of your best model, and `PATH_TO_SAVE_VOCAB_HAN` with the vocababulary created during training phase.
 For that, go to `./Han Models/`. And then, run the above command again to resume training.
 
+#### Test
 To test your HAN model, run:
 ```{bash}
 python run.py --MODEL HAN --RUN_MODE test
 ```
 
-To Evaluate yout model, make sure to change `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` with your best model, `PATH_TO_SAVE_MODEL_HAN` with the path of your best model, and `PATH_TO_SAVE_VOCAB_HAN` with the vocababulary created during training phase.
+#### Inference
+For inferencing your model on un-labeled data, make sure to change `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` with your best model, `PATH_TO_SAVE_MODEL_HAN` with the path of your best model, and `PATH_TO_SAVE_VOCAB_HAN` with the vocababulary created during training phase. This will gives us results of number of liberals and conservatives, and also creates a pickle file containing authors id, and their biasness. We had 2 files to infernced, and hence we got 2 dictionary file. We ran this cmd for the 2 files separately. Then, we ran the Script "Scripts/18. remove_conflicts_inference.py" to remove the conflicts and merge the result.
 ```{bash}
-python run.py --MODEL HAN --RUN_MODE eval
+python run.py --MODEL HAN --RUN_MODE inference
 ```
 
-#### LSTM model
+#### Visualize
+To visualize our HAN model, this creates an html file containing the visualizations of attention score the HAN model gives to each words and each sentences in a document. Check the html file attached on the notebook.
+```{bash}
+python run.py --MODEL HAN --RUN_MODE vis
+```
+
+### LSTM model
+#### Train
 Initially, `LAST_SAVED_EPOCH_LSTM_MODEL` parameter in `config.yml` file will be `Null`. At this point, simply run the below command to train LSTM model:
 ```{bash}
 python run.py --MODEL LSTM --RUN_MODE train
@@ -67,9 +75,10 @@ python run.py --MODEL LSTM --RUN_MODE train
 To resume training after some time, `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` needs to be changed to the last epoch trained. For that, check the epoch number in the saved model's file name. And also make sure to change `PATH_TO_SAVE_MODEL_HAN` with the path of your best model, and `PATH_TO_SAVE_VOCAB_HAN` with the vocababulary created during training phase.
 For that, go to `./Han Models/`. And then, run the above command again to resume training.
 
+#### Test
 To test your LSTM model, run:
 ```{bash}
 python run.py --MODEL LSTM --RUN_MODE test
 ```
 
-No evaluation script was created for LSTM, since we already know HAN was working much better than LSTM model.
+No inference script was created for LSTM, since we already know HAN was working much better than LSTM model.
