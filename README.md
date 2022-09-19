@@ -6,7 +6,7 @@ The research project was associated with "[INF-DS-RMB] Research Module B: Projek
 
 If you want to train/inference/visualize Hierarchical Attention Model (HAN) or LSTM, follow the steps shown in readme [here](https://github.com/MohammadWasil/Sentiment-Classification-Youtube-Comments-Political-Affiliation/tree/main/Model%20Cod#training-description)
 
-### Installing Dependencies
+### Installing Dependencies for Data Scraping
 Install package `scrapetube` using pip to scrap the youtube videos id:
 ```
 pip install scrapetube
