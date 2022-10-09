@@ -37,6 +37,9 @@ GPU Version: ```conda install pytorch cudatoolkit -c pytorch``` <Br/>
 CPU Version: ```conda install pytorch cpuonly -c pytorch```
 
 ### HAN model
+
+Update [09-10-2022] : HAN Pre-Trained model available for download. See below.
+
 #### Train
 
 Initially, `LAST_SAVED_EPOCH_HAN_MODEL` parameter in `config.yml` file will be `Null`. At this point, simply run the below command to train HAN model:
@@ -83,4 +86,5 @@ python run.py --MODEL LSTM --RUN_MODE test
 
 No inference script was created for LSTM, since we already know HAN was working much better than LSTM model.
 
-**Note**: Trained HAN model can be provided upon request.
+**Note**: ~Trained HAN model can be provided upon request.~ <Br>
+Update [09-10-2022] : HAN Pre-trained model can be downloaded from [here](https://drive.google.com/file/d/1bSiGevCy1LCxZ2FOpZoqtA2DNHwJuV57/view?usp=sharing).
