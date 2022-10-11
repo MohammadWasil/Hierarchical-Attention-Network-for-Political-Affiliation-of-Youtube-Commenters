@@ -2,7 +2,7 @@
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FMohammadWasil%2FSentiment-Classification-Youtube-Comments-Political-Affiliation&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
-The research project was associated with "[INF-DS-RMB] Research Module B: Projekt: Social Media and Business Analytics Project", Summer Semester 2022, for my Masters of Science: Data Science, University of Potsdam, Germany. Associated Research Paper will be made available very soon [here](https://www.researchgate.net/profile/Mohammad-Wasil-Saleem?ev=prf_overview).
+The research project was associated with "[INF-DS-RMB] Research Module B: Projekt: Social Media and Business Analytics Project", Summer Semester 2022, for my Masters of Science: Data Science, University of Potsdam, Germany. Associated Research Paper can be found [here](https://www.researchgate.net/publication/364308344_Political_Affiliation_of_YouTube_Commenters_with_Hierarchical_Attention_Network).
 
 If you want to train/inference/visualize Hierarchical Attention Model (HAN) or LSTM, follow the steps shown in readme [here](https://github.com/MohammadWasil/Sentiment-Classification-Youtube-Comments-Political-Affiliation/tree/main/Model%20Cod#training-description)
 
